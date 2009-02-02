@@ -115,7 +115,7 @@ help:
 	@echo ""
 
 test: all
-	cd .. && $(PERL) t/harness --languages=WMLScript
+	$(PERL) t/harness
 
 TEST_CLEANERS = \
  "t/pmc/*.pir" \
