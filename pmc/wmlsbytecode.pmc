@@ -29,7 +29,7 @@ static const char *fp;
 static void _init(Interp *interp, STRING *str)
 {
     bytecode = Parrot_string_cstring(interp, str);
-    maxi     = string_length(interp, str);
+    maxi     = Parrot_str_byte_length(interp, str);
     fp       = (const char *)bytecode;
 }
 
@@ -156,7 +156,7 @@ static int _load_header(Interp *interp)
             "incorrect version");
 
     VTABLE_set_integer_keyed_str(interp, script,
-        const_string(interp, "VersionNumber"), VersionNumber);
+        Parrot_str_new_constant(interp, "VersionNumber"), VersionNumber);
 
     CodeSize = _get_mb32();
 
@@ -165,7 +165,7 @@ static int _load_header(Interp *interp)
             "incorrect code size");
 
     VTABLE_set_integer_keyed_str(interp, script,
-        const_string(interp, "CodeSize"), CodeSize);
+        Parrot_str_new_constant(interp, "CodeSize"), CodeSize);
 
     return 0;
 }
@@ -193,11 +193,11 @@ static int _load_constant_pool(Interp *interp)
     Constants = new_wmls(interp, "Constants");
     VTABLE_set_integer_native(interp, Constants, NumberOfConstants);
     VTABLE_set_pmc_keyed_str(interp, script,
-        const_string(interp, "Constants"), Constants);
+        Parrot_str_new_constant(interp, "Constants"), Constants);
 
     CharacterSet = _get_mb16();
     VTABLE_set_integer_keyed_str(interp, script,
-        const_string(interp, "CharacterSet"), CharacterSet);
+        Parrot_str_new_constant(interp, "CharacterSet"), CharacterSet);
 
     for (idx = 0; idx < NumberOfConstants; idx++) {
         PMC * Constant;
@@ -251,7 +251,7 @@ static int _load_constant_pool(Interp *interp)
         case 6:
         {
             UINTVAL StringSize = _get_mb32();
-            STRING * String = string_from_cstring(interp,
+            STRING * String = Parrot_str_new(interp,
               _get_pos(), StringSize);
             while (StringSize --) {
                 (void)_get_uint8();
@@ -280,7 +280,7 @@ static int _load_pragma_pool(Interp *interp)
     Pragmas = new_wmls(interp, "Pragmas");
     VTABLE_set_integer_native(interp, Pragmas, NumberOfPragmas);
     VTABLE_set_pmc_keyed_str(interp, script,
-        const_string(interp, "Pragmas"), Pragmas);
+        Parrot_str_new_constant(interp, "Pragmas"), Pragmas);
 
     for (idx = 0; idx < NumberOfPragmas; idx++) {
         PMC * Pragma;
@@ -291,7 +291,7 @@ static int _load_pragma_pool(Interp *interp)
             UINTVAL AccessDomainIndex = _get_mb16();
             Pragma = new_wmls(interp, "AccessDomain");
             VTABLE_set_integer_keyed_str(interp, Pragma,
-              const_string(interp, "AccessDomainIndex"), AccessDomainIndex);
+              Parrot_str_new_constant(interp, "AccessDomainIndex"), AccessDomainIndex);
             break;
         }
         case 1:
@@ -299,7 +299,7 @@ static int _load_pragma_pool(Interp *interp)
             UINTVAL AccessPathIndex = _get_mb16();
             Pragma = new_wmls(interp, "AccessPath");
             VTABLE_set_integer_keyed_str(interp, Pragma,
-              const_string(interp, "AccessPathIndex"), AccessPathIndex);
+              Parrot_str_new_constant(interp, "AccessPathIndex"), AccessPathIndex);
             break;
         }
         case 2:
@@ -308,9 +308,9 @@ static int _load_pragma_pool(Interp *interp)
             UINTVAL ContentIndex = _get_mb16();
             Pragma = new_wmls(interp, "UserAgentProperty");
             VTABLE_set_integer_keyed_str(interp, Pragma,
-              const_string(interp, "PropertyNameIndex"), PropertyNameIndex);
+              Parrot_str_new_constant(interp, "PropertyNameIndex"), PropertyNameIndex);
             VTABLE_set_integer_keyed_str(interp, Pragma,
-              const_string(interp, "ContentIndex"), ContentIndex);
+              Parrot_str_new_constant(interp, "ContentIndex"), ContentIndex);
             break;
         }
         case 3:
@@ -320,11 +320,11 @@ static int _load_pragma_pool(Interp *interp)
             UINTVAL SchemeIndex = _get_mb16();
             Pragma = new_wmls(interp, "UserAgentProperty&Scheme");
             VTABLE_set_integer_keyed_str(interp, Pragma,
-              const_string(interp, "PropertyNameIndex"), PropertyNameIndex);
+              Parrot_str_new_constant(interp, "PropertyNameIndex"), PropertyNameIndex);
             VTABLE_set_integer_keyed_str(interp, Pragma,
-              const_string(interp, "ContentIndex"), ContentIndex);
+              Parrot_str_new_constant(interp, "ContentIndex"), ContentIndex);
             VTABLE_set_integer_keyed_str(interp, Pragma,
-              const_string(interp, "SchemeIndex"), SchemeIndex);
+              Parrot_str_new_constant(interp, "SchemeIndex"), SchemeIndex);
             break;
         }
         default:
@@ -349,14 +349,14 @@ static int _load_function_pool(Interp *interp)
     Functions = new_wmls(interp, "Functions");
     VTABLE_set_integer_native(interp, Functions, NumberOfFunctions);
     VTABLE_set_pmc_keyed_str(interp, script,
-        const_string(interp, "Functions"), Functions);
+        Parrot_str_new_constant(interp, "Functions"), Functions);
 
     NumberOfFunctionNames = _get_uint8();
     FunctionNameTable = new_wmls(interp, "FunctionNameTable");
     VTABLE_set_integer_native(interp, FunctionNameTable,
         NumberOfFunctionNames);
     VTABLE_set_pmc_keyed_str(interp, script,
-        const_string(interp, "FunctionNameTable"), FunctionNameTable);
+        Parrot_str_new_constant(interp, "FunctionNameTable"), FunctionNameTable);
 
     for (idx = 0; idx < NumberOfFunctionNames; idx++) {
         PMC * Couple = pmc_new(interp, enum_class_Array);
@@ -386,12 +386,12 @@ static int _load_function_pool(Interp *interp)
         }
         Function = new_wmls(interp, "Function");
         VTABLE_set_integer_keyed_str(interp, Function,
-          const_string(interp, "NumberOfArguments"), NumberOfArguments);
+          Parrot_str_new_constant(interp, "NumberOfArguments"), NumberOfArguments);
         VTABLE_set_integer_keyed_str(interp, Function,
-          const_string(interp, "NumberOfLocalVariables"),
+          Parrot_str_new_constant(interp, "NumberOfLocalVariables"),
           NumberOfLocalVariables);
         VTABLE_set_string_keyed_str(interp, Function,
-          const_string(interp, "CodeArray"), CodeArray);
+          Parrot_str_new_constant(interp, "CodeArray"), CodeArray);
 
         VTABLE_set_pmc_keyed_int(interp, Functions, idx, Function);
     }

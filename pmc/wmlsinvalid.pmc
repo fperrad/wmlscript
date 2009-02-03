@@ -37,11 +37,11 @@ pmclass WmlsInvalid
     void class_init() {
         if (pass) {
             dynpmc_WmlsBoolean = pmc_type(INTERP,
-              const_string(INTERP, "WmlsBoolean"));
+              Parrot_str_new_constant(INTERP, "WmlsBoolean"));
             dynpmc_WmlsInteger = pmc_type(INTERP,
-              const_string(INTERP, "WmlsInteger"));
+              Parrot_str_new_constant(INTERP, "WmlsInteger"));
             dynpmc_WmlsInvalid = pmc_type(INTERP,
-              const_string(INTERP, "WmlsInvalid"));
+              Parrot_str_new_constant(INTERP, "WmlsInvalid"));
         }
     }
 
@@ -81,7 +81,7 @@ Return the string "invalid".
 
 */
     VTABLE STRING* get_string() {
-        return const_string(INTERP, "invalid");
+        return Parrot_str_new_constant(INTERP, "invalid");
     }
 
 /*
