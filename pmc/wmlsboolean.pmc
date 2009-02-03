@@ -92,7 +92,7 @@ Return the integer 3.
 */
     VTABLE PMC* get_class() {
         PMC* retval = pmc_new(interp, dynpmc_WmlsInteger);
-        PMC_int_val(retval) = 3;
+        VTABLE_set_integer_native(INTERP, retval, 3);
         return retval;
     }
 
@@ -106,7 +106,7 @@ Return the string "true" or "false".
 
 */
     VTABLE STRING* get_string() {
-        if (PMC_int_val(SELF))
+        if (VTABLE_get_integer(INTERP, SELF))
             return Parrot_str_new_constant(INTERP, "true");
         else
             return Parrot_str_new_constant(INTERP, "false");
@@ -167,8 +167,9 @@ Return the string "true" or "false".
 
 */
     VTABLE PMC* neg(PMC* dest) {
+        INTVAL result = - SELF.get_bool();
         dest = pmc_new(INTERP, dynpmc_WmlsInteger);
-        PMC_int_val(dest) = - SELF.get_bool();
+        VTABLE_set_integer_native(INTERP, dest, result);
         return dest;
     }
 
@@ -188,8 +189,9 @@ Return the string "true" or "false".
 
 */
     VTABLE PMC* bitwise_not(PMC* dest) {
+        INTVAL result = ~ SELF.get_bool();
         dest = pmc_new(INTERP, dynpmc_WmlsInteger);
-        PMC_int_val(dest) = ~ SELF.get_bool();
+        VTABLE_set_integer_native(INTERP, dest, result);
         return dest;
     }
 

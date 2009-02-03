@@ -63,7 +63,7 @@ Return the integer 2.
 */
     VTABLE PMC* get_class() {
         PMC* retval = pmc_new(interp, dynpmc_WmlsInteger);
-        PMC_int_val(retval) = 2;
+        VTABLE_set_integer_native(INTERP, retval, 2);
         return retval;
     }
 
@@ -155,8 +155,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
+            INTVAL result = - VTABLE_get_integer(INTERP, trans);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
-            PMC_int_val(dest) = - VTABLE_get_integer(INTERP, trans);
+            VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
         }
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
@@ -201,8 +202,9 @@ Return the integer 2.
             &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
+            INTVAL result = ~ VTABLE_get_integer(INTERP, trans);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
-            PMC_int_val(dest) = ~ VTABLE_get_integer(INTERP, trans);
+            VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
         }
 
@@ -1506,7 +1508,7 @@ Return the integer 2.
 
         if (s1 != s2 && (*s2 == '\0' || isspace((unsigned char)*s2))) {
             retval = pmc_new(INTERP, dynpmc_WmlsInteger);
-            PMC_int_val(retval) = d;
+            VTABLE_set_integer_native(INTERP, retval, d);
         }
         else
             retval = pmc_new(INTERP, dynpmc_WmlsInvalid);

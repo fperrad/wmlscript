@@ -31,7 +31,7 @@ inline op defined(out PMC, invar PMC) :base_core {
 
     INTVAL result = PMC_IS_NULL($2) ? 0 : VTABLE_defined(interp, $2);
     $1 = pmc_new(interp, dynpmc_WmlsBoolean);
-    PMC_int_val($1) = result;
+    VTABLE_set_integer_native(interp, $1, result);
     goto NEXT();
 }
 
@@ -55,7 +55,7 @@ inline op istrue(out PMC, invar PMC) :base_core {
     else {
         INTVAL result = VTABLE_get_bool(interp, $2);
         $1 = pmc_new(interp, dynpmc_WmlsBoolean);
-        PMC_int_val($1) = result;
+        VTABLE_set_integer_native(interp, $1, result);
     }
     goto NEXT();
 }
@@ -81,7 +81,7 @@ inline op isgt(out PMC, invar PMC, invar PMC) {
     }
     else {
         $1 = pmc_new(interp, dynpmc_WmlsBoolean);
-        PMC_int_val($1) = result > 0;
+        VTABLE_set_integer_native(interp, $1, result > 0);
     }
     goto NEXT();
 }
@@ -107,7 +107,7 @@ inline op isge(out PMC, invar PMC, invar PMC) {
     }
     else {
         $1 = pmc_new(interp, dynpmc_WmlsBoolean);
-        PMC_int_val($1) = result >= 0;
+        VTABLE_set_integer_native(interp, $1, result >= 0);
     }
     goto NEXT();
 }
@@ -133,7 +133,7 @@ inline op isle(out PMC, invar PMC, invar PMC) {
     }
     else {
         $1 = pmc_new(interp, dynpmc_WmlsBoolean);
-        PMC_int_val($1) = result <= 0;
+        VTABLE_set_integer_native(interp, $1, result <= 0);
     }
     goto NEXT();
 }
@@ -159,7 +159,7 @@ inline op islt(out PMC, invar PMC, invar PMC) {
     }
     else {
         $1 = pmc_new(interp, dynpmc_WmlsBoolean);
-        PMC_int_val($1) = result < 0;
+        VTABLE_set_integer_native(interp, $1, result < 0);
     }
     goto NEXT();
 }
@@ -184,7 +184,7 @@ inline op iseq(out PMC, invar PMC, invar PMC) {
     }
     else {
         $1 = pmc_new(interp, dynpmc_WmlsBoolean);
-        PMC_int_val($1) = result;
+        VTABLE_set_integer_native(interp, $1, result);
     }
     goto NEXT();
 }
@@ -210,7 +210,7 @@ inline op isne(out PMC, invar PMC, invar PMC) {
     }
     else {
         $1 = pmc_new(interp, dynpmc_WmlsBoolean);
-        PMC_int_val($1) = !result;
+        VTABLE_set_integer_native(interp, $1, !result);
     }
     goto NEXT();
 }
