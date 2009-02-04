@@ -228,7 +228,7 @@ static int _load_constant_pool(Interp *interp)
         case 4:
         {
             UINTVAL StringSize = _get_mb32();
-            STRING * String = string_make(interp, _get_pos(),
+            STRING * const String = string_make(interp, _get_pos(),
               StringSize, "unicode", 0);
             while (StringSize --) {
                 (void)_get_uint8();
@@ -245,7 +245,7 @@ static int _load_constant_pool(Interp *interp)
         case 6:
         {
             UINTVAL StringSize = _get_mb32();
-            STRING * String = Parrot_str_new(interp,
+            STRING * const String = Parrot_str_new(interp,
               _get_pos(), StringSize);
             while (StringSize --) {
                 (void)_get_uint8();
@@ -353,7 +353,7 @@ static int _load_function_pool(Interp *interp)
         PMC * Couple = pmc_new(interp, enum_class_Array);
         const UINTVAL FunctionIndex = _get_uint8();
         UINTVAL FunctionNameSize = _get_uint8();
-        STRING * FunctionName = string_make(interp, _get_pos(),
+        STRING * const FunctionName = string_make(interp, _get_pos(),
           FunctionNameSize, "unicode", 0);
         while (FunctionNameSize --) {
             (void)_get_uint8();
@@ -370,7 +370,7 @@ static int _load_function_pool(Interp *interp)
         const UINTVAL NumberOfArguments = _get_uint8();
         const UINTVAL NumberOfLocalVariables = _get_uint8();
         UINTVAL FunctionSize = _get_mb32();
-        STRING * CodeArray = string_make(interp, _get_pos(),
+        STRING * const CodeArray = string_make(interp, _get_pos(),
           FunctionSize, "binary", 0);
         while (FunctionSize --) {
             (void)_get_uint8();

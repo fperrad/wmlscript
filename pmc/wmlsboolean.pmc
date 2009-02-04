@@ -262,7 +262,7 @@ Return the string "true" or "false".
     }
 
     MULTI PMC* add(WmlsString value, PMC* dest) {
-        STRING* result = Parrot_str_concat(INTERP,
+        STRING* const result = Parrot_str_concat(INTERP,
               SELF.get_string(),
               VTABLE_get_string(INTERP, value), 0);
         dest = pmc_new(INTERP, dynpmc_WmlsString);
@@ -296,7 +296,7 @@ Return the string "true" or "false".
     }
 
     MULTI void i_add(WmlsString value) {
-        STRING* result = Parrot_str_concat(INTERP,
+        STRING* const result = Parrot_str_concat(INTERP,
               SELF.get_string(),
               VTABLE_get_string(INTERP, value), 0);
         SELF.morph(dynpmc_WmlsString);
