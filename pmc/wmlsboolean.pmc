@@ -219,7 +219,7 @@ Return the string "true" or "false".
 
     VTABLE void i_logical_not() {
         const INTVAL result = ! SELF.get_bool();
-        SELF.set_integer_native(result);
+        SELF.set_bool(result);
     }
 
 /*

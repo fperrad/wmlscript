@@ -163,7 +163,7 @@ Returns a Parrot string representation of the number.
     VTABLE void i_logical_not() {
         const INTVAL result = ! SELF.get_bool();
         SELF.morph(dynpmc_WmlsBoolean);
-        SELF.set_integer_native(result);
+        SELF.set_bool(result);
     }
 
 /*

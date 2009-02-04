@@ -156,7 +156,7 @@ Return the integer 0.
     VTABLE void i_logical_not() {
         const INTVAL result = ! SELF.get_bool();
         SELF.morph(dynpmc_WmlsBoolean);
-        SELF.set_integer_native(result);
+        SELF.set_bool(result);
     }
 
 /*
