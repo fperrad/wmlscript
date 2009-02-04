@@ -1496,15 +1496,10 @@ Return the integer 2.
 
 */
     METHOD PMC* parseInt() {
-        PMC    *retval;
-        STRING *rep;
-        char   *s1;
-        char   *s2;
-        INTVAL  d;
-
-        rep = SELF.get_string();
-        s1 = Parrot_str_to_cstring(INTERP, rep);
-        d  = strtol(s1, &s2, 10);
+        PMC *retval;
+        char * const s1 = Parrot_str_to_cstring(INTERP, SELF.get_string());
+        char *s2;
+        const INTVAL d = strtol(s1, &s2, 10);
 
         if (s1 != s2 && (*s2 == '\0' || isspace((unsigned char)*s2))) {
             retval = pmc_new(INTERP, dynpmc_WmlsInteger);
@@ -1526,15 +1521,10 @@ Return the integer 2.
 
 */
     METHOD PMC* parseFloat() {
-        PMC     *retval;
-        STRING  *rep;
-        char    *s1;
-        char    *s2;
-        FLOATVAL d;
-
-        rep = SELF.get_string();
-        s1 = Parrot_str_to_cstring(INTERP, rep);
-        d  = strtod(s1, &s2);
+        PMC *retval;
+        char * const s1 = Parrot_str_to_cstring(INTERP, SELF.get_string());
+        char *s2;
+        FLOATVAL d = strtod(s1, &s2);
 
         if (s1 != s2 && (*s2 == '\0' || isspace((unsigned char)*s2))
         && (fabs(d) < 3.40282347e+38)) {
