@@ -146,10 +146,8 @@ static float _get_float32(void)
 
 static int _load_header(Interp *interp)
 {
-    UINTVAL VersionNumber;
-    UINTVAL CodeSize;
-
-    VersionNumber = _get_uint8();
+    const UINTVAL VersionNumber = _get_uint8();
+    const UINTVAL CodeSize = _get_mb32();
 
     if (VersionNumber != 0x01)
         Parrot_ex_throw_from_c_args(interp, NULL, EXCEPTION_ILL_INHERIT,
@@ -157,8 +155,6 @@ static int _load_header(Interp *interp)
 
     VTABLE_set_integer_keyed_str(interp, script,
         Parrot_str_new_constant(interp, "VersionNumber"), VersionNumber);
-
-    CodeSize = _get_mb32();
 
     if (CodeSize != _info_get())
         Parrot_ex_throw_from_c_args(interp, NULL, EXCEPTION_ILL_INHERIT,
@@ -184,49 +180,47 @@ static PMC * new_wmls(Interp *interp, const char *name)
 
 static int _load_constant_pool(Interp *interp)
 {
-    UINTVAL NumberOfConstants;
-    UINTVAL CharacterSet;
     UINTVAL idx;
     PMC * Constants;
+    const UINTVAL NumberOfConstants = _get_mb16();
+    const UINTVAL CharacterSet = _get_mb16();
 
-    NumberOfConstants = _get_mb16();
     Constants = new_wmls(interp, "Constants");
     VTABLE_set_integer_native(interp, Constants, NumberOfConstants);
     VTABLE_set_pmc_keyed_str(interp, script,
         Parrot_str_new_constant(interp, "Constants"), Constants);
 
-    CharacterSet = _get_mb16();
     VTABLE_set_integer_keyed_str(interp, script,
         Parrot_str_new_constant(interp, "CharacterSet"), CharacterSet);
 
     for (idx = 0; idx < NumberOfConstants; idx++) {
         PMC * Constant;
-        UINTVAL ConstantType = _get_uint8();
+        const UINTVAL ConstantType = _get_uint8();
         switch (ConstantType) {
         case 0:
         {
-            INTVAL ConstantInteger8 = _get_int8();
+            const INTVAL ConstantInteger8 = _get_int8();
             Constant = new_wmls(interp, "ConstantInteger");
             VTABLE_set_integer_native(interp, Constant, ConstantInteger8);
             break;
         }
         case 1:
         {
-            INTVAL ConstantInteger16 = _get_int16();
+            const INTVAL ConstantInteger16 = _get_int16();
             Constant = new_wmls(interp, "ConstantInteger");
             VTABLE_set_integer_native(interp, Constant, ConstantInteger16);
             break;
         }
         case 2:
         {
-            INTVAL ConstantInteger32 = _get_int32();
+            const INTVAL ConstantInteger32 = _get_int32();
             Constant = new_wmls(interp, "ConstantInteger");
             VTABLE_set_integer_native(interp, Constant, ConstantInteger32);
             break;
         }
         case 3:
         {
-            FLOATVAL ConstantFloat32 = _get_float32();
+            const FLOATVAL ConstantFloat32 = _get_float32();
             Constant = new_wmls(interp, "ConstantFloat");
             VTABLE_set_number_native(interp, Constant, ConstantFloat32);
             break;
@@ -272,11 +266,10 @@ static int _load_constant_pool(Interp *interp)
 
 static int _load_pragma_pool(Interp *interp)
 {
-    UINTVAL NumberOfPragmas;
     UINTVAL idx;
     PMC * Pragmas;
+    const UINTVAL NumberOfPragmas = _get_mb16();
 
-    NumberOfPragmas = _get_mb16();
     Pragmas = new_wmls(interp, "Pragmas");
     VTABLE_set_integer_native(interp, Pragmas, NumberOfPragmas);
     VTABLE_set_pmc_keyed_str(interp, script,
@@ -288,7 +281,7 @@ static int _load_pragma_pool(Interp *interp)
         switch (PragmaType) {
         case 0:
         {
-            UINTVAL AccessDomainIndex = _get_mb16();
+            const UINTVAL AccessDomainIndex = _get_mb16();
             Pragma = new_wmls(interp, "AccessDomain");
             VTABLE_set_integer_keyed_str(interp, Pragma,
               Parrot_str_new_constant(interp, "AccessDomainIndex"), AccessDomainIndex);
@@ -296,7 +289,7 @@ static int _load_pragma_pool(Interp *interp)
         }
         case 1:
         {
-            UINTVAL AccessPathIndex = _get_mb16();
+            const UINTVAL AccessPathIndex = _get_mb16();
             Pragma = new_wmls(interp, "AccessPath");
             VTABLE_set_integer_keyed_str(interp, Pragma,
               Parrot_str_new_constant(interp, "AccessPathIndex"), AccessPathIndex);
@@ -304,8 +297,8 @@ static int _load_pragma_pool(Interp *interp)
         }
         case 2:
         {
-            UINTVAL PropertyNameIndex = _get_mb16();
-            UINTVAL ContentIndex = _get_mb16();
+            const UINTVAL PropertyNameIndex = _get_mb16();
+            const UINTVAL ContentIndex = _get_mb16();
             Pragma = new_wmls(interp, "UserAgentProperty");
             VTABLE_set_integer_keyed_str(interp, Pragma,
               Parrot_str_new_constant(interp, "PropertyNameIndex"), PropertyNameIndex);
@@ -315,9 +308,9 @@ static int _load_pragma_pool(Interp *interp)
         }
         case 3:
         {
-            UINTVAL PropertyNameIndex = _get_mb16();
-            UINTVAL ContentIndex = _get_mb16();
-            UINTVAL SchemeIndex = _get_mb16();
+            const UINTVAL PropertyNameIndex = _get_mb16();
+            const UINTVAL ContentIndex = _get_mb16();
+            const UINTVAL SchemeIndex = _get_mb16();
             Pragma = new_wmls(interp, "UserAgentProperty&Scheme");
             VTABLE_set_integer_keyed_str(interp, Pragma,
               Parrot_str_new_constant(interp, "PropertyNameIndex"), PropertyNameIndex);
@@ -339,19 +332,17 @@ static int _load_pragma_pool(Interp *interp)
 
 static int _load_function_pool(Interp *interp)
 {
-    UINTVAL NumberOfFunctions;
-    UINTVAL NumberOfFunctionNames;
     UINTVAL idx;
     PMC * Functions;
     PMC * FunctionNameTable;
+    const UINTVAL NumberOfFunctions = _get_uint8();
+    const UINTVAL NumberOfFunctionNames = _get_uint8();
 
-    NumberOfFunctions = _get_uint8();
     Functions = new_wmls(interp, "Functions");
     VTABLE_set_integer_native(interp, Functions, NumberOfFunctions);
     VTABLE_set_pmc_keyed_str(interp, script,
         Parrot_str_new_constant(interp, "Functions"), Functions);
 
-    NumberOfFunctionNames = _get_uint8();
     FunctionNameTable = new_wmls(interp, "FunctionNameTable");
     VTABLE_set_integer_native(interp, FunctionNameTable,
         NumberOfFunctionNames);
@@ -360,7 +351,7 @@ static int _load_function_pool(Interp *interp)
 
     for (idx = 0; idx < NumberOfFunctionNames; idx++) {
         PMC * Couple = pmc_new(interp, enum_class_Array);
-        UINTVAL FunctionIndex = _get_uint8();
+        const UINTVAL FunctionIndex = _get_uint8();
         UINTVAL FunctionNameSize = _get_uint8();
         STRING * FunctionName = string_make(interp, _get_pos(),
           FunctionNameSize, "unicode", 0);
@@ -376,8 +367,8 @@ static int _load_function_pool(Interp *interp)
 
     for (idx = 0; idx < NumberOfFunctions; idx++) {
         PMC * Function;
-        UINTVAL NumberOfArguments = _get_uint8();
-        UINTVAL NumberOfLocalVariables = _get_uint8();
+        const UINTVAL NumberOfArguments = _get_uint8();
+        const UINTVAL NumberOfLocalVariables = _get_uint8();
         UINTVAL FunctionSize = _get_mb32();
         STRING * CodeArray = string_make(interp, _get_pos(),
           FunctionSize, "binary", 0);

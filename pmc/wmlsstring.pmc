@@ -155,13 +155,13 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = - VTABLE_get_integer(INTERP, trans);
+            const INTVAL result = - VTABLE_get_integer(INTERP, trans);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
         }
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL result = - VTABLE_get_number(INTERP, trans);
+            const FLOATVAL result = - VTABLE_get_number(INTERP, trans);
             dest = pmc_new(INTERP, dynpmc_WmlsFloat);
             VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -202,7 +202,7 @@ Return the integer 2.
             &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = ~ VTABLE_get_integer(INTERP, trans);
+            const INTVAL result = ~ VTABLE_get_integer(INTERP, trans);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -241,7 +241,7 @@ Return the integer 2.
     }
 
     VTABLE void i_logical_not() {
-        INTVAL result = ! SELF.get_bool();
+        const INTVAL result = ! SELF.get_bool();
         SELF.morph(dynpmc_WmlsBoolean);
         SELF.set_integer_native(result);
     }
@@ -344,16 +344,16 @@ Return the integer 2.
 
         if (trans1->vtable->base_type == dynpmc_WmlsInteger
         &&  trans2->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans1)
-                          - VTABLE_get_integer(INTERP, trans2);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans1)
+                                - VTABLE_get_integer(INTERP, trans2);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
         }
         if (trans1->vtable->base_type != dynpmc_WmlsInvalid
           && trans2->vtable->base_type != dynpmc_WmlsInvalid) {
-            FLOATVAL result = VTABLE_get_number(INTERP, trans1)
-                            - VTABLE_get_number(INTERP, trans2);
+            const FLOATVAL result = VTABLE_get_number(INTERP, trans1)
+                                  - VTABLE_get_number(INTERP, trans2);
             dest = pmc_new(INTERP, dynpmc_WmlsFloat);
             VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -367,8 +367,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          - VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                - VTABLE_get_integer(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -382,8 +382,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          - VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                - VTABLE_get_integer(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -397,8 +397,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL result = VTABLE_get_number(INTERP, trans)
-                            - VTABLE_get_number(INTERP, value);
+            const FLOATVAL result = VTABLE_get_number(INTERP, trans)
+                                  - VTABLE_get_number(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsFloat);
             VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -420,15 +420,15 @@ Return the integer 2.
 
         if (trans1->vtable->base_type == dynpmc_WmlsInteger
         &&  trans2->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans1)
-                          - VTABLE_get_integer(INTERP, trans2);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans1)
+                                - VTABLE_get_integer(INTERP, trans2);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
         else if (trans1->vtable->base_type != dynpmc_WmlsInvalid
                && trans2->vtable->base_type != dynpmc_WmlsInvalid) {
-            FLOATVAL result = VTABLE_get_number(INTERP, trans1)
-                            - VTABLE_get_number(INTERP, trans2);
+            const FLOATVAL result = VTABLE_get_number(INTERP, trans1)
+                                  - VTABLE_get_number(INTERP, trans2);
             SELF.morph(dynpmc_WmlsFloat);
             SELF.set_number_native(result);
         }
@@ -443,8 +443,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          - VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                - VTABLE_get_integer(INTERP, value);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
@@ -459,8 +459,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          - VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                - VTABLE_get_integer(INTERP, value);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
@@ -475,8 +475,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL result = VTABLE_get_number(INTERP, trans)
-                            - VTABLE_get_number(INTERP, value);
+            const FLOATVAL result = VTABLE_get_number(INTERP, trans)
+                                  - VTABLE_get_number(INTERP, value);
             SELF.morph(dynpmc_WmlsFloat);
             SELF.set_number_native(result);
         }
@@ -508,16 +508,16 @@ Return the integer 2.
 
         if (trans1->vtable->base_type == dynpmc_WmlsInteger
         &&  trans2->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans1)
-                          * VTABLE_get_integer(INTERP, trans2);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans1)
+                                * VTABLE_get_integer(INTERP, trans2);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
         }
         if (trans1->vtable->base_type != dynpmc_WmlsInvalid
           && trans2->vtable->base_type != dynpmc_WmlsInvalid) {
-            FLOATVAL result = VTABLE_get_number(INTERP, trans1)
-                            * VTABLE_get_number(INTERP, trans2);
+            const FLOATVAL result = VTABLE_get_number(INTERP, trans1)
+                                  * VTABLE_get_number(INTERP, trans2);
             dest = pmc_new(INTERP, dynpmc_WmlsFloat);
             VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -531,8 +531,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          * VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                * VTABLE_get_integer(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -546,8 +546,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          * VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                * VTABLE_get_integer(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -561,8 +561,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL result = VTABLE_get_number(INTERP, trans)
-                            * VTABLE_get_number(INTERP, value);
+            const FLOATVAL result = VTABLE_get_number(INTERP, trans)
+                                  * VTABLE_get_number(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsFloat);
             VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -584,15 +584,15 @@ Return the integer 2.
 
         if (trans1->vtable->base_type == dynpmc_WmlsInteger
         &&  trans2->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans1)
-                          * VTABLE_get_integer(INTERP, trans2);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans1)
+                                * VTABLE_get_integer(INTERP, trans2);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
         else if (trans1->vtable->base_type != dynpmc_WmlsInvalid
                && trans2->vtable->base_type != dynpmc_WmlsInvalid) {
-            FLOATVAL result = VTABLE_get_number(INTERP, trans1)
-                            * VTABLE_get_number(INTERP, trans2);
+            const FLOATVAL result = VTABLE_get_number(INTERP, trans1)
+                                  * VTABLE_get_number(INTERP, trans2);
             SELF.morph(dynpmc_WmlsFloat);
             SELF.set_number_native(result);
         }
@@ -607,8 +607,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          * VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                * VTABLE_get_integer(INTERP, value);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
@@ -623,8 +623,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          * VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                * VTABLE_get_integer(INTERP, value);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
@@ -639,8 +639,8 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL result = VTABLE_get_number(INTERP, trans)
-                            * VTABLE_get_number(INTERP, value);
+            const FLOATVAL result = VTABLE_get_number(INTERP, trans)
+                                  * VTABLE_get_number(INTERP, value);
             SELF.morph(dynpmc_WmlsFloat);
             SELF.set_number_native(result);
         }
@@ -672,9 +672,9 @@ Return the integer 2.
 
         if (trans1->vtable->base_type != dynpmc_WmlsInvalid
         &&  trans2->vtable->base_type != dynpmc_WmlsInvalid) {
-            FLOATVAL d = VTABLE_get_number(INTERP, trans2);
+            const FLOATVAL d = VTABLE_get_number(INTERP, trans2);
             if (d != 0.0) {
-                FLOATVAL result = VTABLE_get_number(INTERP, trans1) / d;
+                const FLOATVAL result = VTABLE_get_number(INTERP, trans1) / d;
                 dest = pmc_new(INTERP, dynpmc_WmlsFloat);
                 VTABLE_set_number_native(INTERP, dest, result);
                 return dest;
@@ -689,9 +689,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            FLOATVAL d = VTABLE_get_number(INTERP, value);
+            const FLOATVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0.0) {
-                FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
+                const FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
                 dest = pmc_new(INTERP, dynpmc_WmlsFloat);
                 VTABLE_set_number_native(INTERP, dest, result);
                 return dest;
@@ -706,9 +706,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            FLOATVAL d = VTABLE_get_number(INTERP, value);
+            const FLOATVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0.0) {
-                FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
+                const FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
                 dest = pmc_new(INTERP, dynpmc_WmlsFloat);
                 VTABLE_set_number_native(INTERP, dest, result);
                 return dest;
@@ -723,9 +723,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL d = VTABLE_get_number(INTERP, value);
+            const FLOATVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0.0) {
-                FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
+                const FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
                 dest = pmc_new(INTERP, dynpmc_WmlsFloat);
                 VTABLE_set_number_native(INTERP, dest, result);
                 return dest;
@@ -748,9 +748,9 @@ Return the integer 2.
 
         if (trans1->vtable->base_type != dynpmc_WmlsInvalid
         &&  trans2->vtable->base_type != dynpmc_WmlsInvalid) {
-            FLOATVAL d = VTABLE_get_number(INTERP, trans2);
+            const FLOATVAL d = VTABLE_get_number(INTERP, trans2);
             if (d != 0.0) {
-                FLOATVAL result = VTABLE_get_number(INTERP, trans1) / d;
+                const FLOATVAL result = VTABLE_get_number(INTERP, trans1) / d;
                 SELF.morph(dynpmc_WmlsFloat);
                 SELF.set_number_native(result);
             }
@@ -769,9 +769,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            FLOATVAL d = VTABLE_get_number(INTERP, value);
+            const FLOATVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0.0) {
-                FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
+                const FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
                 SELF.morph(dynpmc_WmlsFloat);
                 SELF.set_number_native(result);
             }
@@ -790,9 +790,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            FLOATVAL d = VTABLE_get_number(INTERP, value);
+            const FLOATVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0.0) {
-                FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
+                const FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
                 SELF.morph(dynpmc_WmlsFloat);
                 SELF.set_number_native(result);
             }
@@ -811,9 +811,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL d = VTABLE_get_number(INTERP, value);
+            const FLOATVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0.0) {
-                FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
+                const FLOATVAL result = VTABLE_get_number(INTERP, trans) / d;
                 SELF.morph(dynpmc_WmlsFloat);
                 SELF.set_number_native(result);
             }
@@ -849,9 +849,9 @@ Return the integer 2.
 
         if (trans1->vtable->base_type == dynpmc_WmlsInteger
         &&  trans2->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_integer(INTERP, trans2);
+            const INTVAL d = VTABLE_get_integer(INTERP, trans2);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans1) / d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans1) / d;
                 dest = pmc_new(INTERP, dynpmc_WmlsInteger);
                 VTABLE_set_integer_native(INTERP, dest, result);
                 return dest;
@@ -866,9 +866,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_number(INTERP, value);
+            const INTVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans) / d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans) / d;
                 dest = pmc_new(INTERP, dynpmc_WmlsInteger);
                 VTABLE_set_integer_native(INTERP, dest, result);
                 return dest;
@@ -883,9 +883,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_number(INTERP, value);
+            const INTVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans) / d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans) / d;
                 dest = pmc_new(INTERP, dynpmc_WmlsInteger);
                 VTABLE_set_integer_native(INTERP, dest, result);
                 return dest;
@@ -908,9 +908,9 @@ Return the integer 2.
 
         if (trans1->vtable->base_type == dynpmc_WmlsInteger
         &&  trans2->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_integer(INTERP, trans2);
+            const INTVAL d = VTABLE_get_integer(INTERP, trans2);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans1) / d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans1) / d;
                 SELF.morph(dynpmc_WmlsInteger);
                 SELF.set_integer_native(result);
             }
@@ -929,9 +929,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_number(INTERP, value);
+            const INTVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans) / d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans) / d;
                 SELF.morph(dynpmc_WmlsInteger);
                 SELF.set_number_native(result);
             }
@@ -950,9 +950,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_number(INTERP, value);
+            const INTVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans) / d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans) / d;
                 SELF.morph(dynpmc_WmlsInteger);
                 SELF.set_number_native(result);
             }
@@ -988,9 +988,9 @@ Return the integer 2.
 
         if (trans1->vtable->base_type == dynpmc_WmlsInteger
         &&  trans2->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_integer(INTERP, trans2);
+            const INTVAL d = VTABLE_get_integer(INTERP, trans2);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans1) % d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans1) % d;
                 dest = pmc_new(INTERP, dynpmc_WmlsInteger);
                 VTABLE_set_integer_native(INTERP, dest, result);
                 return dest;
@@ -1005,9 +1005,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_number(INTERP, value);
+            const INTVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans) % d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans) % d;
                 dest = pmc_new(INTERP, dynpmc_WmlsInteger);
                 VTABLE_set_integer_native(INTERP, dest, result);
                 return dest;
@@ -1022,9 +1022,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_number(INTERP, value);
+            const INTVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans) % d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans) % d;
                 dest = pmc_new(INTERP, dynpmc_WmlsInteger);
                 VTABLE_set_integer_native(INTERP, dest, result);
                 return dest;
@@ -1047,9 +1047,9 @@ Return the integer 2.
 
         if (trans1->vtable->base_type == dynpmc_WmlsInteger
         &&  trans2->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_integer(INTERP, trans2);
+            const INTVAL d = VTABLE_get_integer(INTERP, trans2);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans1) % d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans1) % d;
                 SELF.morph(dynpmc_WmlsInteger);
                 SELF.set_integer_native(result);
             }
@@ -1068,9 +1068,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_number(INTERP, value);
+            const INTVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans) % d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans) % d;
                 SELF.morph(dynpmc_WmlsInteger);
                 SELF.set_number_native(result);
             }
@@ -1089,9 +1089,9 @@ Return the integer 2.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
-            INTVAL d = VTABLE_get_number(INTERP, value);
+            const INTVAL d = VTABLE_get_number(INTERP, value);
             if (d != 0) {
-                INTVAL result = VTABLE_get_integer(INTERP, trans) % d;
+                const INTVAL result = VTABLE_get_integer(INTERP, trans) % d;
                 SELF.morph(dynpmc_WmlsInteger);
                 SELF.set_number_native(result);
             }
@@ -1128,8 +1128,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          | VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                | VTABLE_get_integer(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -1150,8 +1150,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          | VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                | VTABLE_get_integer(INTERP, value);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
@@ -1180,8 +1180,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          & VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                & VTABLE_get_integer(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -1202,8 +1202,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          & VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                & VTABLE_get_integer(INTERP, value);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
@@ -1232,8 +1232,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          ^ VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                ^ VTABLE_get_integer(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -1254,8 +1254,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          ^ VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                ^ VTABLE_get_integer(INTERP, value);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
@@ -1284,8 +1284,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          >> VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                >> VTABLE_get_integer(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -1306,8 +1306,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          >> VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                >> VTABLE_get_integer(INTERP, value);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
@@ -1336,8 +1336,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          >> VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                >> VTABLE_get_integer(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -1358,8 +1358,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          >> VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                >> VTABLE_get_integer(INTERP, value);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }
@@ -1388,8 +1388,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          << VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                << VTABLE_get_integer(INTERP, value);
             dest = pmc_new(INTERP, dynpmc_WmlsInteger);
             VTABLE_set_integer_native(INTERP, dest, result);
             return dest;
@@ -1410,8 +1410,8 @@ Return the integer 2.
         if (trans->vtable->base_type == dynpmc_WmlsInteger
           && (value->vtable->base_type == dynpmc_WmlsInteger
             || value->vtable->base_type == dynpmc_WmlsBoolean)) {
-            INTVAL result = VTABLE_get_integer(INTERP, trans)
-                          << VTABLE_get_integer(INTERP, value);
+            const INTVAL result = VTABLE_get_integer(INTERP, trans)
+                                << VTABLE_get_integer(INTERP, value);
             SELF.morph(dynpmc_WmlsInteger);
             SELF.set_integer_native(result);
         }

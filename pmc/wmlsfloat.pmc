@@ -116,14 +116,14 @@ Returns a Parrot string representation of the number.
 
 */
     VTABLE PMC* neg(PMC* dest) {
-        FLOATVAL result = - SELF.get_number();
+        const FLOATVAL result = - SELF.get_number();
         dest = pmc_new(INTERP, dynpmc_WmlsFloat);
         VTABLE_set_number_native(INTERP, dest, result);
         return dest;
     }
 
     VTABLE void i_neg() {
-        FLOATVAL result = - SELF.get_number();
+        const FLOATVAL result = - SELF.get_number();
         SELF.set_number_native(result);
     }
 
@@ -154,13 +154,14 @@ Returns a Parrot string representation of the number.
 
 */
     VTABLE PMC* logical_not(PMC* dest) {
+        const INTVAL result = ! SELF.get_bool();
         dest = pmc_new(INTERP, dynpmc_WmlsBoolean);
-        VTABLE_set_bool(INTERP, dest, ! SELF.get_bool());
+        VTABLE_set_bool(INTERP, dest, result);
         return dest;
     }
 
     VTABLE void i_logical_not() {
-        INTVAL result = ! SELF.get_bool();
+        const INTVAL result = ! SELF.get_bool();
         SELF.morph(dynpmc_WmlsBoolean);
         SELF.set_integer_native(result);
     }
@@ -181,24 +182,24 @@ Returns a Parrot string representation of the number.
 
 */
     MULTI PMC* add(WmlsFloat value, PMC* dest) {
-        FLOATVAL result = SELF.get_number()
-                        + VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              + VTABLE_get_number(INTERP, value);
         dest = pmc_new(INTERP, dynpmc_WmlsFloat);
         VTABLE_set_number_native(INTERP, dest, result);
         return dest;
     }
 
     MULTI PMC* add(WmlsInteger value, PMC* dest) {
-        FLOATVAL result = SELF.get_number()
-                        + VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              + VTABLE_get_number(INTERP, value);
         dest = pmc_new(INTERP, dynpmc_WmlsFloat);
         VTABLE_set_number_native(INTERP, dest, result);
         return dest;
     }
 
     MULTI PMC* add(WmlsBoolean value, PMC* dest) {
-        FLOATVAL result = SELF.get_number()
-                        + VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              + VTABLE_get_number(INTERP, value);
         dest = pmc_new(INTERP, dynpmc_WmlsFloat);
         VTABLE_set_number_native(INTERP, dest, result);
         return dest;
@@ -218,20 +219,20 @@ Returns a Parrot string representation of the number.
     }
 
     MULTI void i_add(WmlsFloat value) {
-        FLOATVAL result = SELF.get_number()
-                        + VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              + VTABLE_get_number(INTERP, value);
         SELF.set_number_native(result);
     }
 
     MULTI void i_add(WmlsInteger value) {
-        FLOATVAL result = SELF.get_number()
-                        + VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              + VTABLE_get_number(INTERP, value);
         SELF.set_number_native(result);
     }
 
     MULTI void i_add(WmlsBoolean value) {
-        FLOATVAL result = SELF.get_number()
-                        + VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              + VTABLE_get_number(INTERP, value);
         SELF.set_number_native(result);
     }
 
@@ -257,24 +258,24 @@ Returns a Parrot string representation of the number.
 
 */
     MULTI PMC* subtract(WmlsFloat value, PMC* dest) {
-        FLOATVAL result = SELF.get_number()
-                        - VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              - VTABLE_get_number(INTERP, value);
         dest = pmc_new(INTERP, dynpmc_WmlsFloat);
         VTABLE_set_number_native(INTERP, dest, result);
         return dest;
     }
 
     MULTI PMC* subtract(WmlsInteger value, PMC* dest) {
-        FLOATVAL result = SELF.get_number()
-                        - VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              - VTABLE_get_number(INTERP, value);
         dest = pmc_new(INTERP, dynpmc_WmlsFloat);
         VTABLE_set_number_native(INTERP, dest, result);
         return dest;
     }
 
     MULTI PMC* subtract(WmlsBoolean value, PMC* dest) {
-        FLOATVAL result = SELF.get_number()
-                        - VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              - VTABLE_get_number(INTERP, value);
         dest = pmc_new(INTERP, dynpmc_WmlsFloat);
         VTABLE_set_number_native(INTERP, dest, result);
         return dest;
@@ -286,8 +287,8 @@ Returns a Parrot string representation of the number.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL result = SELF.get_number()
-                            - VTABLE_get_number(INTERP, trans);
+            const FLOATVAL result = SELF.get_number()
+                                  - VTABLE_get_number(INTERP, trans);
             dest = pmc_new(INTERP, dynpmc_WmlsFloat);
             VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -300,20 +301,20 @@ Returns a Parrot string representation of the number.
     }
 
     MULTI void i_subtract(WmlsFloat value) {
-        FLOATVAL result = SELF.get_number()
-                        - VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              - VTABLE_get_number(INTERP, value);
         SELF.set_number_native(result);
     }
 
     MULTI void i_subtract(WmlsInteger value) {
-        FLOATVAL result = SELF.get_number()
-                        - VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              - VTABLE_get_number(INTERP, value);
         SELF.set_number_native(result);
     }
 
     MULTI void i_subtract(WmlsBoolean value) {
-        FLOATVAL result = SELF.get_number()
-                        - VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              - VTABLE_get_number(INTERP, value);
         SELF.set_number_native(result);
     }
 
@@ -323,8 +324,8 @@ Returns a Parrot string representation of the number.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL result = SELF.get_number()
-                            - VTABLE_get_number(INTERP, trans);
+            const FLOATVAL result = SELF.get_number()
+                                  - VTABLE_get_number(INTERP, trans);
             SELF.set_number_native(result);
         }
         else {
@@ -346,24 +347,24 @@ Returns a Parrot string representation of the number.
 
 */
     MULTI PMC* multiply(WmlsFloat value, PMC* dest) {
-        FLOATVAL result = SELF.get_number()
-                        * VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              * VTABLE_get_number(INTERP, value);
         dest = pmc_new(INTERP, dynpmc_WmlsFloat);
         VTABLE_set_number_native(INTERP, dest, result);
         return dest;
     }
 
     MULTI PMC* multiply(WmlsInteger value, PMC* dest) {
-        FLOATVAL result = SELF.get_number()
-                        * VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              * VTABLE_get_number(INTERP, value);
         dest = pmc_new(INTERP, dynpmc_WmlsFloat);
         VTABLE_set_number_native(INTERP, dest, result);
         return dest;
     }
 
     MULTI PMC* multiply(WmlsBoolean value, PMC* dest) {
-        FLOATVAL result = SELF.get_number()
-                        * VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              * VTABLE_get_number(INTERP, value);
         dest = pmc_new(INTERP, dynpmc_WmlsFloat);
         VTABLE_set_number_native(INTERP, dest, result);
         return dest;
@@ -375,8 +376,8 @@ Returns a Parrot string representation of the number.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL result = SELF.get_number()
-                            * VTABLE_get_number(INTERP, trans);
+            const FLOATVAL result = SELF.get_number()
+                                  * VTABLE_get_number(INTERP, trans);
             dest = pmc_new(INTERP, dynpmc_WmlsFloat);
             VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -389,20 +390,20 @@ Returns a Parrot string representation of the number.
     }
 
     MULTI void i_multiply(WmlsFloat value) {
-        FLOATVAL result = SELF.get_number()
-                        * VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              * VTABLE_get_number(INTERP, value);
         SELF.set_number_native(result);
     }
 
     MULTI void i_multiply(WmlsInteger value) {
-        FLOATVAL result = SELF.get_number()
-                        * VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              * VTABLE_get_number(INTERP, value);
         SELF.set_number_native(result);
     }
 
     MULTI void i_multiply(WmlsBoolean value) {
-        FLOATVAL result = SELF.get_number()
-                        * VTABLE_get_number(INTERP, value);
+        const FLOATVAL result = SELF.get_number()
+                              * VTABLE_get_number(INTERP, value);
         SELF.set_number_native(result);
     }
 
@@ -412,8 +413,8 @@ Returns a Parrot string representation of the number.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL result = SELF.get_number()
-                            * VTABLE_get_number(INTERP, trans);
+            const FLOATVAL result = SELF.get_number()
+                                  * VTABLE_get_number(INTERP, trans);
             SELF.set_number_native(result);
         }
         else {
@@ -435,9 +436,9 @@ Returns a Parrot string representation of the number.
 
 */
     MULTI PMC* divide(WmlsFloat value, PMC* dest) {
-        FLOATVAL d = VTABLE_get_number(INTERP, value);
+        const FLOATVAL d = VTABLE_get_number(INTERP, value);
         if (d != 0.0) {
-            FLOATVAL result = SELF.get_number() / d;
+            const FLOATVAL result = SELF.get_number() / d;
             dest = pmc_new(INTERP, dynpmc_WmlsFloat);
             VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -446,9 +447,9 @@ Returns a Parrot string representation of the number.
     }
 
     MULTI PMC* divide(WmlsInteger value, PMC* dest) {
-        FLOATVAL d = VTABLE_get_number(INTERP, value);
+        const FLOATVAL d = VTABLE_get_number(INTERP, value);
         if (d != 0.0) {
-            FLOATVAL result = SELF.get_number() / d;
+            const FLOATVAL result = SELF.get_number() / d;
             dest = pmc_new(INTERP, dynpmc_WmlsFloat);
             VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -457,9 +458,9 @@ Returns a Parrot string representation of the number.
     }
 
     MULTI PMC* divide(WmlsBoolean value, PMC* dest) {
-        FLOATVAL d = VTABLE_get_number(INTERP, value);
+        const FLOATVAL d = VTABLE_get_number(INTERP, value);
         if (d != 0.0) {
-            FLOATVAL result = SELF.get_number() / d;
+            const FLOATVAL result = SELF.get_number() / d;
             dest = pmc_new(INTERP, dynpmc_WmlsFloat);
             VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -473,9 +474,9 @@ Returns a Parrot string representation of the number.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL d = VTABLE_get_number(INTERP, trans);
+            const FLOATVAL d = VTABLE_get_number(INTERP, trans);
             if (d != 0.0) {
-                FLOATVAL result = SELF.get_number() / d;
+                const FLOATVAL result = SELF.get_number() / d;
                 dest = pmc_new(INTERP, dynpmc_WmlsFloat);
                 VTABLE_set_number_native(INTERP, dest, result);
             return dest;
@@ -489,9 +490,9 @@ Returns a Parrot string representation of the number.
     }
 
     MULTI void i_divide(WmlsFloat value) {
-        FLOATVAL d = VTABLE_get_number(INTERP, value);
+        const FLOATVAL d = VTABLE_get_number(INTERP, value);
         if (d != 0.0) {
-            FLOATVAL result = SELF.get_number() / d;
+            const FLOATVAL result = SELF.get_number() / d;
             SELF.set_number_native(result);
         }
         else {
@@ -500,9 +501,9 @@ Returns a Parrot string representation of the number.
     }
 
     MULTI void i_divide(WmlsInteger value) {
-        FLOATVAL d = VTABLE_get_number(INTERP, value);
+        const FLOATVAL d = VTABLE_get_number(INTERP, value);
         if (d != 0.0) {
-            FLOATVAL result = SELF.get_number() / d;
+            const FLOATVAL result = SELF.get_number() / d;
             SELF.set_number_native(result);
         }
         else {
@@ -511,9 +512,9 @@ Returns a Parrot string representation of the number.
     }
 
     MULTI void i_divide(WmlsBoolean value) {
-        FLOATVAL d = VTABLE_get_number(INTERP, value);
+        const FLOATVAL d = VTABLE_get_number(INTERP, value);
         if (d != 0.0) {
-            FLOATVAL result = SELF.get_number() / d;
+            const FLOATVAL result = SELF.get_number() / d;
             SELF.set_number_native(result);
         }
         else {
@@ -527,9 +528,9 @@ Returns a Parrot string representation of the number.
             "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
-            FLOATVAL d = VTABLE_get_number(INTERP, trans);
+            const FLOATVAL d = VTABLE_get_number(INTERP, trans);
             if (d != 0.0) {
-                FLOATVAL result = SELF.get_number() / d;
+                const FLOATVAL result = SELF.get_number() / d;
                 SELF.set_number_native(result);
             }
             else {
