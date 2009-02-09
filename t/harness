@@ -1,7 +1,11 @@
-#!/usr/bin/perl
+#! perl
 
 # Copyright (C) 2006-2007, The Perl Foundation.
 # $Id$
+
+use strict;
+use warnings;
+use 5.008;
 
 BEGIN {
     # Check that we have the WMLScript compiler.
