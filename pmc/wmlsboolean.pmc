@@ -121,7 +121,7 @@ Return the string "true" or "false".
 */
     VTABLE void increment() {
         const INTVAL a = SELF.get_integer();
-        SELF.morph(dynpmc_WmlsInteger);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
         SELF.set_integer_native(a);
         SELF.increment();
     }
@@ -135,7 +135,7 @@ Return the string "true" or "false".
 */
     VTABLE void decrement() {
         const INTVAL a = SELF.get_integer();
-        SELF.morph(dynpmc_WmlsInteger);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
         SELF.set_integer_native(a);
         SELF.decrement();
     }
@@ -154,7 +154,7 @@ Return the string "true" or "false".
     }
 
     VTABLE void i_absolute() {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -175,7 +175,7 @@ Return the string "true" or "false".
 
     VTABLE void i_neg() {
         const INTVAL result = - SELF.get_bool();
-        SELF.morph(dynpmc_WmlsInteger);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
         SELF.set_integer_native(result);
     }
 
@@ -197,7 +197,7 @@ Return the string "true" or "false".
 
     VTABLE void i_bitwise_not() {
         const INTVAL result = ~ SELF.get_bool();
-        SELF.morph(dynpmc_WmlsInteger);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
         SELF.set_integer_native(result);
     }
 
@@ -277,21 +277,21 @@ Return the string "true" or "false".
     MULTI void i_add(WmlsInteger value) {
         const INTVAL result = SELF.get_integer()
                             + VTABLE_get_integer(INTERP, value);
-        SELF.morph(dynpmc_WmlsInteger);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
         SELF.set_integer_native(result);
     }
 
     MULTI void i_add(WmlsBoolean value) {
         const INTVAL result = SELF.get_integer()
                             + VTABLE_get_integer(INTERP, value);
-        SELF.morph(dynpmc_WmlsInteger);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
         SELF.set_integer_native(result);
     }
 
     MULTI void i_add(WmlsFloat value) {
         const FLOATVAL result = SELF.get_number()
                               + VTABLE_get_number(INTERP, value);
-        SELF.morph(dynpmc_WmlsFloat);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsFloat, 0);
         SELF.set_number_native(result);
     }
 
@@ -299,12 +299,12 @@ Return the string "true" or "false".
         STRING* const result = Parrot_str_concat(INTERP,
               SELF.get_string(),
               VTABLE_get_string(INTERP, value), 0);
-        SELF.morph(dynpmc_WmlsString);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsString, 0);
         SELF.set_string_native(result);
     }
 
     MULTI void i_add(DEFAULT value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -362,21 +362,21 @@ Return the string "true" or "false".
     MULTI void i_subtract(WmlsInteger value) {
         const INTVAL result = SELF.get_integer()
                             - VTABLE_get_integer(INTERP, value);
-        SELF.morph(dynpmc_WmlsInteger);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
         SELF.set_integer_native(result);
     }
 
     MULTI void i_subtract(WmlsBoolean value) {
         const INTVAL result = SELF.get_integer()
                             - VTABLE_get_integer(INTERP, value);
-        SELF.morph(dynpmc_WmlsInteger);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
         SELF.set_integer_native(result);
     }
 
     MULTI void i_subtract(WmlsFloat value) {
         const FLOATVAL result = SELF.get_number()
                               - VTABLE_get_number(INTERP, value);
-        SELF.morph(dynpmc_WmlsFloat);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsFloat, 0);
         SELF.set_number_native(result);
     }
 
@@ -388,16 +388,16 @@ Return the string "true" or "false".
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
             const INTVAL result = SELF.get_integer()
                                 - VTABLE_get_integer(INTERP, trans);
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
     MULTI void i_subtract(DEFAULT value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -455,21 +455,21 @@ Return the string "true" or "false".
     MULTI void i_multiply(WmlsInteger value) {
         const INTVAL result = SELF.get_integer()
                             * VTABLE_get_integer(INTERP, value);
-        SELF.morph(dynpmc_WmlsInteger);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
         SELF.set_integer_native(result);
     }
 
     MULTI void i_multiply(WmlsBoolean value) {
         const INTVAL result = SELF.get_integer()
                             * VTABLE_get_integer(INTERP, value);
-        SELF.morph(dynpmc_WmlsInteger);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
         SELF.set_integer_native(result);
     }
 
     MULTI void i_multiply(WmlsFloat value) {
         const FLOATVAL result = SELF.get_number()
                               * VTABLE_get_number(INTERP, value);
-        SELF.morph(dynpmc_WmlsFloat);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsFloat, 0);
         SELF.set_number_native(result);
     }
 
@@ -481,16 +481,16 @@ Return the string "true" or "false".
         if (trans->vtable->base_type == dynpmc_WmlsInteger) {
             const INTVAL result = SELF.get_integer()
                                 * VTABLE_get_integer(INTERP, trans);
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
     MULTI void i_multiply(DEFAULT value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -560,11 +560,11 @@ Return the string "true" or "false".
         const FLOATVAL d = VTABLE_get_number(INTERP, value);
         if (d != 0.0) {
             const FLOATVAL result = SELF.get_number() / d;
-            SELF.morph(dynpmc_WmlsFloat);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsFloat, 0);
             SELF.set_number_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -572,11 +572,11 @@ Return the string "true" or "false".
         const FLOATVAL d = VTABLE_get_number(INTERP, value);
         if (d != 0.0) {
             const FLOATVAL result = SELF.get_number() / d;
-            SELF.morph(dynpmc_WmlsFloat);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsFloat, 0);
             SELF.set_number_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -584,11 +584,11 @@ Return the string "true" or "false".
         const FLOATVAL d = VTABLE_get_number(INTERP, value);
         if (d != 0.0) {
             const FLOATVAL result = SELF.get_number() / d;
-            SELF.morph(dynpmc_WmlsFloat);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsFloat, 0);
             SELF.set_number_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -601,20 +601,20 @@ Return the string "true" or "false".
             const FLOATVAL d = VTABLE_get_integer(INTERP, trans);
             if (d != 0.0) {
                 const FLOATVAL result = SELF.get_number() / d;
-                SELF.morph(dynpmc_WmlsFloat);
+                pmc_reuse(INTERP, SELF, dynpmc_WmlsFloat, 0);
                 SELF.set_number_native(result);
             }
             else {
-                SELF.morph(dynpmc_WmlsInvalid);
+                pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
             }
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
     MULTI void i_divide(DEFAULT value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -673,11 +673,11 @@ Return the string "true" or "false".
         const INTVAL d = VTABLE_get_integer(INTERP, value);
         if (d != 0) {
             const INTVAL result = SELF.get_integer() / d;
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -685,11 +685,11 @@ Return the string "true" or "false".
         const INTVAL d = VTABLE_get_integer(INTERP, value);
         if (d != 0) {
             const INTVAL result = SELF.get_integer() / d;
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -702,20 +702,20 @@ Return the string "true" or "false".
             const INTVAL d = VTABLE_get_integer(INTERP, trans);
             if (d != 0) {
                 const INTVAL result = SELF.get_integer() / d;
-                SELF.morph(dynpmc_WmlsInteger);
+                pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
                 SELF.set_integer_native(result);
             }
             else {
-                SELF.morph(dynpmc_WmlsInvalid);
+                pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
             }
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
     MULTI void i_floor_divide(DEFAULT value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -774,11 +774,11 @@ Return the string "true" or "false".
         const INTVAL d = VTABLE_get_integer(INTERP, value);
         if (d != 0) {
             const INTVAL result = SELF.get_integer() % d;
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -786,11 +786,11 @@ Return the string "true" or "false".
         const INTVAL d = VTABLE_get_integer(INTERP, value);
         if (d != 0) {
             const INTVAL result = SELF.get_integer() % d;
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -803,20 +803,20 @@ Return the string "true" or "false".
             const INTVAL d = VTABLE_get_integer(INTERP, trans);
             if (d != 0) {
                 const INTVAL result = SELF.get_integer() % d;
-                SELF.morph(dynpmc_WmlsInteger);
+                pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
                 SELF.set_integer_native(result);
             }
             else {
-                SELF.morph(dynpmc_WmlsInvalid);
+                pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
             }
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
     MULTI void i_modulus(DEFAULT value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -855,11 +855,11 @@ Return the string "true" or "false".
           || value->vtable->base_type == dynpmc_WmlsBoolean) {
             const INTVAL result = SELF.get_integer()
                                 | VTABLE_get_integer(INTERP, value);
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -899,11 +899,11 @@ Return the string "true" or "false".
           || value->vtable->base_type == dynpmc_WmlsBoolean) {
             const INTVAL result = SELF.get_integer()
                                 & VTABLE_get_integer(INTERP, value);
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -943,11 +943,11 @@ Return the string "true" or "false".
           || value->vtable->base_type == dynpmc_WmlsBoolean) {
             const INTVAL result = SELF.get_integer()
                                 ^ VTABLE_get_integer(INTERP, value);
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -987,11 +987,11 @@ Return the string "true" or "false".
           || value->vtable->base_type == dynpmc_WmlsBoolean) {
             const INTVAL result = SELF.get_integer()
                                 >> VTABLE_get_integer(INTERP, value);
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -1031,11 +1031,11 @@ Return the string "true" or "false".
           || value->vtable->base_type == dynpmc_WmlsBoolean) {
             const INTVAL result = SELF.get_integer()
                                 >> VTABLE_get_integer(INTERP, value);
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -1075,11 +1075,11 @@ Return the string "true" or "false".
           || value->vtable->base_type == dynpmc_WmlsBoolean) {
             const INTVAL result = SELF.get_integer()
                                 << VTABLE_get_integer(INTERP, value);
-            SELF.morph(dynpmc_WmlsInteger);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInteger, 0);
             SELF.set_integer_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 

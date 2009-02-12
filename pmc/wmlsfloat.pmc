@@ -141,7 +141,7 @@ Returns a Parrot string representation of the number.
     }
 
     VTABLE void i_bitwise_not() {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -162,7 +162,7 @@ Returns a Parrot string representation of the number.
 
     VTABLE void i_logical_not() {
         const INTVAL result = ! SELF.get_bool();
-        SELF.morph(dynpmc_WmlsBoolean);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsBoolean, 0);
         SELF.set_bool(result);
     }
 
@@ -240,12 +240,12 @@ Returns a Parrot string representation of the number.
         STRING* const result = Parrot_str_concat(INTERP,
             SELF.get_string(),
             VTABLE_get_string(INTERP, value), 0);
-        SELF.morph(dynpmc_WmlsString);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsString, 0);
         SELF.set_string_native(result);
     }
 
     MULTI void i_add(DEFAULT value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -329,12 +329,12 @@ Returns a Parrot string representation of the number.
             SELF.set_number_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
     MULTI void i_subtract(DEFAULT value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -418,12 +418,12 @@ Returns a Parrot string representation of the number.
             SELF.set_number_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
     MULTI void i_multiply(DEFAULT value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -496,7 +496,7 @@ Returns a Parrot string representation of the number.
             SELF.set_number_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -507,7 +507,7 @@ Returns a Parrot string representation of the number.
             SELF.set_number_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -518,7 +518,7 @@ Returns a Parrot string representation of the number.
             SELF.set_number_native(result);
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
@@ -534,16 +534,16 @@ Returns a Parrot string representation of the number.
                 SELF.set_number_native(result);
             }
             else {
-                SELF.morph(dynpmc_WmlsInvalid);
+                pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
             }
         }
         else {
-            SELF.morph(dynpmc_WmlsInvalid);
+            pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
         }
     }
 
     MULTI void i_divide(DEFAULT value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -560,7 +560,7 @@ Returns a Parrot string representation of the number.
     }
 
     void i_floor_divide(PMC* value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -577,7 +577,7 @@ Returns a Parrot string representation of the number.
     }
 
     void i_modulus(PMC* value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -594,7 +594,7 @@ Returns a Parrot string representation of the number.
     }
 
     VTABLE void i_bitwise_or(PMC* value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -611,7 +611,7 @@ Returns a Parrot string representation of the number.
     }
 
     VTABLE void i_bitwise_and(PMC* value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -628,7 +628,7 @@ Returns a Parrot string representation of the number.
     }
 
     VTABLE void i_bitwise_xor(PMC* value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -645,7 +645,7 @@ Returns a Parrot string representation of the number.
     }
 
     VTABLE void i_bitwise_shr(PMC* value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -662,7 +662,7 @@ Returns a Parrot string representation of the number.
     }
 
     VTABLE void i_bitwise_lsr(PMC* value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
@@ -679,7 +679,7 @@ Returns a Parrot string representation of the number.
     }
 
     VTABLE void i_bitwise_shl(PMC* value) {
-        SELF.morph(dynpmc_WmlsInvalid);
+        pmc_reuse(INTERP, SELF, dynpmc_WmlsInvalid, 0);
     }
 
 /*
