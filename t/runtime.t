@@ -2,11 +2,9 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript Runtime Libraries
 
-t/runtime.t - WMLScript Runtime Libraries
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/runtime.t
 

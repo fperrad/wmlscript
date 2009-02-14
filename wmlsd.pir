@@ -1,19 +1,17 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript Disassembler
 
-wmlsd - WMLScript Disassembler
-
-=head1 SYNOPSYS
+=head2 Synopsis
 
  parrot wmlsd.pir file.wmlsc
 
-=head1 DESCRIPTION
+=head2 Description
 
 B<wmlsd> disassembles binary form of WMLScript file.
 
-=head1 SEE ALSO
+=head2 See Also
 
 wmls2pir, wmls2pbc, wmlsi
 

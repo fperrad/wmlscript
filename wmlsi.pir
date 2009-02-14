@@ -1,20 +1,18 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript Interpreter
 
-wmlsi - WMLScript Interpreter
-
-=head1 SYNOPSYS
+=head2 Synopsis
 
  parrot wmlsi.pir file.wmlsc function [params ...]
 
-=head1 DESCRIPTION
+=head2 Description
 
 B<wmlsi> translates a WMLScript bytecode file to Parrot PBC and calls
 C<function(params, ...)>.
 
-=head1 SEE ALSO
+=head2 See Also
 
 wmlsd, wmls2pir, wmls2pbc
 

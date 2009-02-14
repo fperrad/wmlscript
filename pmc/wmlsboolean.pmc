@@ -2,16 +2,14 @@
 Copyright (C) 2006-2009, Parrot Foundation.
 $Id$
 
-=head1 NAME
+=head1 WMLScript Boolean
 
-pmc/wmlsboolean.pmc - WMLScript Boolean
-
-=head1 DESCRIPTION
+=head2 Description
 
 C<WmlsBoolean> extends C<Boolean> to provide a class with the behaviour of
 the WMLScript C<Boolean> type.
 
-=head2 Methods
+=head3 Methods
 
 =over 4
 
@@ -226,7 +224,7 @@ Return the string "true" or "false".
 
 =back
 
-=head2 non-Vtable Methods
+=head3 non-Vtable Methods
 
 =over 4
 

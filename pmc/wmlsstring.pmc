@@ -2,16 +2,14 @@
 Copyright (C) 2006-2009, Parrot Foundation.
 $Id$
 
-=head1 NAME
+=head1 WMLScript String
 
-pmc/wmlsstring.pmc - WMLScript String
-
-=head1 DESCRIPTION
+=head2 Description
 
 C<WmlsString> extends C<String> to provide a class with the behaviour of
 the WMLScript C<String> type.
 
-=head2 Methods
+=head3 Methods
 
 =over 4
 
@@ -251,7 +249,7 @@ Return the integer 2.
 
 =back
 
-=head2 non-Vtable Methods
+=head3 non-Vtable Methods
 
 =over 4
 
@@ -1487,7 +1485,7 @@ Return the integer 2.
 
 =back
 
-=head2 Specific Methods
+=head3 Specific Methods
 
 =over 4
 

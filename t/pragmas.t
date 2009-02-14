@@ -2,15 +2,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript Pragmas
 
-t/pragmas.t - WMLScript Pragmas
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/pragmas.t
 
-=head1 DESCRIPTION
+=head2 Description
 
 =cut
 

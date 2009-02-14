@@ -2,15 +2,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript Float library
 
-t/libfloat.t - WMLScript Float library
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/libfloat.t
 
-=head1 DESCRIPTION
+=head2 Description
 
 Tests WMLScript Float Library
 (implemented in F<languages/WMLScript/runtime/wmlsfloat.pir>).

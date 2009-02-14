@@ -1,18 +1,16 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript Float library
 
-runtime/wmlsfloat.pir - WMLScript Float library
-
-=head1 DESCRIPTION
+=head2 Description
 
 This library contains a set of typical arithmetic floating-point functions that
 are frequently used by applications.
 
 See "WMLScript Standard Libraries Specification", section 8 "Float".
 
-=head1 FUNCTIONS
+=head2 Functions
 
 =cut
 
@@ -45,18 +43,18 @@ See "WMLScript Standard Libraries Specification", section 8 "Float".
 .end
 
 
-=head2 C<int(value)>
+=head3 C<int(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the integer part of the given value. If the value is already an integer,
 the result is the value itself.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Number
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer or invalid.
 
@@ -82,18 +80,18 @@ Integer or invalid.
 .end
 
 
-=head2 C<floor(value)>
+=head3 C<floor(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the greatest integer value that is not greater than the given value. If
 the value is already an integer, the result is the value itself.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Number
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer or invalid.
 
@@ -120,18 +118,18 @@ Integer or invalid.
 .end
 
 
-=head2 C<ceil(value)>
+=head3 C<ceil(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the smallest integer value that is not less than the given value. If
 the value is already an integer, the result is the value itself.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Number
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer or invalid.
 
@@ -158,25 +156,25 @@ Integer or invalid.
 .end
 
 
-=head2 C<pow(value1, value2)>
+=head3 C<pow(value1, value2)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns an implementation-dependent approximation to the result of raising
 value1 to the power of value2. If value1 is a negative number then value2
 must be an integer.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value1 = Number
 
 value2 = Number
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Floating-point or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 If value1 == 0 and value2 < 0 then C<invalid> is returned.
 
@@ -223,20 +221,20 @@ If value1 < 0 and value2 is not an integer then C<invalid> is returned.
 .end
 
 
-=head2 C<round(value)>
+=head3 C<round(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the number value that is closest to the given value and is equal to a
 mathematical integer. If two integer number values are equally close to the
 value, the result is the larger number value. If the value is already an
 integer, the result is the value itself.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Number
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer or invalid.
 
@@ -264,22 +262,22 @@ Integer or invalid.
 .end
 
 
-=head2 C<sqrt(value)>
+=head3 C<sqrt(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns an implementation-dependent approximation to the square root of
 the given value.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Floating-point
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Floating-point or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 If value is a negative number then invalid is returned.
 
@@ -307,14 +305,14 @@ If value is a negative number then invalid is returned.
 .end
 
 
-=head2 C<maxFloat()>
+=head3 C<maxFloat()>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the maximum floating-point value supported by [IEEE754] single
 precision floating-point format.
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Floating-point 3.40282347e+38.
 
@@ -327,14 +325,14 @@ Floating-point 3.40282347e+38.
 .end
 
 
-=head2 C<minFloat()>
+=head3 C<minFloat()>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the smallest nonzero floating-point value supported by [IEEE754]
 single precision floating-point format.
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Floating-point. Smaller than or equal to the normalised minimum single
 precision floating-point value: 1.17549435e-38.

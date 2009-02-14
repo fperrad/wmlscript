@@ -1,18 +1,16 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript Lang library
 
-runtime/wmlslang.pir - WMLScript Lang library
-
-=head1 DESCRIPTION
+=head2 Description
 
 This library contains a set of functions that are closely related to the
 WMLScript language core.
 
 See "WMLScript Standard Libraries Specification", section 7 "Lang".
 
-=head1 FUNCTIONS
+=head2 Functions
 
 =cut
 
@@ -59,19 +57,19 @@ See "WMLScript Standard Libraries Specification", section 7 "Lang".
 .end
 
 
-=head2 C<abs(value)>
+=head3 C<abs(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the absolute value of the given number. If the given number is of
 type integer then an integer value is returned. If the given number is of type
 floating-point then a floating-point value is returned.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Number
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Number or invalid.
 
@@ -86,9 +84,9 @@ Number or invalid.
 .end
 
 
-=head2 C<min(value1, value2)>
+=head3 C<min(value1, value2)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the minimum value of the given two numbers. The value and type
 returned is the same as the value and type of the selected number. The
@@ -112,13 +110,13 @@ If the values are equal then the first value is selected.
 
 =back
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value1 = Number
 
 value2 = Number
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Number or invalid.
 
@@ -154,9 +152,9 @@ Number or invalid.
 .end
 
 
-=head2 C<max(value1, value2)>
+=head3 C<max(value1, value2)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the maximum value of the given two numbers. The value and type
 returned is the same as the value and type of the selected number. The
@@ -180,13 +178,13 @@ If the values are equal then the first value is selected.
 
 =back
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value1 = Number
 
 value2 = Number
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Number or invalid.
 
@@ -222,9 +220,9 @@ Number or invalid.
 .end
 
 
-=head2 C<parseInt(value)>
+=head3 C<parseInt(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns an integer value defined by the string value. The legal integer
 syntax is specified by the WMLScript (see [WMLScript]) numeric string
@@ -242,15 +240,15 @@ leading '+' or '-' or a decimal digit.
 
 The result is the parsed string converted to an integer value.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 In case of a parsing error an C<invalid> value is returned.
 
@@ -273,9 +271,9 @@ In case of a parsing error an C<invalid> value is returned.
 .end
 
 
-=head2 C<parseFloat(value)>
+=head3 C<parseFloat(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a floating-point value defined by the string value. The legal floatingpoint
 syntax is specified by the WMLScript (see [WMLScript]) numeric
@@ -293,15 +291,15 @@ be parsed as being part of the floating-point representation.
 
 The result is the parsed string converted to a floating-point value.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Floating-point or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 In case of a parsing error an C<invalid> value is returned.
 
@@ -331,19 +329,19 @@ In case of a parsing error an C<invalid> value is returned.
 .end
 
 
-=head2 C<isInt(value)>
+=head3 C<isInt(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a boolean value that is C<true> if the given value can be converted
 into an integer number by using parseInt(value). Otherwise C<false> is
 returned.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Any
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Boolean or invalid.
 
@@ -370,19 +368,19 @@ Boolean or invalid.
 .end
 
 
-=head2 C<isFloat(value)>
+=head3 C<isFloat(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a boolean value that is C<true> if the given value can be converted
 into a floating-point number using parseFloat(value). Otherwise C<false> is
 returned.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Any
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Boolean or invalid.
 
@@ -413,13 +411,13 @@ Boolean or invalid.
 .end
 
 
-=head2 C<maxInt()>
+=head3 C<maxInt()>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the maximum integer value.
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer 2147483647.
 
@@ -432,13 +430,13 @@ Integer 2147483647.
 .end
 
 
-=head2 C<minInt()>
+=head3 C<minInt()>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the minimum integer value.
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer -2147483648.
 
@@ -451,13 +449,13 @@ Integer -2147483648.
 .end
 
 
-=head2 C<float()>
+=head3 C<float()>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns true if floating-points are supported and false if not.
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Boolean.
 
@@ -471,20 +469,20 @@ Boolean.
 .end
 
 
-=head2 C<exit(value)>
+=head3 C<exit(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Ends the interpretation of the WMLScript bytecode and returns the control
 back to the caller of the WMLScript interpreter with the given return value.
 This function can be used to perform a normal exit from a function in cases
 where the execution of the WMLScript bytecode should be discontinued.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Any
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 None (this function ends the interpretation).
 
@@ -504,9 +502,9 @@ None (this function ends the interpretation).
 .end
 
 
-=head2 C<abort(errorDescription)>
+=head3 C<abort(errorDescription)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Aborts the interpretation of the WMLScript bytecode and returns the control
 back to the caller of the WMLScript interpreter with the return
@@ -515,11 +513,11 @@ cases where the execution of the WMLScript should be discontinued due to
 serious errors detected by the program. If the type of the errorDescription is
 invalid, string "invalid" is used as the errorDescription instead.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 errorDescription = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 None (this function aborts the interpretation).
 
@@ -531,9 +529,9 @@ None (this function aborts the interpretation).
 .end
 
 
-=head2 C<random(value)>
+=head3 C<random(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns an integer value with positive sign that is greater than or equal to 0
 but less than or equal to the given value. The return value is chosen
@@ -543,15 +541,15 @@ that range, using an implementation-dependent algorithm or strategy.
 If the value is of type floating-point, Float.int() is first used to calculate the
 actual integer value.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Number
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 If value is equal to zero (0), the function returns zero.
 
@@ -584,9 +582,9 @@ If value is less than zero (0), the function returns C<invalid>.
 .end
 
 
-=head2 C<seed(value)>
+=head3 C<seed(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Initialises the pseudo-random number sequence and returns an empty
 string. If the value is zero or a positive integer then the given value is used
@@ -599,11 +597,11 @@ If the value is of type floating-point, Float.int() is first used to calculate t
 actual integer value. . If the value is non-numeric, invalid is returned and the
 current seed is unchanged.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Number
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
@@ -635,15 +633,15 @@ String or invalid.
 .end
 
 
-=head2 C<characterSet()>
+=head3 C<characterSet()>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the character set supported by the WMLScript Interpreter. The
 return value is an integer that denotes a MIBEnum value assigned by the
 IANA for all character sets (see [WSP] for more information).
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer.
 

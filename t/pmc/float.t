@@ -2,15 +2,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WmlsFloat
 
-t/pmc/float.t - WmlsFloat
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/pmc/float.t
 
-=head1 DESCRIPTION
+=head2 Description
 
 Tests C<WmlsFloat> PMC
 (implemented in F<languages/WMLScript/pmc/wmlsfloat.pmc>).

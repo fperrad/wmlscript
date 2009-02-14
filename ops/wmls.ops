@@ -3,13 +3,11 @@ Copyright (C) 2006-2009, Parrot Foundation.
 $Id$
 */
 
-=head1 NAME
+=head1 WMLScript Operations
 
-wmls.ops - WMLScript Operations
+=head2 Description
 
-=head1 DESCRIPTION
-
-=head2 Operations
+=head3 Operations
 
 =over 8
 

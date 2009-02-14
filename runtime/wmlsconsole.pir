@@ -1,15 +1,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript Console library
 
-runtime/wmlsconsole.pir - WMLScript Console library
-
-=head1 DESCRIPTION
+=head2 Description
 
 See "WMLScript Reference UP.SDK R4.B3 - October 1999".
 
-=head1 FUNCTIONS
+=head2 Functions
 
 =cut
 
@@ -30,16 +28,16 @@ See "WMLScript Reference UP.SDK R4.B3 - October 1999".
 .end
 
 
-=head2 C<print(string)>
+=head3 C<print(string)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Number or invalid.
 
@@ -62,16 +60,16 @@ Number or invalid.
 .end
 
 
-=head2 C<println(string)>
+=head3 C<println(string)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Number or invalid.
 

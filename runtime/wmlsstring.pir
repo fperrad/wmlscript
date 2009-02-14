@@ -1,11 +1,9 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript String library
 
-runtime/wmlsstring.pir - WMLScript String library
-
-=head1 DESCRIPTION
+=head2 Description
 
 This library contains a set of string functions. A string is an array of
 characters. Each of the characters has an index. The first character in a
@@ -38,7 +36,7 @@ A White space character is one of the following characters:
 
 See "WMLScript Standard Libraries Specification", section 9 "String".
 
-=head1 FUNCTIONS
+=head2 Functions
 
 =cut
 
@@ -87,17 +85,17 @@ See "WMLScript Standard Libraries Specification", section 9 "String".
 .end
 
 
-=head2 C<length(string)>
+=head3 C<length(string)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the length (number of characters) of the given string.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer or invalid.
 
@@ -118,18 +116,18 @@ Integer or invalid.
 .end
 
 
-=head2 C<isEmpty(string)>
+=head3 C<isEmpty(string)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a boolean true if the string length is zero and boolean false
 otherwise.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Boolean or invalid.
 
@@ -154,9 +152,9 @@ Boolean or invalid.
 .end
 
 
-=head2 C<charAt(string, index)>
+=head3 C<charAt(string, index)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a new string of length one containing the character at the specified
 index of the given string.
@@ -164,17 +162,17 @@ index of the given string.
 If the index is of type floating-point, Float.int() is first used to calculate the
 actual integer index.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
 index = Number (the index of the character to be returned)
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 If index is out of range then an empty string (C<"">) is returned.
 
@@ -209,9 +207,9 @@ If index is out of range then an empty string (C<"">) is returned.
 .end
 
 
-=head2 C<subString(string, startIndex, length)>
+=head3 C<subString(string, startIndex, length)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a new string that is a substring of the given string. The substring
 begins at the specified startIndex and its length (number of characters) is
@@ -222,7 +220,7 @@ the string, the length is replaced with the number of remaining characters.
 If the startIndex or the length is of type floating-point, Float.int() is first used to
 calculate the actual integer value.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
@@ -230,11 +228,11 @@ startIndex = Number (the beginning index, inclusive)
 
 length = Number (the length of the substring)
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 If startIndex is larger than the last index an empty string (C<"">) is returned.
 
@@ -282,9 +280,9 @@ If length <= 0 an empty string (C<"">) is returned.
 .end
 
 
-=head2 C<find(string, subString)>
+=head3 C<find(string, subString)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the index of the first character in the string that matches the
 requested subString. If no match is found integer value -1 is returned.
@@ -293,17 +291,17 @@ Two strings are defined to match when they are identical. Characters with
 multiple possible representations match only if they have the same
 representation in both strings. No case folding is performed.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
 subString = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 If subString is an empty string (C<"">), an invalid value is returned.
 
@@ -330,9 +328,9 @@ If subString is an empty string (C<"">), an invalid value is returned.
 .end
 
 
-=head2 C<replace(string, oldSubString, newSubString)>
+=head3 C<replace(string, oldSubString, newSubString)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a new string resulting from replacing all occurrences of
 oldSubString in this string with newSubString.
@@ -341,7 +339,7 @@ Two strings are defined to match when they are identical. Characters with
 multiple possible representations match only if they have the same
 representation in both strings. No case folding is performed.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
@@ -349,11 +347,11 @@ oldSubString = String
 
 newSubString = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 If oldSubString is an empty string an C<invalid> value is returned.
 
@@ -385,25 +383,25 @@ If oldSubString is an empty string an C<invalid> value is returned.
 .end
 
 
-=head2 C<elements(string, separator)>
+=head3 C<elements(string, separator)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns the number of elements in the given string separated by the given
 separator. Empty string ("") is a valid element (thus, this function can never
 return a value that is less or equal to zero).
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
 separator = String (the first character of the string used as separator)
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 Returns C<invalid> if the separator is an empty string.
 
@@ -437,9 +435,9 @@ Returns C<invalid> if the separator is an empty string.
 .end
 
 
-=head2 C<elementAt(string, index, separator)>
+=head3 C<elementAt(string, index, separator)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Search string for index'th element, elements being separated by separator
 and return the corresponding element. If the index is less than 0 then the first
@@ -450,7 +448,7 @@ string is returned.
 If the index is of type floating-point, Float.int() is first used to calculate the
 actual index value.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
@@ -458,11 +456,11 @@ index = Number (the index of the element to be returned)
 
 separator = String (the first character of the string used as separator)
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 Returns C<invalid> if the separator is an empty string.
 
@@ -511,9 +509,9 @@ Returns C<invalid> if the separator is an empty string.
 .end
 
 
-=head2 C<removeAt(string, index, separator)>
+=head3 C<removeAt(string, index, separator)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a new string where the element and the corresponding separator (if
 existing) with the given index are removed from the given string. If the index
@@ -524,7 +522,7 @@ the function returns a new empty string.
 If the index is of type floating-point, Float.int() is first used to calculate the
 actual index value.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
@@ -532,11 +530,11 @@ index = Number (the index of the element to be deleted)
 
 separator = String (the first character of the string used as separator)
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 Returns C<invalid> if the separator is an empty string.
 
@@ -600,9 +598,9 @@ Returns C<invalid> if the separator is an empty string.
 .end
 
 
-=head2 C<replaceAt(string, element, index, separator)>
+=head3 C<replaceAt(string, element, index, separator)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a string with the current element at the specified index replaced with
 the given element. If the index is less than 0 then the first element is
@@ -613,7 +611,7 @@ with the given element.
 If the index is of type floating-point, Float.int() is first used to calculate the
 actual index value.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String
 
@@ -623,11 +621,11 @@ index = Number (the index of the element to be replaced)
 
 separator = String (the first character of the string used as separator)
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 Returns C<invalid> if the separator is an empty string.
 
@@ -681,9 +679,9 @@ Returns C<invalid> if the separator is an empty string.
 .end
 
 
-=head2 C<insertAt(string, element, index, separator)>
+=head3 C<insertAt(string, element, index, separator)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a string with the element and the corresponding separator (if
 needed) inserted at the specified element index of the original string. If the
@@ -694,7 +692,7 @@ the string is empty, the function returns a new string with the given element.
 If the index is of type floating-point, Float.int() is first used to calculate the
 actual index value.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 string = String (original string)
 
@@ -704,11 +702,11 @@ index = Number (the index of the element to be added)
 
 separator = String (the first character of the string used as separator)
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 Returns C<invalid> if the separator is an empty string.
 
@@ -778,18 +776,18 @@ Returns C<invalid> if the separator is an empty string.
 .end
 
 
-=head2 C<squeeze(string)>
+=head3 C<squeeze(string)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a string where all consecutive series of white spaces within the
 string are reduced to single inter-word space.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 String = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
@@ -838,18 +836,18 @@ String or invalid.
 .end
 
 
-=head2 C<trim(string)>
+=head3 C<trim(string)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a string where all trailing and leading white spaces in the given
 string have been trimmed.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 String = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
@@ -891,22 +889,22 @@ String or invalid.
 .end
 
 
-=head2 C<compare(string1, string2)>
+=head3 C<compare(string1, string2)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 The return value indicates the lexicographic relation of string1 to string2. The
 relation is based on the relation of the character codes in the native
 character set. The return value is -1 if string1 is less than string2, 0 if string1
 is identical to string2 or 1 if string1 is greater than string2.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 String1 = String
 
 String2 = String
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 Integer or invalid.
 
@@ -938,20 +936,20 @@ Integer or invalid.
 .end
 
 
-=head2 C<toString(value)>
+=head3 C<toString(value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Returns a string representation of the given value. This function performs
 exactly the same conversions as supported by the [WMLScript] language
 (automatic conversion from boolean, integer and floating-point values to
 strings) except that C<invalid> value returns the string C<"invalid">.
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 value = Any
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String.
 
@@ -966,9 +964,9 @@ String.
 .end
 
 
-=head2 C<format(format, value)>
+=head3 C<format(format, value)>
 
-=head3 DESCRIPTION
+=head4 DESCRIPTION
 
 Converts the given value to a string by using the given formatting provided as
 a format string. The format string can contain only one format specifier,
@@ -1058,17 +1056,17 @@ preceding it with another percent character (%%).
 
 MINIMALIST IMPLEMENTATION
 
-=head3 PARAMETERS
+=head4 PARAMETERS
 
 format = String
 
 value = Any
 
-=head3 RETURN VALUE
+=head4 RETURN VALUE
 
 String or invalid.
 
-=head3 EXCEPTIONS
+=head4 EXCEPTIONS
 
 Illegal format specifier results in an C<invalid> return value.
 

@@ -2,15 +2,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WmlsString
 
-t/pmc/string.t - WmlsString
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/pmc/string.t
 
-=head1 DESCRIPTION
+=head2 Description
 
 Tests C<WmlsString> PMC
 (implemented in F<languages/WMLScript/pmc/wmlsstring.pmc>).

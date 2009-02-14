@@ -2,15 +2,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript literals
 
-t/literals.t - WMLScript literals
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/literals.t
 
-=head1 DESCRIPTION
+=head2 Description
 
 See "WMLScript Specification", section 6.1.5 "Literals".
 

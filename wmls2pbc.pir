@@ -1,19 +1,17 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript bytecode to Parrot PBC Translator
 
-wmls2pbc - WMLScript bytecode to Parrot PBC Translator
-
-=head1 SYNOPSYS
+=head2 Synopsis
 
  parrot wmls2pbc.pir file.wmlsc
 
-=head1 DESCRIPTION
+=head2 Description
 
 B<wmls2pbc> translates a WMLScript bytecode file to Parrot PBC.
 
-=head1 SEE ALSO
+=head2 See Also
 
 wmlsd, wmls2pir, wmlsi
 

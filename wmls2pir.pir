@@ -1,19 +1,17 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript bytecode to Parrot PIR Translator
 
-wmls2pir - WMLScript bytecode to Parrot PIR Translator
-
-=head1 SYNOPSYS
+=head2 Synopsis
 
  parrot wmls2pir.pir file.wmlsc
 
-=head1 DESCRIPTION
+=head2 Description
 
 B<wmls2pir> translates a WMLScript bytecode file to Parrot PIR.
 
-=head1 SEE ALSO
+=head2 See Also
 
 wmlsd, wmls2pbc, wmlsi
 

@@ -2,15 +2,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript integer & conversion
 
-t/integer.t - WMLScript integer & conversion
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/number.t
 
-=head1 DESCRIPTION
+=head2 Description
 
 =cut
 

@@ -2,15 +2,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 Logical operators
 
-t/logical.t - Logical operators
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/logical.t
 
-=head1 DESCRIPTION
+=head2 Description
 
 Test opcodes C<SCAND> and C<SCOR>.
 

@@ -2,16 +2,14 @@
 Copyright (C) 2006-2009, Parrot Foundation.
 $Id$
 
-=head1 NAME
+=head1 WMLScript Floating-point
 
-pmc/wmlsfloat.pmc - WMLScript Floating-point
-
-=head1 DESCRIPTION
+=head2 Description
 
 C<WmlsFloat> extends C<Float> to provide a class with the behaviour of
 the WMLScript C<Floating-point> type.
 
-=head2 Methods
+=head3 Methods
 
 =over 4
 
@@ -170,7 +168,7 @@ Returns a Parrot string representation of the number.
 
 =back
 
-=head2 non-Vtable Methods
+=head3 non-Vtable Methods
 
 =over 4
 

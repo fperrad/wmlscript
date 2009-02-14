@@ -2,15 +2,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WmlsInvalid
 
-t/pmc/invalid.t - WmlsInvalid
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/pmc/invalid.t
 
-=head1 DESCRIPTION
+=head2 Description
 
 Tests C<WmlsInvalid> PMC
 (implemented in F<languages/WMLScript/pmc/wmlsinvalid.pmc>).

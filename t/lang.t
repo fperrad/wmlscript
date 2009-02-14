@@ -2,15 +2,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript Lang library
 
-t/lang.t - WMLScript Lang library
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/lang.t
 
-=head1 DESCRIPTION
+=head2 Description
 
 Tests WMLScript Lang Library
 (implemented in F<languages/WMLScript/runtime/wmlslang.pir>).

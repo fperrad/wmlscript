@@ -5,17 +5,15 @@ package Parrot::Test::WMLScript;
 
 require Parrot::Test;
 
-=head1 NAME
+=head1 Testing routines specific to 'WMLScript'.
 
-Test/WMLScript.pm - Testing routines specific to 'WMLScript'.
-
-=head1 DESCRIPTION
+=head2 Description
 
 Call WMLScript compiler, translator and parrot.
 
-=head1 METHODS
+=head2 Methods
 
-=head2 new
+=head3 new
 
 Yet another constructor.
 
@@ -99,11 +97,11 @@ foreach my $func ( keys %language_test_map ) {
         }
 }
 
-=head1 HISTORY
+=head2 History
 
 Mostly taken from F<languages/bc/lib/Parrot/Test/Bc.pm>.
 
-=head1 SEE ALSO
+=head2 See Also
 
 F<languages/tcl/lib/Parrot/Test/Tcl.pm>, F<languages/lua/t/Parrot/Test/lua.pm>
 

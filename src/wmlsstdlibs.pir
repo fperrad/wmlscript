@@ -1,11 +1,9 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WMLScript standard libraries
 
-src/wmlsstdlibs.pir - WMLScript standard libraries
-
-=head1 DESCRIPTION
+=head2 Description
 
 See "WMLScript Standard Libraries Specification".
 
@@ -51,7 +49,7 @@ See "WMLScript Standard Libraries Specification".
     die "not implemented"
 .end
 
-=head2 Helpers
+=head3 Helpers
 
 =over 4
 

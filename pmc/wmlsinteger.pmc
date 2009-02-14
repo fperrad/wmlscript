@@ -2,16 +2,14 @@
 Copyright (C) 2006-2009, Parrot Foundation.
 $Id$
 
-=head1 NAME
+=head1 WMLScript Integer
 
-pmc/wmlsinteger.pmc - WMLScript Integer
-
-=head1 DESCRIPTION
+=head2 Description
 
 C<WmlsInteger> extends C<Integer> to provide a class with the behaviour of
 the WMLScript C<Integer> type.
 
-=head2 Methods
+=head3 Methods
 
 =over 4
 
@@ -163,7 +161,7 @@ Return the integer 0.
 
 =back
 
-=head2 non-Vtable Methods
+=head3 non-Vtable Methods
 
 =over 4
 

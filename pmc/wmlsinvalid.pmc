@@ -2,16 +2,14 @@
 Copyright (C) 2006-2009, Parrot Foundation.
 $Id$
 
-=head1 NAME
+=head1 WMLScript Invalid
 
-pmc/wmlsinvalid.pmc - WMLScript Invalid
-
-=head1 DESCRIPTION
+=head2 Description
 
 C<WmlsInvalid> extends C<Undef> to provide a class with the behaviour of
 the WMLScript C<Invalid> type.
 
-=head2 Methods
+=head3 Methods
 
 =over 4
 
@@ -178,7 +176,7 @@ Return the string "invalid".
 
 =back
 
-=head2 non-Vtable Methods
+=head3 non-Vtable Methods
 
 =over 4
 

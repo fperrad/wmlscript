@@ -2,15 +2,13 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-=head1 NAME
+=head1 WmlsBoolean
 
-t/pmc/boolean.t - WmlsBoolean
-
-=head1 SYNOPSIS
+=head2 Synopsis
 
     % perl t/pmc/boolean.t
 
-=head1 DESCRIPTION
+=head2 Description
 
 Tests C<WmlsBoolean> PMC
 (implemented in F<languages/WMLScript/pmc/wmlsboolean.pmc>).
