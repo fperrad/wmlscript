@@ -24,7 +24,7 @@ pir_output_is( << 'CODE', << 'OUTPUT', 'WMLScript.pbc' );
 .loadlib 'wmls_ops'
 
 .sub '_init' :anon
-  load_bytecode 'languages/WMLScript/src/WMLScript.pbc'
+  load_bytecode 'languages/wmlscript/src/WMLScript.pbc'
 .end
 
 .sub 'function0' :anon
@@ -61,7 +61,7 @@ pir_output_is( << 'CODE', << 'OUTPUT', 'alternate way' );
 .loadlib 'wmls_ops'
 
 .sub '_init' :anon
-  load_bytecode 'languages/WMLScript/src/wmlsstdlibs.pir'
+  load_bytecode 'languages/wmlscript/src/wmlsstdlibs.pir'
 .end
 
 .sub 'function0' :anon

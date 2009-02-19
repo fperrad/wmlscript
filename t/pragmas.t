@@ -35,7 +35,7 @@ Hello World!
 OUT
 
 language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'use url' );
-use url OtherScript "languages/WMLScript/t/pragmas_1.wmlsc";
+use url OtherScript "languages/wmlscript/t/pragmas_1.wmlsc";
 
 extern function main()
 {
@@ -46,7 +46,7 @@ Hello World!
 OUT
 
 language_output_like( 'WMLScript', <<'CODE', <<'OUT', 'unable to load' );
-use url OtherScript "languages/WMLScript/t/pragmas_x.wmlsc";
+use url OtherScript "languages/wmlscript/t/pragmas_x.wmlsc";
 
 extern function main()
 {
@@ -57,7 +57,7 @@ CODE
 OUT
 
 language_output_like( 'WMLScript', <<'CODE', <<'OUT', 'verification failed' );
-use url OtherScript "languages/WMLScript/t/pragmas_1.out";
+use url OtherScript "languages/wmlscript/t/pragmas_1.out";
 
 extern function main()
 {
@@ -68,7 +68,7 @@ CODE
 OUT
 
 language_output_like( 'WMLScript', <<'CODE', <<'OUT', 'external function not found' );
-use url OtherScript "languages/WMLScript/t/pragmas_1.wmlsc";
+use url OtherScript "languages/wmlscript/t/pragmas_1.wmlsc";
 
 extern function main()
 {

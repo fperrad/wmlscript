@@ -66,7 +66,7 @@ foreach my $func ( keys %language_test_map ) {
 
             #            "wmlsc $cflags ${lang_fn}",
             #            "$self->{parrot} languages/WMLScript/wmls2pir.pir ${bin_fn}",
-            "$self->{parrot} languages/WMLScript/wmlsi.pir ${bin_fn} $function $params",
+            "$self->{parrot} languages/wmlscript/wmlsi.pir ${bin_fn} $function $params",
         );
 
         # STDERR is written into same output file

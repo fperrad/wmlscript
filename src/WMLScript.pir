@@ -5,10 +5,10 @@
 .loadlib 'wmls_group'
 .loadlib 'wmls_ops'
 
-.include 'languages/WMLScript/src/wmlsstdlibs.pir'
-.include 'languages/WMLScript/src/stdlibs.pir'
-.include 'languages/WMLScript/src/script.pir'
-.include 'languages/WMLScript/src/opcode.pir'
+.include 'languages/wmlscript/src/wmlsstdlibs.pir'
+.include 'languages/wmlscript/src/stdlibs.pir'
+.include 'languages/wmlscript/src/script.pir'
+.include 'languages/wmlscript/src/opcode.pir'
 
 
 # Local Variables:

@@ -23,7 +23,7 @@ wmls2pir, wmls2pbc, wmlsi
 
 .sub 'main' :main
     .param pmc argv
-    load_bytecode 'languages/WMLScript/src/WMLScript.pbc'
+    load_bytecode 'languages/wmlscript/src/WMLScript.pbc'
     .local int argc
     .local string progname
     .local string filename
