@@ -27,10 +27,10 @@ See "WMLScript Standard Libraries Specification".
 
 .sub '__onload' :load :anon
 #    print "__onload (wmlsstdlibs.pir)\n"
-    load_bytecode 'languages/wmlscript/runtime/wmlslang.pbc'
-    load_bytecode 'languages/wmlscript/runtime/wmlsfloat.pbc'
-    load_bytecode 'languages/wmlscript/runtime/wmlsstring.pbc'
-    load_bytecode 'languages/wmlscript/runtime/wmlsconsole.pbc'
+    load_bytecode 'languages/wmlscript/library/wmlslang.pbc'
+    load_bytecode 'languages/wmlscript/library/wmlsfloat.pbc'
+    load_bytecode 'languages/wmlscript/library/wmlsstring.pbc'
+    load_bytecode 'languages/wmlscript/library/wmlsconsole.pbc'
 
     new $P0, 'Hash'
     $P1 = getLang()

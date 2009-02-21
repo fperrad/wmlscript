@@ -40,10 +40,10 @@ OPS_FILES = $(OPSDIR)/wmls.ops
 OPSLIB    = wmls
 
 PBCS = \
- $(LIBPATH)/wmlslang.pbc \
- $(LIBPATH)/wmlsfloat.pbc \
- $(LIBPATH)/wmlsstring.pbc \
- $(LIBPATH)/wmlsconsole.pbc
+ library/wmlslang.pbc \
+ library/wmlsfloat.pbc \
+ library/wmlsstring.pbc \
+ library/wmlsconsole.pbc
 
 GEN_PIR = \
  src/opcode.pir \
@@ -52,7 +52,7 @@ GEN_PIR = \
 all: \
  pmc/wmls_group$(LOAD_EXT) \
  ops/wmls_ops$(LOAD_EXT) \
- src/WMLScript.pbc \
+ library/WMLScript.pbc \
  $(PBCS)
 
 pmc/wmls_group$(LOAD_EXT) : $(PMC_FILES)
@@ -67,9 +67,9 @@ ops/wmls_ops$(LOAD_EXT) : $(OPS_FILES)
 	@cd $(OPSDIR) && $(OPSBUILD) linklibs $(OPSLIB)
 	@cd $(OPSDIR) && $(OPSBUILD) copy "--destination=$(PARROT_DYNEXT)" $(OPSLIB)
 
-src/WMLScript.pbc: src/WMLScript.pir \
+library/WMLScript.pbc: src/WMLScript.pir \
  src/script.pir src/wmlsstdlibs.pir $(GEN_PIR)
-	$(PARROT) -o src/WMLScript.pbc src/WMLScript.pir
+	$(PARROT) -o library/WMLScript.pbc src/WMLScript.pir
 
 src/opcode.pir: src/translation.rules build/translator.pl \
  build/SRM/Stack.pm build/SRM/Register.pm
@@ -79,17 +79,17 @@ src/opcode.pir: src/translation.rules build/translator.pl \
 src/stdlibs.pir: src/wmlslibs.cfg build/stdlibs.pl
 	$(PERL) build/stdlibs.pl --output src/stdlibs.pir src/wmlslibs.cfg
 
-$(LIBPATH)/wmlslang.pbc: $(LIBPATH)/wmlslang.pir
-	$(PARROT) --output=$(LIBPATH)/wmlslang.pbc $(LIBPATH)/wmlslang.pir
+library/wmlslang.pbc: $(LIBPATH)/wmlslang.pir
+	$(PARROT) --output=library/wmlslang.pbc $(LIBPATH)/wmlslang.pir
 
-$(LIBPATH)/wmlsfloat.pbc: $(LIBPATH)/wmlsfloat.pir
-	$(PARROT) --output=$(LIBPATH)/wmlsfloat.pbc $(LIBPATH)/wmlsfloat.pir
+library/wmlsfloat.pbc: $(LIBPATH)/wmlsfloat.pir
+	$(PARROT) --output=library/wmlsfloat.pbc $(LIBPATH)/wmlsfloat.pir
 
-$(LIBPATH)/wmlsstring.pbc: $(LIBPATH)/wmlsstring.pir
-	$(PARROT) --output=$(LIBPATH)/wmlsstring.pbc $(LIBPATH)/wmlsstring.pir
+library/wmlsstring.pbc: $(LIBPATH)/wmlsstring.pir
+	$(PARROT) --output=library/wmlsstring.pbc $(LIBPATH)/wmlsstring.pir
 
-$(LIBPATH)/wmlsconsole.pbc: $(LIBPATH)/wmlsconsole.pir
-	$(PARROT) --output=$(LIBPATH)/wmlsconsole.pbc $(LIBPATH)/wmlsconsole.pir
+library/wmlsconsole.pbc: $(LIBPATH)/wmlsconsole.pir
+	$(PARROT) --output=library/wmlsconsole.pbc $(LIBPATH)/wmlsconsole.pir
 
 # regenerate the Makefile
 Makefile: config/makefiles/root.in
@@ -188,7 +188,7 @@ testclean:
 
 BUILD_CLEANERS = \
  $(GEN_PIR) \
- "src/*.pbc" \
+ "*.pbc" \
  "$(PMCDIR)/*.dump" \
  "$(PMCDIR)/*.c" \
  "$(PMCDIR)/*.h" \
@@ -198,7 +198,7 @@ BUILD_CLEANERS = \
  "$(OPSDIR)/*.h" \
  "$(OPSDIR)/*$(LOAD_EXT)" \
  "$(OPSDIR)/*$(O)" \
- "$(LIBPATH)/*.pbc"
+ "library/*.pbc"
 
 clean:
 	$(RM_F) $(BUILD_CLEANERS) $(TEST_CLEANERS)
