@@ -1,24 +1,44 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
+## arguments we want to run parrot with
+PARROT_ARGS   =
+
+## configuration settings
+BUILD_DIR     = @build_dir@
+LOAD_EXT      = @load_ext@
+O             = @o@
+VERSION       = @versiondir@
+BIN_DIR       = @bin_dir@
+LIB_DIR       = @lib_dir@$(VERSION)
+DOC_DIR       = @doc_dir@$(VERSION)
+MANDIR        = @mandir@@$(VERSION)
+PARROT_DYNEXT = $(BUILD_DIR)/runtime/parrot/dynext
+
+## Setup some commands
 PERL          = @perl@
 RM_F          = @rm_f@
+CP            = @cp@
+CHMOD         = @chmod@
+CAT           = @cat@
+MKPATH        = @mkpath@
+POD2MAN       = pod2man
+#IF(parrot_is_shared and not(cygwin or win32)):export LD_RUN_PATH := @blib_dir@:$(LD_RUN_PATH)
 PARROT        = ../../parrot@exe@
 PBC_TO_EXE    = ../../pbc_to_exe@exe@
-
-PMCBUILD = $(PERL) @build_dir@/tools/build/dynpmc.pl
-OPSBUILD = $(PERL) @build_dir@/tools/build/dynoplibs.pl
-LIBPATH  = runtime
-PMCDIR   = pmc
-OPSDIR   = ops
-O        = @o@
-LOAD_EXT = @load_ext@
-PARROT_DYNEXT = @build_dir@/runtime/parrot/dynext
+PMCBUILD      = $(PERL) $(BUILD_DIR)/tools/build/dynpmc.pl
+OPSBUILD      = $(PERL) $(BUILD_DIR)/tools/build/dynoplibs.pl
 #IF(darwin):
 #IF(darwin):# MACOSX_DEPLOYMENT_TARGET must be defined for OS X compilation/linking
 #IF(darwin):export MACOSX_DEPLOYMENT_TARGET := @osx_version@
 
+LIBPATH  = runtime
+PMCDIR   = pmc
+OPSDIR   = ops
+
 SRM=Stack
+
+DOCS = MAINTAINER README
 
 PMCS = \
  wmlsinteger \
@@ -203,6 +223,34 @@ codetest-pod:
 	- $(PERL) @build_dir@/t/codingstd/trailing_space.t $(T_POD)
 	- $(PERL) @build_dir@/t/doc/pod.t $(T_POD)
 
+install: installable
+	$(CP) installable_wmlsi@exe@ $(BIN_DIR)/parrot-wmlsi@exe@
+	$(CHMOD) 0755 $(BIN_DIR)/parrot-wmlsi@exe@
+	$(CP) installable_wmlsd@exe@ $(BIN_DIR)/parrot-wmlsd@exe@
+	$(CHMOD) 0755 $(BIN_DIR)/parrot-wmlsd@exe@
+	@cd $(PMCDIR) && $(PMCBUILD) copy "--destination=$(LIB_DIR)/dynext" $(PMCS)
+	@cd $(OPSDIR) && $(OPSBUILD) copy "--destination=$(LIB_DIR)/dynext" $(OPSLIB)
+	-$(MKPATH) $(LIB_DIR)/languages/wmlscript
+	$(CP) *.pbc $(LIB_DIR)/languages/wmlscript
+	-$(MKPATH) $(LIB_DIR)/languages/wmlscript/library
+	$(CP) library/*.pbc $(LIB_DIR)/languages/wmlscript/library
+	-$(MKPATH) $(MANDIR)/man1
+	$(POD2MAN) wmlsi.pir > $(MANDIR)/man1/parrot-wmlsi.1
+	$(POD2MAN) wmlsd.pir > $(MANDIR)/man1/parrot-wmlsd.1
+	-$(MKPATH) $(DOC_DIR)/languages/wmlscript
+	$(CP) $(DOCS) $(DOC_DIR)/languages/wmlscript
+
+win32-inno-installer: installable
+	-$(MKPATH) man/man1
+	$(POD2MAN) wmlsi.pir > man/man1/parrot-wmlsi.1
+	$(POD2MAN) wmlsd.pir > man/man1/parrot-wmlsd.1
+	-$(MKPATH) man/html
+	pod2html --infile wmlsi.pir --outfile man/html/parrot-wmlsi.html
+	pod2html --infile wmlsd.pir --outfile man/html/parrot-wmlsd.html
+	$(CP) installable_wmlsi@exe@ parrot-wmlsi@exe@
+	$(CP) installable_wmlsd@exe@ parrot-wmlsd@exe@
+	cd @build_dir@ && $(PERL) tools/dev/mk_inno_language.pl wmlscript
+	cd @build_dir@ && iscc parrot-wmlscript.iss
 
 TEST_CLEANERS = \
  "t/pmc/*.pir" \

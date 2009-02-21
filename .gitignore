@@ -9,6 +9,8 @@ wmlsi
 wmlsd
 installable_*
 
+man
+
 ops/*.bundle
 ops/*.c
 ops/*.dll
