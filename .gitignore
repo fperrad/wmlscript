@@ -1,5 +1,13 @@
 Makefile
 *.pbc
+*.c
+*.o
+*.obj
+*.exe
+
+wmlsi
+wmlsd
+installable_*
 
 ops/*.bundle
 ops/*.c

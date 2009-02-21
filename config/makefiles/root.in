@@ -1,9 +1,10 @@
 # Copyright (C) 2006-2009, Parrot Foundation.
 # $Id$
 
-RM_F    = @rm_f@
-PERL    = @perl@
-PARROT  = ../../parrot@exe@
+PERL          = @perl@
+RM_F          = @rm_f@
+PARROT        = ../../parrot@exe@
+PBC_TO_EXE    = ../../pbc_to_exe@exe@
 
 PMCBUILD = $(PERL) @build_dir@/tools/build/dynpmc.pl
 OPSBUILD = $(PERL) @build_dir@/tools/build/dynoplibs.pl
@@ -40,6 +41,8 @@ OPS_FILES = $(OPSDIR)/wmls.ops
 OPSLIB    = wmls
 
 PBCS = \
+ wmlsi.pbc \
+ wmlsd.pbc \
  library/wmlslang.pbc \
  library/wmlsfloat.pbc \
  library/wmlsstring.pbc \
@@ -49,11 +52,13 @@ GEN_PIR = \
  src/opcode.pir \
  src/stdlibs.pir
 
-all: \
+build: \
  pmc/wmls_group$(LOAD_EXT) \
  ops/wmls_ops$(LOAD_EXT) \
  library/WMLScript.pbc \
  $(PBCS)
+
+all: build wmlsi@exe@ wmlsd@exe@ installable
 
 pmc/wmls_group$(LOAD_EXT) : $(PMC_FILES)
 	@cd $(PMCDIR) && $(PMCBUILD) generate $(PMCS)
@@ -66,6 +71,18 @@ ops/wmls_ops$(LOAD_EXT) : $(OPS_FILES)
 	@cd $(OPSDIR) && $(OPSBUILD) compile $(OPSLIB)
 	@cd $(OPSDIR) && $(OPSBUILD) linklibs $(OPSLIB)
 	@cd $(OPSDIR) && $(OPSBUILD) copy "--destination=$(PARROT_DYNEXT)" $(OPSLIB)
+
+wmlsi.pbc: wmlsi.pir
+	$(PARROT) $(PARROT_ARGS) -o wmlsi.pbc wmlsi.pir
+
+wmlsi@exe@: wmlsi.pbc
+	$(PBC_TO_EXE) wmlsi.pbc
+
+wmlsd.pbc: wmlsd.pir
+	$(PARROT) $(PARROT_ARGS) -o wmlsd.pbc wmlsd.pir
+
+wmlsd@exe@: wmlsd.pbc
+	$(PBC_TO_EXE) wmlsd.pbc
 
 library/WMLScript.pbc: src/WMLScript.pir \
  src/script.pir src/wmlsstdlibs.pir $(GEN_PIR)
@@ -91,6 +108,14 @@ library/wmlsstring.pbc: $(LIBPATH)/wmlsstring.pir
 library/wmlsconsole.pbc: $(LIBPATH)/wmlsconsole.pir
 	$(PARROT) --output=library/wmlsconsole.pbc $(LIBPATH)/wmlsconsole.pir
 
+installable: installable_wmlsi@exe@ installable_wmlsd@exe@
+
+installable_wmlsi@exe@: wmlsi.pbc
+	$(PBC_TO_EXE) wmlsi.pbc --install
+
+installable_wmlsd@exe@: wmlsd.pbc
+	$(PBC_TO_EXE) wmlsd.pbc --install
+
 # regenerate the Makefile
 Makefile: config/makefiles/root.in
 	$(PERL) Configure.pl
@@ -99,8 +124,12 @@ help:
 	@echo ""
 	@echo "Following targets are available for the user:"
 	@echo ""
-	@echo "  all:"
+	@echo "  build:             wmlsi.pbc, wmlsd.pbc"
 	@echo "                     This is the default."
+	@echo "  all:               wmlsi.pbc wmlsi@exe@ wmlsd.pbc wmlsd@exe@ installable"
+	@echo "  installable:       Create libs and self-hosting binaries to be installed."
+	@echo "  install:           Install the installable targets and docs."
+	@echo ""
 	@echo "Testing:"
 	@echo "  test:              Run the test suite."
 	@echo "  testclean:         Clean up test results."
@@ -189,6 +218,10 @@ testclean:
 BUILD_CLEANERS = \
  $(GEN_PIR) \
  "*.pbc" \
+ "*.c" \
+ "*$(O)" \
+ wmlsi@exe@ installable_wmlsi@exe@ \
+ wmlsd@exe@ installable_wmlsd@exe@ \
  "$(PMCDIR)/*.dump" \
  "$(PMCDIR)/*.c" \
  "$(PMCDIR)/*.h" \
