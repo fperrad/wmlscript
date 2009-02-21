@@ -12,7 +12,7 @@ VERSION       = @versiondir@
 BIN_DIR       = @bin_dir@
 LIB_DIR       = @lib_dir@$(VERSION)
 DOC_DIR       = @doc_dir@$(VERSION)
-MANDIR        = @mandir@@$(VERSION)
+MANDIR        = @mandir@$(VERSION)
 PARROT_DYNEXT = $(BUILD_DIR)/runtime/parrot/dynext
 
 ## Setup some commands
@@ -37,8 +37,6 @@ PMCDIR   = pmc
 OPSDIR   = ops
 
 SRM=Stack
-
-DOCS = MAINTAINER README
 
 PMCS = \
  wmlsinteger \
@@ -238,7 +236,8 @@ install: installable
 	$(POD2MAN) wmlsi.pir > $(MANDIR)/man1/parrot-wmlsi.1
 	$(POD2MAN) wmlsd.pir > $(MANDIR)/man1/parrot-wmlsd.1
 	-$(MKPATH) $(DOC_DIR)/languages/wmlscript
-	$(CP) $(DOCS) $(DOC_DIR)/languages/wmlscript
+	$(CP) README $(DOC_DIR)/languages/wmlscript
+	$(CP) MAINTAINER $(DOC_DIR)/languages/wmlscript
 
 win32-inno-installer: installable
 	-$(MKPATH) man/man1
