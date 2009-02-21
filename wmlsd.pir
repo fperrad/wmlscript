@@ -5,7 +5,7 @@
 
 =head2 Synopsis
 
- parrot wmlsd.pir file.wmlsc
+ parrot-wmlsd file.wmlsc
 
 =head2 Description
 
@@ -13,7 +13,7 @@ B<wmlsd> disassembles binary form of WMLScript file.
 
 =head2 See Also
 
-wmls2pir, wmls2pbc, wmlsi
+parrot-wmlsi
 
 =cut
 

@@ -5,7 +5,7 @@
 
 =head2 Synopsis
 
- parrot wmlsi.pir file.wmlsc function [params ...]
+ parrot-wmlsi file.wmlsc function [params ...]
 
 =head2 Description
 
@@ -14,7 +14,7 @@ C<function(params, ...)>.
 
 =head2 See Also
 
-wmlsd, wmls2pir, wmls2pbc
+parrot-wmlsd
 
 =cut
 
