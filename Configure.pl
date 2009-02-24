@@ -44,8 +44,8 @@ sub create_makefiles {
     my %config = @_;
     my %makefiles = (
         'config/makefiles/root.in' => 'Makefile',
-        'config/makefiles/pmc.in'  => 'pmc/Makefile',
-        'config/makefiles/ops.in'  => 'ops/Makefile',
+        'config/makefiles/pmc.in'  => 'src/pmc/Makefile',
+        'config/makefiles/ops.in'  => 'src/ops/Makefile',
     );
     my $build_tool = $config{libdir} . $config{versiondir}
                    . '/tools/dev/gen_makefile.pl';

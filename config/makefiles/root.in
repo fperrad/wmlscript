@@ -16,9 +16,9 @@ LOAD_EXT      = @load_ext@
 O             = @o@
 
 # Various paths
-PMC_DIR       = pmc
-OPS_DIR       = ops
-LIBPATH       = runtime
+PMC_DIR       = src/pmc
+OPS_DIR       = src/ops
+LIBPATH       = src/runtime
 
 ## Setup some commands
 MAKE          = @make_c@

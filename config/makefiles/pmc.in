@@ -98,8 +98,8 @@ install:
 uninstall:
 	$(RM_F) $(INSTALL_DIR)/$(WMLSCRIPT_GROUP)$(LOAD_EXT)
 
-Makefile: ../config/makefiles/pmc.in
-	cd .. && $(PERL) Configure.pl
+Makefile: ../../config/makefiles/pmc.in
+	cd ../.. && $(PERL) Configure.pl
 
 clean:
 	$(RM_F) "*$(LOAD_EXT)" "*$(O)" "*.c" "*.h" "*.dump" \
