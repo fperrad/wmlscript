@@ -1,44 +1,44 @@
 ## $Id$
 
 # values from parrot_config
-VERSION_DIR   = @versiondir@
-INCLUDE_DIR   = @includedir@$(VERSION_DIR)
-LIB_DIR       = @libdir@$(VERSION_DIR)
-SRC_DIR       = @srcdir@$(VERSION_DIR)
-TOOLS_DIR     = @libdir@$(VERSION_DIR)/tools/lib
-#STAGING_DIR   = ../../dynext
-STAGING_DIR   = @build_dir@/runtime/parrot/dynext
-#INSTALL_DIR   = $(LIB_DIR)/languages/wmlscript2/dynext
-INSTALL_DIR   = $(LIB_DIR)/dynext
+VERSION_DIR   := @versiondir@
+INCLUDE_DIR   := @includedir@$(VERSION_DIR)
+LIB_DIR       := @libdir@$(VERSION_DIR)
+SRC_DIR       := @srcdir@$(VERSION_DIR)
+TOOLS_DIR     := @libdir@$(VERSION_DIR)/tools/lib
+#STAGING_DIR   := ../../dynext
+STAGING_DIR   := @build_dir@/runtime/parrot/dynext
+#INSTALL_DIR   := $(LIB_DIR)/languages/wmlscript2/dynext
+INSTALL_DIR   := $(LIB_DIR)/dynext
 
 # Set up extensions
-LOAD_EXT      = @load_ext@
-O             = @o@
+LOAD_EXT      := @load_ext@
+O             := @o@
 
 # Setup some commands
-PERL          = @perl@
-RM_F          = @rm_f@
-CHMOD         = @chmod@
-CP            = @cp@
-CC            = @cc@ -c
-LD            = @ld@
-LDFLAGS       = @ldflags@ @ld_debug@
-LD_LOAD_FLAGS = @ld_load_flags@
-CFLAGS        = @ccflags@ @cc_shared@ @cc_debug@ @ccwarn@ @cc_hasjit@ @cg_flag@ @gc_flag@
-CC_OUT        = @cc_o_out@
-LD_OUT        = @ld_out@
-#IF(parrot_is_shared):LIBPARROT     = @libparrot_ldflags@
-#ELSE:LIBPARROT     =
+PERL          := @perl@
+RM_F          := @rm_f@
+CHMOD         := @chmod@
+CP            := @cp@
+CC            := @cc@ -c
+LD            := @ld@
+LDFLAGS       := @ldflags@ @ld_debug@
+LD_LOAD_FLAGS := @ld_load_flags@
+CFLAGS        := @ccflags@ @cc_shared@ @cc_debug@ @ccwarn@ @cc_hasjit@ @cg_flag@ @gc_flag@
+CC_OUT        := @cc_o_out@
+LD_OUT        := @ld_out@
+#IF(parrot_is_shared):LIBPARROT     := @libparrot_ldflags@
+#ELSE:LIBPARROT     :=
 
-PMC2C_INCLUDES  = --include $(SRC_DIR) --include $(SRC_DIR)/pmc
-PMC2C           = $(PERL) $(LIB_DIR)/tools/build/pmc2c.pl
-PMC2CD          = $(PMC2C) --dump $(PMC2C_INCLUDES)
-PMC2CC          = $(PMC2C) --c $(PMC2C_INCLUDES)
+PMC2C_INCLUDES  := --include $(SRC_DIR) --include $(SRC_DIR)/pmc
+PMC2C           := $(PERL) $(LIB_DIR)/tools/build/pmc2c.pl
+PMC2CD          := $(PMC2C) --dump $(PMC2C_INCLUDES)
+PMC2CC          := $(PMC2C) --c $(PMC2C_INCLUDES)
 
-INCLUDES        = -I$(INCLUDE_DIR) -I$(INCLUDE_DIR)/pmc
-LINKARGS        = $(LDFLAGS) $(LD_LOAD_FLAGS) $(LIBPARROT)
+INCLUDES        := -I$(INCLUDE_DIR) -I$(INCLUDE_DIR)/pmc
+LINKARGS        := $(LDFLAGS) $(LD_LOAD_FLAGS) $(LIBPARROT)
 
-PMC_SOURCES = \
+PMC_SOURCES := \
   wmlsinteger.pmc \
   wmlsfloat.pmc \
   wmlsstring.pmc \
@@ -46,9 +46,9 @@ PMC_SOURCES = \
   wmlsinvalid.pmc \
   wmlsbytecode.pmc
 
-WMLSCRIPT_GROUP = wmls_group
+WMLSCRIPT_GROUP := wmls_group
 
-OBJS = \
+OBJS := \
   lib-$(WMLSCRIPT_GROUP)$(O) \
   wmlsinteger$(O) \
   wmlsfloat$(O) \
@@ -56,6 +56,19 @@ OBJS = \
   wmlsboolean$(O) \
   wmlsinvalid$(O) \
   wmlsbytecode$(O)
+
+CLEANUPS := \
+  "*$(LOAD_EXT)" \
+  "*$(O)" \
+  "*.c" \
+  "*.h" \
+  "*.dump" \
+#IF(win32):  "*.exp" \
+#IF(win32):  "*.ilk" \
+#IF(win32):  "*.manifext" \
+#IF(win32):  "*.pdb" \
+#IF(win32):  "*.lib" \
+  $(STAGING_DIR)/$(WMLSCRIPT2_GROUP)$(LOAD_EXT)
 
 
 all: staging
@@ -102,12 +115,10 @@ Makefile: ../../config/makefiles/pmc.in
 	cd ../.. && $(PERL) Configure.pl
 
 clean:
-	$(RM_F) "*$(LOAD_EXT)" "*$(O)" "*.c" "*.h" "*.dump" \
-	    $(STAGING_DIR)/$(WMLSCRIPT_GROUP)$(LOAD_EXT)
-#IF(win32):	$(RM_F) "*.exp" "*.ilk" "*.manifext" "*.pdb" "*.lib"
+	$(RM_F) $(CLEANUPS)
 
-realclean: clean
-	$(RM_F) Makefile
+realclean:
+	$(RM_F) $(CLEANUPS) Makefile
 
 # Local variables:
 #   mode: makefile

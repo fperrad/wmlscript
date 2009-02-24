@@ -2,47 +2,47 @@
 # $Id$
 
 ## arguments we want to run parrot with
-PARROT_ARGS   =
+PARROT_ARGS   :=
 
 ## configuration settings
-VERSION       = @versiondir@
-BIN_DIR       = @bin_dir@
-LIB_DIR       = @lib_dir@$(VERSION)
-DOC_DIR       = @doc_dir@$(VERSION)
-MANDIR        = @mandir@$(VERSION)
+VERSION       := @versiondir@
+BIN_DIR       := @bin_dir@
+LIB_DIR       := @lib_dir@$(VERSION)
+DOC_DIR       := @doc_dir@$(VERSION)
+MANDIR        := @mandir@$(VERSION)
 
 # Set up extensions
-LOAD_EXT      = @load_ext@
-O             = @o@
+LOAD_EXT      := @load_ext@
+O             := @o@
 
 # Various paths
-PMC_DIR       = src/pmc
-OPS_DIR       = src/ops
-LIBPATH       = src/runtime
+PMC_DIR       := src/pmc
+OPS_DIR       := src/ops
+LIBPATH       := src/runtime
 
 ## Setup some commands
-MAKE          = @make_c@
-PERL          = @perl@
-CAT           = @cat@
-CHMOD         = @chmod@
-CP            = @cp@
-MKPATH        = @mkpath@
-RM_F          = @rm_f@
-RM_RF         = @rm_rf@
-POD2MAN       = pod2man
+MAKE          := @make_c@
+PERL          := @perl@
+CAT           := @cat@
+CHMOD         := @chmod@
+CP            := @cp@
+MKPATH        := @mkpath@
+RM_F          := @rm_f@
+RM_RF         := @rm_rf@
+POD2MAN       := pod2man
 #IF(parrot_is_shared and not(cygwin or win32)):export LD_RUN_PATH := @blib_dir@:$(LD_RUN_PATH)
-PARROT        = ../../parrot@exe@
-PBC_TO_EXE    = ../../pbc_to_exe@exe@
+PARROT        := ../../parrot@exe@
+PBC_TO_EXE    := ../../pbc_to_exe@exe@
 #IF(darwin):
 #IF(darwin):# MACOSX_DEPLOYMENT_TARGET must be defined for OS X compilation/linking
 #IF(darwin):export MACOSX_DEPLOYMENT_TARGET := @osx_version@
 
-SRM=Stack
+SRM := Stack
 
-WMLSCRIPT_GROUP = $(PMC_DIR)/wmls_group$(LOAD_EXT)
-WMLSCRIPT_OPS = $(OPS_DIR)/wmls_ops$(LOAD_EXT)
+WMLSCRIPT_GROUP := $(PMC_DIR)/wmls_group$(LOAD_EXT)
+WMLSCRIPT_OPS := $(OPS_DIR)/wmls_ops$(LOAD_EXT)
 
-PMC_DEPS = \
+PMC_DEPS := \
  config/makefiles/pmc.in \
  $(PMC_DIR)/wmlsinteger.pmc \
  $(PMC_DIR)/wmlsfloat.pmc \
@@ -51,13 +51,13 @@ PMC_DEPS = \
  $(PMC_DIR)/wmlsinvalid.pmc \
  $(PMC_DIR)/wmlsbytecode.pmc
 
-OPS_DEPS = \
+OPS_DEPS := \
  config/makefiles/ops.in \
  $(OPS_DIR)/wmls.ops
 
-DOCS = README
+DOCS := README
 
-PBCS = \
+PBCS := \
  wmlsi.pbc \
  wmlsd.pbc \
  library/wmlslang.pbc \
@@ -65,7 +65,7 @@ PBCS = \
  library/wmlsstring.pbc \
  library/wmlsconsole.pbc
 
-GEN_PIR = \
+GEN_PIR := \
  src/opcode.pir \
  src/stdlibs.pir
 
@@ -159,12 +159,12 @@ test: all
 
 codetest: codetest-c codetest-make codetest-perl codetest-pir codetest-pod
 
-T_C     = pmc//*.pmc ops//*.ops
-T_MAKE  = config//makefiles//root.in config//makefiles//ops.in config//makefiles//pmc.in
-T_PERL  = Configure.pl t//harness t//*.t t//pmc//*.t t//Parrot//Test//*.pm \
+T_C     := src//pmc//*.pmc src//ops//*.ops
+T_MAKE  := config//makefiles//root.in config//makefiles//ops.in config//makefiles//pmc.in
+T_PERL  := Configure.pl t//harness t//*.t t//pmc//*.t t//Parrot//Test//*.pm \
           build//*.pl build//SRM//*.pm
-T_PIR   = *.pir src//*.pir runtime//*.pir
-T_POD   = doc//*.pod
+T_PIR   := *.pir src//*.pir src//runtime//*.pir
+T_POD   := doc//*.pod
 
 codetest-c:
 	- $(PERL) @build_dir@/t/codingstd/c_code_coda.t $(T_C)
@@ -252,7 +252,7 @@ win32-inno-installer: installable
 	cd @build_dir@ && $(PERL) tools/dev/mk_inno_language.pl wmlscript
 	cd @build_dir@ && iscc parrot-wmlscript.iss
 
-TEST_CLEANERS = \
+TEST_CLEANERS := \
  "t/pmc/*.pir" \
  "t/*.pir" \
  "t/*.pbc" \
@@ -263,7 +263,7 @@ TEST_CLEANERS = \
 testclean:
 	$(RM_F) $(TEST_CLEANERS)
 
-BUILD_CLEANERS = \
+BUILD_CLEANERS := \
  $(GEN_PIR) \
  "*.pbc" \
  "*.c" \
@@ -277,12 +277,12 @@ BUILD_CLEANERS = \
 clean:
 	$(MAKE) $(OPS_DIR) clean
 	$(MAKE) $(PMC_DIR) clean
-	$(RM_F) $(BUILD_CLEANERS) $(TEST_CLEANERS)
+	$(RM_F) $(TEST_CLEANERS) $(BUILD_CLEANERS)
 
-realclean: clean
+realclean:
 	$(MAKE) $(OPS_DIR) realclean
 	$(MAKE) $(PMC_DIR) realclean
-	$(RM_F) Makefile
+	$(RM_F) $(TEST_CLEANERS) $(BUILD_CLEANERS) Makefile
 
 distclean: realclean
 

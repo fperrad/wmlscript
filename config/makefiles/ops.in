@@ -1,39 +1,46 @@
 ## $Id$
 
 # values from parrot_config
-VERSION_DIR   = @versiondir@
-INCLUDE_DIR   = @includedir@$(VERSION_DIR)
-LIB_DIR       = @libdir@$(VERSION_DIR)
-#STAGING_DIR   = ../../dynext
-STAGING_DIR   = @build_dir@/runtime/parrot/dynext
-#INSTALL_DIR   = $(LIB_DIR)/languages/wmlscript/dynext
-INSTALL_DIR   = $(LIB_DIR)/dynext
+VERSION_DIR   := @versiondir@
+INCLUDE_DIR   := @includedir@$(VERSION_DIR)
+LIB_DIR       := @libdir@$(VERSION_DIR)
+#STAGING_DIR   := ../../dynext
+STAGING_DIR   := @build_dir@/runtime/parrot/dynext
+#INSTALL_DIR   := $(LIB_DIR)/languages/wmlscript2/dynext
+INSTALL_DIR   := $(LIB_DIR)/dynext
 
 # Set up extensions
-LOAD_EXT      = @load_ext@
-O             = @o@
+LOAD_EXT      := @load_ext@
+O             := @o@
 
 # Setup some commands
-PERL          = @perl@
-RM_F          = @rm_f@
-CHMOD         = @chmod@
-CP            = @cp@
-CC            = @cc@ -c
-LD            = @ld@
-LDFLAGS       = @ldflags@ @ld_debug@ @rpath_blib@ @linkflags@
-LD_LOAD_FLAGS = @ld_load_flags@
-CFLAGS        = @ccflags@ @cc_shared@ @cc_debug@ @ccwarn@ @cc_hasjit@ @cg_flag@ @gc_flag@
-CC_OUT        = @cc_o_out@
-LD_OUT        = @ld_out@
-#IF(parrot_is_shared):LIBPARROT     = @libparrot_ldflags@
-#ELSE:LIBPARROT     =
+PERL          := @perl@
+RM_F          := @rm_f@
+CHMOD         := @chmod@
+CP            := @cp@
+CC            := @cc@ -c
+LD            := @ld@
+LDFLAGS       := @ldflags@ @ld_debug@ @rpath_blib@ @linkflags@
+LD_LOAD_FLAGS := @ld_load_flags@
+CFLAGS        := @ccflags@ @cc_shared@ @cc_debug@ @ccwarn@ @cc_hasjit@ @cg_flag@ @gc_flag@
+CC_OUT        := @cc_o_out@
+LD_OUT        := @ld_out@
+#IF(parrot_is_shared):LIBPARROT     := @libparrot_ldflags@
+#ELSE:LIBPARROT     :=
 
-OPS2C           = $(PERL) $(LIB_DIR)/tools/build/ops2c.pl
+OPS2C           := $(PERL) $(LIB_DIR)/tools/build/ops2c.pl
 
-INCLUDES        = -I$(INCLUDE_DIR) -I$(INCLUDE_DIR)/pmc
-LINKARGS        = $(LDFLAGS) $(LD_LOAD_FLAGS) $(LIBPARROT)
+INCLUDES        := -I$(INCLUDE_DIR) -I$(INCLUDE_DIR)/pmc
+LINKARGS        := $(LDFLAGS) $(LD_LOAD_FLAGS) $(LIBPARROT)
 
-OPS_FILE = wmls.ops
+OPS_FILE := wmls.ops
+
+CLEANUPS := \
+  "*$(LOAD_EXT)" \
+  "*$(O)" \
+  "*.c" \
+  "*.h" \
+  "$(STAGING_DIR)/wmlscript2_ops*$(LOAD_EXT)"
 
 
 all: staging
@@ -71,11 +78,10 @@ Makefile: ../../config/makefiles/ops.in
 	cd ../.. && $(PERL) Configure.pl
 
 clean:
-	$(RM_F) "*$(LOAD_EXT)" "*$(O)" "*.c" "*.h" \
-	    "$(STAGING_DIR)/wmls_ops*$(LOAD_EXT)"
+	$(RM_F) $(CLEANUPS)
 
-realclean: clean
-	$(RM_F) Makefile
+realclean:
+	$(RM_F) $(CLEANUPS) Makefile
 
 # Local variables:
 #   mode: makefile
