@@ -4,6 +4,7 @@ Makefile
 *.o
 *.obj
 *.exe
+*.tmp
 
 wmlsi
 wmlsd
@@ -11,28 +12,29 @@ installable_*
 
 man
 
-ops/*.bundle
-ops/*.c
-ops/*.dll
-ops/*.h
-ops/*.o
-ops/*.obj
-ops/*.so
-
-pmc/*.bundle
-pmc/*.c
-pmc/*.dll
-pmc/*.dump
-pmc/*.h
-pmc/*.o
-pmc/*.obj
-pmc/*.pdb
-pmc/*.so
-
-runtime/*.pbc
 src/*.pbc
 src/opcode.pir
 src/stdlibs.pir
+
+src/ops/*.bundle
+src/ops/*.c
+src/ops/*.dll
+src/ops/*.h
+src/ops/*.o
+src/ops/*.obj
+src/ops/*.so
+
+src/pmc/*.bundle
+src/pmc/*.c
+src/pmc/*.dll
+src/pmc/*.dump
+src/pmc/*.h
+src/pmc/*.o
+src/pmc/*.obj
+src/pmc/*.pdb
+src/pmc/*.so
+
+src/runtime/*.pbc
 
 t/*.out
 t/*.pbc
