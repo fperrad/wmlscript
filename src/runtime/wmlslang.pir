@@ -18,6 +18,14 @@ See "WMLScript Standard Libraries Specification", section 7 "Lang".
 .loadlib 'wmls_group'
 .loadlib 'wmls_ops'
 
+.sub '__onload' :load :init
+    load_bytecode 'Math/rand.pir'
+    $P0 = get_hll_namespace ['Math'; 'Rand']
+    $P1 = get_namespace
+    $P2 = split ' ', 'rand srand RAND_MAX'
+    $P0.'export_to'($P1, $P2)
+.end
+
 
 .sub 'getLang'
     new $P0, 'Hash'
@@ -560,19 +568,20 @@ If value is less than zero (0), the function returns C<invalid>.
 .sub '_lang_random' :anon
     .param pmc value
     .local pmc res
-    $P0 = value
+    $P1 = value
     $I0 = isa value, 'WmlsString'
     unless $I0 goto L1
-    $P0 = value.'parseNumber'()
+    $P1 = value.'parseNumber'()
   L1:
-    $I0 = isa $P0, 'WmlsInvalid'
+    $I0 = isa $P1, 'WmlsInvalid'
     if $I0 goto L2
-    $I0 = $P0
-    if $I0 < 0 goto L2
-    new $P0, 'Random'
-    $N0 = $P0
-    $N0 = mul $I0
-    $I0 = $N0
+    $I1 = $P1
+    if $I1 < 0 goto L2
+    $I0 = rand()
+    $I0 = mul $I1
+    $I2 = RAND_MAX()
+    inc $I2
+    $I0 = div $I2
     box res, $I0
     goto L3
   L2:
@@ -610,19 +619,18 @@ String or invalid.
 .sub '_lang_seed' :anon
     .param pmc value
     .local pmc res
-    $P0 = value
+    $P1 = value
     $I0 = isa value, 'WmlsString'
     unless $I0 goto L1
-    $P0 = value.'parseNumber'()
+    $P1 = value.'parseNumber'()
   L1:
-    $I0 = isa $P0, 'WmlsInvalid'
+    $I0 = isa $P1, 'WmlsInvalid'
     if $I0 goto L2
-    $I0 = $P0
+    $I1 = $P1
     if $I0 >= 0 goto L3
-    $I0 = time
+    $I1 = time
   L3:
-    new $P0, 'Random'
-    $P0 = $I0
+    srand($I1)
     new res, 'WmlsString'
     set res, ''
     goto L4
