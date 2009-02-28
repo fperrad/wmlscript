@@ -249,8 +249,8 @@ win32-inno-installer: installable
 	pod2html --infile wmlsd.pir --outfile man/html/parrot-wmlsd.html
 	$(CP) installable_wmlsi@exe@ parrot-wmlsi.exe
 	$(CP) installable_wmlsd@exe@ parrot-wmlsd.exe
-	cd @build_dir@ && $(PERL) tools/dev/mk_inno_language.pl wmlscript
-	cd @build_dir@ && iscc parrot-wmlscript.iss
+	$(PERL) @build_dir@/tools/dev/mk_inno_language.pl wmlscript
+	iscc parrot-wmlscript.iss
 
 TEST_CLEANERS := \
  "t/pmc/*.pir" \
@@ -272,17 +272,21 @@ BUILD_CLEANERS := \
  wmlsd@exe@ installable_wmlsd@exe@ \
 #IF(win32): parrot-wmlsi.exe \
 #IF(win32): parrot-wmlsd.exe \
+#IF(win32):  parrot-wmlscript.iss \
+#IF(win32):  "setup-parrot-*.exe" \
  "library/*.pbc"
 
 clean:
 	$(MAKE) $(OPS_DIR) clean
 	$(MAKE) $(PMC_DIR) clean
 	$(RM_F) $(TEST_CLEANERS) $(BUILD_CLEANERS)
+	$(RM_RF) man
 
 realclean:
 	$(MAKE) $(OPS_DIR) realclean
 	$(MAKE) $(PMC_DIR) realclean
 	$(RM_F) $(TEST_CLEANERS) $(BUILD_CLEANERS) Makefile
+	$(RM_RF) man *.tmp
 
 distclean: realclean
 

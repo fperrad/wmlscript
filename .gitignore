@@ -4,13 +4,14 @@ Makefile
 *.o
 *.obj
 *.exe
-*.tmp
+*.iss
 
 wmlsi
 wmlsd
 installable_*
 
 man
+*.tmp
 
 src/*.pbc
 src/opcode.pir
