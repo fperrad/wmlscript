@@ -19,7 +19,7 @@ See "WMLScript Standard Libraries Specification", section 7 "Lang".
 .loadlib 'wmls_ops'
 
 .sub '__onload' :load :init
-    load_bytecode 'Math/rand.pir'
+    load_bytecode 'Math/Rand.pir'
     $P0 = get_hll_namespace ['Math'; 'Rand']
     $P1 = get_namespace
     $P2 = split ' ', 'rand srand RAND_MAX'
