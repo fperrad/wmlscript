@@ -12,6 +12,7 @@ installable_*
 
 man
 *.tmp
+*.sto
 
 src/*.pbc
 src/opcode.pir
