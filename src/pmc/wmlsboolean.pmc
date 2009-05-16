@@ -17,8 +17,6 @@ the WMLScript C<Boolean> type.
 
 */
 
-#include "parrot/embed.h"
-
 static INTVAL dynpmc_WmlsBoolean;
 static INTVAL dynpmc_WmlsFloat;
 static INTVAL dynpmc_WmlsInteger;

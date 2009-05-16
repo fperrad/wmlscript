@@ -16,8 +16,6 @@ This singleton PMC holds a factory.
 
 */
 
-#include "parrot/embed.h"
-
 static PMC * WmlsBytecode_PMC;
 static PMC * script;
 static const char * bytecode;
