@@ -168,7 +168,7 @@ static PMC * new_wmls(Interp *interp, const char *name)
           key_new_cstring(interp, "Wmls"),
           key_new_cstring(interp, name));
     PMC * class_object = Parrot_oo_get_class(interp, key);
-    if (class_object == PMCNULL)
+    if (PMC_IS_NULL(class_object))
         Parrot_ex_throw_from_c_args(interp, NULL, EXCEPTION_ILL_INHERIT,
               "Wmls::%s not loaded", name);
     return VTABLE_instantiate(interp, class_object, PMCNULL);
