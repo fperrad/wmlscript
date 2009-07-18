@@ -858,8 +858,8 @@ sub generate_final_code {
     $P0 = iter h_const
     $S0 = "\n"
   L1_CST:
+    unless $P0 goto L2_CST
     $S1 = shift $P0
-    if null $S1 goto L2_CST
     $S1 = $P0[$S1]
     $S0 = concat $S1
     goto L1_CST
