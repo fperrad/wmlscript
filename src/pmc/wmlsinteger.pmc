@@ -61,18 +61,16 @@ pmclass WmlsInteger
 /* Class initialization. Caches constant strings that will be used later.
 */
     void class_init() {
-        if (pass) {
-            dynpmc_WmlsBoolean = pmc_type(INTERP,
-              Parrot_str_new_constant(INTERP, "WmlsBoolean"));
-            dynpmc_WmlsFloat = pmc_type(INTERP,
-              Parrot_str_new_constant(INTERP, "WmlsFloat"));
-            dynpmc_WmlsInteger = pmc_type(INTERP,
-              Parrot_str_new_constant(INTERP, "WmlsInteger"));
-            dynpmc_WmlsInvalid = pmc_type(INTERP,
-              Parrot_str_new_constant(INTERP, "WmlsInvalid"));
-            dynpmc_WmlsString = pmc_type(INTERP,
-              Parrot_str_new_constant(INTERP, "WmlsString"));
-        }
+        dynpmc_WmlsBoolean = pmc_type(INTERP,
+            Parrot_str_new_constant(INTERP, "WmlsBoolean"));
+        dynpmc_WmlsFloat = pmc_type(INTERP,
+            Parrot_str_new_constant(INTERP, "WmlsFloat"));
+        dynpmc_WmlsInteger = pmc_type(INTERP,
+            Parrot_str_new_constant(INTERP, "WmlsInteger"));
+        dynpmc_WmlsInvalid = pmc_type(INTERP,
+            Parrot_str_new_constant(INTERP, "WmlsInvalid"));
+        dynpmc_WmlsString = pmc_type(INTERP,
+            Parrot_str_new_constant(INTERP, "WmlsString"));
     }
 
 /*
