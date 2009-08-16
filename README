@@ -1,0 +1,16 @@
+
+WMLScript Bytecode Translator
+=============================
+
+The language WMLScript is a subset of ECMAScript (ie JavaScript).
+WMLScript defines also an bytecode interpreter (stack based), a binary
+format.
+
+WMLScript is a part of the Wireless Application Protocol specifications.
+
+This translator transforms WMLScript bytecode into PIR language
+which could executed by the Parrot VM (http://www.parrot.org).
+
+A WMLScript Compiler is available on CPAN
+(http://search.cpan.org/~perrad/WAP-wmls/).
+
