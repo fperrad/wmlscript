@@ -47,6 +47,7 @@ foreach my $func ( keys %language_test_map ) {
         my $function = $options{function} || 'main';
         my $params   = $options{params}   || q{};
 
+        my $parrot = File::Spec->catfile( $self->{relpath}, $self->{parrot} );
         # flatten filenames (don't use directories)
         my $lang_fn = File::Spec->rel2abs( Parrot::Test::per_test( '.wmls',  $count ) );
         my $bin_fn  = File::Spec->rel2abs( Parrot::Test::per_test( '.wmlsc', $count ) );
@@ -57,22 +58,20 @@ foreach my $func ( keys %language_test_map ) {
 
         Parrot::Test::run_command(
             "wmlsc $cflags ${lang_fn}",
-            CD     => $self->{relpath},
             STDOUT => $out_fn,
             STDERR => $out_fn,
         );
 
         my @test_prog = (
 
-            #            "wmlsc $cflags ${lang_fn}",
-            #            "$self->{parrot} languages/WMLScript/wmls2pir.pir ${bin_fn}",
-            "$self->{parrot} languages/wmlscript/wmlsi.pir ${bin_fn} $function $params",
+            # "wmlsc $cflags $lang_fn",
+            # "$parrot wmls2pir.pir $bin_fn",
+            "$parrot wmlsi.pir $bin_fn $function $params",
         );
 
         # STDERR is written into same output file
         my $exit_code = Parrot::Test::run_command(
             \@test_prog,
-            CD     => $self->{relpath},
             STDOUT => $out_fn,
             STDERR => $out_fn,
         );
