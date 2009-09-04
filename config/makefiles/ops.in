@@ -5,10 +5,8 @@
 VERSION_DIR   := @versiondir@
 INCLUDE_DIR   := @includedir@$(VERSION_DIR)
 LIB_DIR       := @libdir@$(VERSION_DIR)
-#STAGING_DIR   := ../../dynext
-STAGING_DIR   := @build_dir@/runtime/parrot/dynext
-#INSTALL_DIR   := $(LIB_DIR)/languages/wmlscript2/dynext
-INSTALL_DIR   := $(LIB_DIR)/dynext
+STAGING_DIR   := ../../dynext
+INSTALL_DIR   := $(LIB_DIR)/languages/wmlscript/dynext
 
 # Set up extensions
 LOAD_EXT      := @load_ext@
@@ -17,6 +15,7 @@ O             := @o@
 # Setup some commands
 PERL          := @perl@
 RM_F          := @rm_f@
+MKPATH        := @mkpath@
 CHMOD         := @chmod@
 CP            := @cp@
 CC            := @cc@ -c
@@ -69,6 +68,7 @@ staging: linklibs
 	$(CP) "*$(LOAD_EXT)" $(STAGING_DIR)
 
 install:
+	$(MKPATH) $(INSTALL_DIR)
 #IF(cygwin or hpux):	CHMOD 0775 "*$(LOAD_EXT)"
 	$(CP) "*$(LOAD_EXT)" $(INSTALL_DIR)
 
