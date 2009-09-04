@@ -1,12 +1,12 @@
-#! perl
-# Copyright (C) 2006-2009, Parrot Foundation.
+#! parrot
+# Copyright (C) 2009, Parrot Foundation.
 # $Id$
 
 =head1 WmlsFloat
 
 =head2 Synopsis
 
-    % perl t/pmc/float.t
+    % perl t/harness t/pmc/float.t
 
 =head2 Description
 
@@ -15,241 +15,71 @@ Tests C<WmlsFloat> PMC
 
 =cut
 
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../../../lib";
+.sub 'main' :main
+    loadlib $P0, 'wmls_group'
 
-use Parrot::Test tests => 11;
-use Test::More;
+    .include 'test_more.pir'
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check inheritance' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsFloat"
-    .local int bool1
-    bool1 = isa pmc1, "Float"
-    print bool1
-    print "\n"
-    bool1 = isa pmc1, "WmlsFloat"
-    print bool1
-    print "\n"
-    end
+    plan(11)
+
+    check_inheritance()
+    check_interface()
+    check_name()
+    check_clone()
+    check_get_bool()
 .end
-CODE
-1
-1
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check interface' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsFloat"
-    .local int bool1
-    bool1 = does pmc1, "scalar"
-    print bool1
-    print "\n"
-    bool1 = does pmc1, "float"
-    print bool1
-    print "\n"
-    bool1 = does pmc1, "no_interface"
-    print bool1
-    print "\n"
-    end
+.sub 'check_inheritance'
+    $P0 = new 'WmlsFloat'
+    $I0 = isa $P0, 'Float'
+    is($I0, 1)
+    $I0 = isa $P0, 'WmlsFloat'
+    is($I0, 1)
 .end
-CODE
-1
-1
-0
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check name' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsFloat"
-    .local string str1
-    str1 = typeof pmc1
-    print str1
-    print "\n"
-    end
+.sub 'check_interface'
+    $P0 = new 'WmlsFloat'
+    $I0 = does $P0, 'scalar'
+    is($I0, 1)
+    $I0 = does $P0, 'float'
+    is($I0, 1)
+    $I0 = does $P0, 'no_interface'
+    is($I0, 0)
 .end
-CODE
-WmlsFloat
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check clone' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsFloat"
-    pmc1 = 3.14
-    .local pmc pmc2
-    pmc2 = clone pmc1
-    pmc1 = 1.57
-    .local string str1
-    str1 = typeof pmc2
-    print str1
-    print "\n"
-    .local string str2
-    str2 = pmc2
-    print str2
-    print "\n"
-    str1 = pmc1
-    print str1
-    print "\n"
-    end
-.end
-CODE
-WmlsFloat
-3.14
-1.57
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check get_bool' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsFloat"
-    pmc1 = 3.14
-    .local int bool1
-    bool1 = istrue pmc1
-    print bool1
-    print "\n"
-    pmc1 = 0.0
-    bool1 = istrue pmc1
-    print bool1
-    print "\n"
-    end
-.end
-CODE
-1
-0
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check HLL' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.sub _main
-    .local pmc pmc1
-    pmc1 = new "WmlsFloat"
-    pmc1 = 3.14
-    print pmc1
-    print "\n"
-    .local int bool1
-    bool1 = isa pmc1, "WmlsFloat"
-    print bool1
-    print "\n"
-    end
-.end
-CODE
-3.14
-1
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check HLL & .const' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.sub _main
-    .const "WmlsFloat" cst1 = "3.14"
-    print cst1
-    print "\n"
-    .local int bool1
-    bool1 = isa cst1, "WmlsFloat"
-    print bool1
-    print "\n"
-.end
-CODE
-3.14
-1
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check istrue' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.loadlib "wmls_ops"
-.sub _main
-    .const "WmlsFloat" cst1 = "3.14"
-    print cst1
-    print "\n"
-    $P0 = istrue cst1
-    print $P0
-    print "\n"
+.sub 'check_name'
+    $P0 = new 'WmlsFloat'
     $S0 = typeof $P0
-    print $S0
-    print "\n"
+    is($S0, 'WmlsFloat')
 .end
-CODE
-3.14
-true
-WmlsBoolean
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check typeof' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.loadlib "wmls_ops"
-.sub _main
-    .const "WmlsFloat" cst1 = "3.14"
-    print cst1
-    print "\n"
-    $P0 = typeof cst1
-    print $P0
-    print "\n"
-    $S0 = typeof $P0
-    print $S0
-    print "\n"
+.sub 'check_clone'
+    $P0 = new 'WmlsFloat'
+    set $P0, 3.14
+    $P1 = clone $P0
+    set $P0, 1.57
+    $S0 = typeof $P1
+    is($S0, 'WmlsFloat')
+    $S0 = $P1
+    is($S0, 3.14)
+    $S0 = $P0
+    is($S0, 1.57)
 .end
-CODE
-3.14
-1
-WmlsInteger
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check defined' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.loadlib "wmls_ops"
-.sub _main
-    .const "WmlsFloat" cst1 = "3.14"
-    print cst1
-    print "\n"
-    $P0 = defined cst1
-    print $P0
-    print "\n"
-    $S0 = typeof $P0
-    print $S0
-    print "\n"
+.sub 'check_get_bool'
+    $P0 = new 'WmlsFloat'
+    set $P0, 3.14
+    $I0 = istrue $P0
+    is($I0, 1)
+    set $P0, 0.0
+    $I0 = istrue $P0
+    is($I0, 0)
 .end
-CODE
-3.14
-true
-WmlsBoolean
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check box' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.loadlib "wmls_ops"
-.sub _main
-    $P0 = box 3.14
-    print $P0
-    print "\n"
-    $S0 = typeof $P0
-    print $S0
-    print "\n"
-.end
-CODE
-3.14
-WmlsFloat
-OUTPUT
 
 # Local Variables:
-#   mode: cperl
+#   mode: pir
 #   cperl-indent-level: 4
 #   fill-column: 100
 # End:
-# vim: expandtab shiftwidth=4:
+# vim: expandtab shiftwidth=4 ft=pir:
 

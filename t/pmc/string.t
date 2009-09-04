@@ -1,12 +1,12 @@
-#! perl
-# Copyright (C) 2006-2009, Parrot Foundation.
+#! parrot
+# Copyright (C) 2009, Parrot Foundation.
 # $Id$
 
 =head1 WmlsString
 
 =head2 Synopsis
 
-    % perl t/pmc/string.t
+    % perl t/harness t/pmc/string.t
 
 =head2 Description
 
@@ -15,273 +15,79 @@ Tests C<WmlsString> PMC
 
 =cut
 
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../../../lib";
+.sub 'main' :main
+    loadlib $P0, 'wmls_group'
 
-use Parrot::Test tests => 13;
-use Test::More;
+    .include 'test_more.pir'
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check inheritance' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsString"
-    .local int bool1
-    bool1 = isa pmc1, "String"
-    print bool1
-    print "\n"
-    bool1 = isa pmc1, "WmlsString"
-    print bool1
-    print "\n"
-    end
+    plan(12)
+
+    check_inheritance()
+    check_interface()
+    check_name()
+    check_clone()
+    check_get_bool()
+    check_embedded_zero()
 .end
-CODE
-1
-1
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check interface' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsString"
-    .local int bool1
-    bool1 = does pmc1, "scalar"
-    print bool1
-    print "\n"
-    bool1 = does pmc1, "string"
-    print bool1
-    print "\n"
-    bool1 = does pmc1, "no_interface"
-    print bool1
-    print "\n"
-    end
+.sub 'check_inheritance'
+    $P0 = new 'WmlsString'
+    $I0 = isa $P0, 'String'
+    is($I0, 1)
+    $I0 = isa $P0, 'WmlsString'
+    is($I0, 1)
 .end
-CODE
-1
-1
-0
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check name' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsString"
-    .local string str1
-    str1 = typeof pmc1
-    print str1
-    print "\n"
-    end
+.sub 'check_interface'
+    $P0 = new 'WmlsString'
+    $I0 = does $P0, 'scalar'
+    is($I0, 1)
+    $I0 = does $P0, 'string'
+    is($I0, 1)
+    $I0 = does $P0, 'no_interface'
+    is($I0, 0)
 .end
-CODE
-WmlsString
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check clone' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsString"
-    pmc1 = "str"
-    .local pmc pmc2
-    pmc2 = clone pmc1
-    pmc1 = "STR"
-    .local string str1
-    str1 = typeof pmc2
-    print str1
-    print "\n"
-    .local string str2
-    str2 = pmc2
-    print str2
-    print "\n"
-    str1 = pmc1
-    print str1
-    print "\n"
-    end
-.end
-CODE
-WmlsString
-str
-STR
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check get_bool' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsString"
-    pmc1 = "str"
-    .local int bool1
-    bool1 = istrue pmc1
-    print bool1
-    print "\n"
-    pmc1 = ""
-    bool1 = istrue pmc1
-    print bool1
-    print "\n"
-    end
-.end
-CODE
-1
-0
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check embedded zero' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsString"
-    pmc1 = "embe\0_dd\0_ed\0"
-    .local int len1
-    len1 = elements pmc1
-    print len1
-    print "\n"
-.end
-CODE
-13
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check HLL' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.sub _main
-    .local pmc pmc1
-    pmc1 = new "WmlsString"
-    pmc1 = "simple string"
-    print pmc1
-    print "\n"
-    .local int bool1
-    bool1 = isa pmc1, "WmlsString"
-    print bool1
-    print "\n"
-    end
-.end
-CODE
-simple string
-1
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check HLL & .const' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.sub _main
-    .const "WmlsString" cst1 = "simple string"
-    print cst1
-    print "\n"
-    .local int bool1
-    bool1 = isa cst1, "WmlsString"
-    print bool1
-    print "\n"
-.end
-CODE
-simple string
-1
-OUTPUT
-
-    pir_output_is( << 'CODE', << 'OUTPUT', '.const & empty string' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.sub _main
-    .const "WmlsString" cst1 = ""
-    print cst1
-    print "\n"
-    .local int bool1
-    bool1 = isa cst1, "WmlsString"
-    print bool1
-    print "\n"
-.end
-CODE
-
-1
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check istrue' );
-.loadlib "wmls_ops"
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.sub _main
-    .const "WmlsString" cst1 = "simple string"
-    print cst1
-    print "\n"
-    $P0 = istrue cst1
-    print $P0
-    print "\n"
+.sub 'check_name'
+    $P0 = new 'WmlsString'
     $S0 = typeof $P0
-    print $S0
-    print "\n"
+    is($S0, 'WmlsString')
 .end
-CODE
-simple string
-true
-WmlsBoolean
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check typeof' );
-.loadlib "wmls_ops"
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.sub _main
-    .const "WmlsString" cst1 = "simple string"
-    print cst1
-    print "\n"
-    $P0 = typeof cst1
-    print $P0
-    print "\n"
-    $S0 = typeof $P0
-    print $S0
-    print "\n"
+.sub 'check_clone'
+    $P0 = new 'WmlsString'
+    set $P0, 'str'
+    $P1 = clone $P0
+    set $P0, 'STR'
+    $S0 = typeof $P1
+    is($S0, 'WmlsString')
+    $S0 = $P1
+    is($S0, 'str')
+    $S0 = $P0
+    is($S0, 'STR')
 .end
-CODE
-simple string
-2
-WmlsInteger
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check defined' );
-.loadlib "wmls_ops"
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.sub _main
-    .const "WmlsString" cst1 = "simple string"
-    print cst1
-    print "\n"
-    $P0 = defined cst1
-    print $P0
-    print "\n"
-    $S0 = typeof $P0
-    print $S0
-    print "\n"
+.sub 'check_get_bool'
+    $P0 = new 'WmlsString'
+    set $P0, 'str'
+    $I0 = istrue $P0
+    is($I0, 1)
+    set $P0, ''
+    $I0 = istrue $P0
+    is($I0, 0)
 .end
-CODE
-simple string
-true
-WmlsBoolean
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check box' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.loadlib "wmls_ops"
-.sub _main
-    $P0 = box "simple string"
-    print $P0
-    print "\n"
-    $S0 = typeof $P0
-    print $S0
-    print "\n"
+.sub 'check_embedded_zero'
+    $P0 = new 'WmlsString'
+    set $P0, "embe\0_dd\0_ed\0"
+    $I0 = elements $P0
+    is($I0, 13)
 .end
-CODE
-simple string
-WmlsString
-OUTPUT
 
 # Local Variables:
-#   mode: cperl
+#   mode: pir
 #   cperl-indent-level: 4
 #   fill-column: 100
 # End:
-# vim: expandtab shiftwidth=4:
+# vim: expandtab shiftwidth=4 ft=pir:
 

@@ -1,12 +1,12 @@
-#! perl
-# Copyright (C) 2006-2009, Parrot Foundation.
+#!parrot
+# Copyright (C) 2009, Parrot Foundation.
 # $Id$
 
 =head1 WmlsBoolean
 
 =head2 Synopsis
 
-    % perl t/pmc/boolean.t
+    % perl t/harness t/pmc/boolean.t
 
 =head2 Description
 
@@ -15,208 +15,73 @@ Tests C<WmlsBoolean> PMC
 
 =cut
 
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../../../lib";
 
-use Parrot::Test tests => 9;
-use Test::More;
+.sub 'main' :main
+    loadlib $P0, 'wmls_group'
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check inheritance' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsBoolean"
-    .local int bool1
-    bool1 = isa pmc1, "Boolean"
-    print bool1
-    print "\n"
-    bool1 = isa pmc1, "WmlsBoolean"
-    print bool1
-    print "\n"
-    end
+    .include 'test_more.pir'
+
+    plan(12)
+
+    check_inheritance()
+    check_interface()
+    check_name()
+    check_get_string()
+    check_clone()
 .end
-CODE
-1
-1
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check interface' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsBoolean"
-    .local int bool1
-    bool1 = does pmc1, "scalar"
-    print bool1
-    print "\n"
-    bool1 = does pmc1, "boolean"
-    print bool1
-    print "\n"
-    bool1 = does pmc1, "integer"
-    print bool1
-    print "\n"
-    bool1 = does pmc1, "no_interface"
-    print bool1
-    print "\n"
-    end
+.sub 'check_inheritance'
+    $P0 = new 'WmlsBoolean'
+    $I0 = isa $P0, 'Boolean'
+    is($I0, 1)
+    $I0 = isa $P0, 'WmlsBoolean'
+    is($I0, 1)
 .end
-CODE
-1
-1
-1
-0
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check name' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsBoolean"
-    .local string str1
-    str1 = typeof pmc1
-    print str1
-    print "\n"
-    end
+.sub 'check_interface'
+    $P0 = new 'WmlsBoolean'
+    $I0 = does $P0, 'scalar'
+    is($I0, 1)
+    $I0 = does $P0, 'boolean'
+    is($I0, 1)
+    $I0 = does $P0, 'integer'
+    is($I0, 1)
+    $I0 = does $P0, 'no_interface'
+    is($I0, 0)
 .end
-CODE
-WmlsBoolean
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check get_string' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsBoolean"
-    pmc1 = 0
-    print pmc1
-    print "\n"
-    pmc1 = 1
-    print pmc1
-    print "\n"
-    end
-.end
-CODE
-false
-true
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check clone' );
-.sub _main
-    loadlib $P1, "wmls_group"
-    .local pmc pmc1
-    pmc1 = new "WmlsBoolean"
-    pmc1 = 1
-    .local pmc pmc2
-    pmc2 = clone pmc1
-    pmc1 = 0
-    .local string str1
-    str1 = typeof pmc2
-    print str1
-    print "\n"
-    .local string str2
-    str2 = pmc2
-    print str2
-    print "\n"
-    str1 = pmc1
-    print str1
-    print "\n"
-    end
-.end
-CODE
-WmlsBoolean
-true
-false
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check HLL' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.sub _main
-    .local pmc pmc1
-    pmc1 = new "WmlsBoolean"
-    pmc1 = 1
-    print pmc1
-    print "\n"
-    .local int bool1
-    bool1 = isa pmc1, "WmlsBoolean"
-    print bool1
-    print "\n"
-    end
-.end
-CODE
-true
-1
-OUTPUT
-
-pir_output_is( << 'CODE', << 'OUTPUT', 'check istrue' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.loadlib "wmls_ops"
-.sub _main
-    .const "WmlsBoolean" cst1 = "1"
-    print cst1
-    print "\n"
-    $P0 = istrue cst1
-    print $P0
-    print "\n"
+.sub 'check_name'
+    $P0 = new 'WmlsBoolean'
     $S0 = typeof $P0
-    print $S0
-    print "\n"
+    is($S0, 'WmlsBoolean')
 .end
-CODE
-true
-true
-WmlsBoolean
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check typeof' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.loadlib "wmls_ops"
-.sub _main
-    .const "WmlsBoolean" cst1 = "1"
-    print cst1
-    print "\n"
-    $P0 = typeof cst1
-    print $P0
-    print "\n"
-    $S0 = typeof $P0
-    print $S0
-    print "\n"
+.sub 'check_get_string'
+    $P0 = new 'WmlsBoolean'
+    set $P0, 0
+    $S0 = $P0
+    is($S0, 'false')
+    set $P0, 1
+    $S0 = $P0
+    is($S0, 'true')
 .end
-CODE
-true
-3
-WmlsInteger
-OUTPUT
 
-pir_output_is( << 'CODE', << 'OUTPUT', 'check defined' );
-.HLL "wmlscript"
-.loadlib "wmls_group"
-.loadlib "wmls_ops"
-.sub _main
-    .const "WmlsBoolean" cst1 = "1"
-    print cst1
-    print "\n"
-    $P0 = defined cst1
-    print $P0
-    print "\n"
-    $S0 = typeof $P0
-    print $S0
-    print "\n"
+.sub 'check_clone'
+    $P0 = new 'WmlsBoolean'
+    set $P0, 1
+    $P1 = clone $P0
+    set $P0, 0
+    $S0 = typeof $P1
+    is($S0, 'WmlsBoolean')
+    $S0 = $P1
+    is($S0, 'true')
+    $S0 = $P0
+    is($S0, 'false')
 .end
-CODE
-true
-true
-WmlsBoolean
-OUTPUT
 
 # Local Variables:
-#   mode: cperl
+#   mode: pir
 #   cperl-indent-level: 4
 #   fill-column: 100
 # End:
-# vim: expandtab shiftwidth=4:
-
+# vim: expandtab shiftwidth=4 ft=pir:
