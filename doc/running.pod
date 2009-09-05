@@ -12,9 +12,25 @@ L<http://search.cpan.org/search?query=wmls&mode=dist>.
 
 =head2 Building
 
-After building C<parrot> :
+Retrieve Parrot
 
-  cd languages/WMLScript
+  svn checkout https://svn.parrot.org/parrot/trunk parrot
+
+Configure & build & install Parrot
+
+  cd parrot
+  perl Configure.pl
+  make
+  sudo make install-dev
+
+Retrieve WMLScript
+
+  perl tools/dev/fetch_languages.pl --lang=wmlscript
+
+Configure & build WMLScript
+
+  cd languages/wmlscript
+  perl Configure.pl
   make
 
 =head2 Running the whole test suite
