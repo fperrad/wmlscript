@@ -33,7 +33,7 @@ Tests C<WmlsInvalid> PMC
 .sub 'check_HLL'
     $P0 = new 'WmlsInvalid'
     $S0 = $P0
-    is($S0, 'invalid')
+    is($S0, 'invalid', "check HLL")
     $I0 = isa $P0, 'WmlsInvalid'
     is($I0, 1)
 .end
@@ -41,7 +41,7 @@ Tests C<WmlsInvalid> PMC
 .sub 'check_istrue'
     $P0 = new 'WmlsInvalid'
     $S0 = $P0
-    is($S0, 'invalid')
+    is($S0, 'invalid', "check istrue")
     $P0 = istrue $P0
     $S0 = $P0
     is($S0, 'invalid')
@@ -52,7 +52,7 @@ Tests C<WmlsInvalid> PMC
 .sub 'check_typeof'
     $P0 = new 'WmlsInvalid'
     $S0 = $P0
-    is($S0, 'invalid')
+    is($S0, 'invalid', "check typeof")
     $P1 = typeof $P0
     $S0 = $P1
     is($S0, 4)
@@ -63,7 +63,7 @@ Tests C<WmlsInvalid> PMC
 .sub 'check_defined'
     $P0 = new 'WmlsInvalid'
     $S0 = $P0
-    is($S0, 'invalid')
+    is($S0, 'invalid', "check defined")
     $P1 = defined $P0
     $S0 = $P1
     is($S0, 'false')

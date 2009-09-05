@@ -32,7 +32,7 @@ Tests C<WmlsInteger> PMC
 .sub 'check_inheritance'
     $P0 = new 'WmlsInteger'
     $I0 = isa $P0, 'Integer'
-    is($I0, 1)
+    is($I0, 1, "check inheritance")
     $I0 = isa $P0, 'WmlsInteger'
     is($I0, 1)
 .end
@@ -40,7 +40,7 @@ Tests C<WmlsInteger> PMC
 .sub 'check_interface'
     $P0 = new 'WmlsInteger'
     $I0 = does $P0, 'scalar'
-    is($I0, 1)
+    is($I0, 1, "check interface")
     $I0 = does $P0, 'integer'
     is($I0, 1)
     $I0 = does $P0, 'no_interface'
@@ -50,7 +50,7 @@ Tests C<WmlsInteger> PMC
 .sub 'check_name'
     $P0 = new 'WmlsInteger'
     $S0 = typeof $P0
-    is($S0, 'WmlsInteger')
+    is($S0, 'WmlsInteger', "check name")
 .end
 
 .sub 'check_clone'
@@ -59,7 +59,7 @@ Tests C<WmlsInteger> PMC
     $P1 = clone $P0
     set $P0, -5
     $S0 = typeof $P1
-    is($S0, 'WmlsInteger')
+    is($S0, 'WmlsInteger', "check clone")
     $S0 = $P1
     is($S0, 10)
     $S0 = $P0
@@ -70,7 +70,7 @@ Tests C<WmlsInteger> PMC
     $P0 = new 'WmlsInteger'
     set $P0, 42
     $I0 = istrue $P0
-    is($I0, 1)
+    is($I0, 1, "check get_bool")
     set $P0, 0
     $I0 = istrue $P0
     is($I0, 0)

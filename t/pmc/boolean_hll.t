@@ -34,7 +34,7 @@ Tests C<WmlsBoolean> PMC
     $P0 = new 'WmlsBoolean'
     set $P0, 1
     $S0 = $P0
-    is($S0, 'true')
+    is($S0, 'true', "check HLL")
     $I0 = isa $P0, 'WmlsBoolean'
     is($I0, 1)
 .end
@@ -42,7 +42,7 @@ Tests C<WmlsBoolean> PMC
 .sub 'check_istrue'
     .const 'WmlsBoolean' K = '1'
     $S0 = K
-    is($S0, 'true')
+    is($S0, 'true', "check istrue")
     $P0 = istrue K
     $S0 = $P0
     is($S0, 'true')
@@ -53,7 +53,7 @@ Tests C<WmlsBoolean> PMC
 .sub 'check_typeof'
     .const 'WmlsBoolean' K = '1'
     $S0 = K
-    is($S0, 'true')
+    is($S0, 'true', "check typeof")
     $P0 = typeof K
     $S0 = $P0
     is($S0, 3)
@@ -64,7 +64,7 @@ Tests C<WmlsBoolean> PMC
 .sub 'check_defined'
     .const 'WmlsBoolean' K = '1'
     $S0 = K
-    is($S0, 'true')
+    is($S0, 'true', "check defined")
     $P0 = defined K
     $S0 = $P0
     is($S0, 'true')

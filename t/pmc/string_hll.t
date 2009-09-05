@@ -37,7 +37,7 @@ Tests C<WmlsString> PMC
     $P0 = new 'WmlsString'
     set $P0, "simple string"
     $S0 = $P0
-    is($S0, "simple string")
+    is($S0, "simple string", "check HLL")
     $I0 = isa $P0, 'WmlsString'
     is($I0, 1)
 .end
@@ -45,7 +45,7 @@ Tests C<WmlsString> PMC
 .sub 'check_HLL_const'
     .const 'WmlsString' K = "simple string"
     $S0 = K
-    is($S0, "simple string")
+    is($S0, "simple string", "check HLL & .const")
     $I0 = isa K, 'WmlsString'
     is($I0, 1)
 .end
@@ -53,7 +53,7 @@ Tests C<WmlsString> PMC
 .sub 'check_empty_string'
     .const 'WmlsString' K = ''
     $S0 = K
-    is($S0, '')
+    is($S0, '', "check empty string")
     $I0 = isa K, 'WmlsString'
     is($I0, 1)
 .end
@@ -61,7 +61,7 @@ Tests C<WmlsString> PMC
 .sub 'check_istrue'
     .const 'WmlsString' K = "simple string"
     $S0 = K
-    is($S0, "simple string")
+    is($S0, "simple string", "check istrue")
     $P0 = istrue K
     $S0 = $P0
     is($S0, 'true')
@@ -72,7 +72,7 @@ Tests C<WmlsString> PMC
 .sub 'check_typeof'
     .const 'WmlsString' K = "simple string"
     $S0 = K
-    is($S0, "simple string")
+    is($S0, "simple string", "check typeof")
     $P0 = typeof K
     $S0 = $P0
     is($S0, 2)
@@ -83,7 +83,7 @@ Tests C<WmlsString> PMC
 .sub 'check_defined'
     .const 'WmlsString' K = "simple string"
     $S0 = K
-    is($S0, "simple string")
+    is($S0, "simple string", "check defined")
     $P0 = defined K
     $S0 = $P0
     is($S0, 'true')
@@ -94,7 +94,7 @@ Tests C<WmlsString> PMC
 .sub 'check_box'
     $P0 = box "simple string"
     $S0 = $P0
-    is($S0, "simple string")
+    is($S0, "simple string", "check box")
     $S0 = typeof $P0
     is($S0, 'WmlsString')
 .end

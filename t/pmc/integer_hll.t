@@ -36,7 +36,7 @@ Tests C<WmlsInteger> PMC
     $P0 = new 'WmlsInteger'
     set $P0, 42
     $S0 = $P0
-    is($S0, '42')
+    is($S0, '42', "check HLL")
     $I0 = isa $P0, 'WmlsInteger'
     is($I0, 1)
 .end
@@ -44,7 +44,7 @@ Tests C<WmlsInteger> PMC
 .sub 'check_HLL_const'
     .const 'WmlsInteger' K = '42'
     $S0 = K
-    is($S0, '42')
+    is($S0, '42', "check HLL & .const")
     $I0 = isa K, 'WmlsInteger'
     is($I0, 1)
 .end
@@ -52,7 +52,7 @@ Tests C<WmlsInteger> PMC
 .sub 'check_istrue'
     .const 'WmlsInteger' K = '42'
     $S0 = K
-    is($S0, '42')
+    is($S0, '42', "check istrue")
     $P0 = istrue K
     $S0 = $P0
     is($S0, 'true')
@@ -63,7 +63,7 @@ Tests C<WmlsInteger> PMC
 .sub 'check_typeof'
     .const 'WmlsInteger' K = '42'
     $S0 = K
-    is($S0, '42')
+    is($S0, '42', "check typeof")
     $P0 = typeof K
     $S0 = $P0
     is($S0, 0)
@@ -74,7 +74,7 @@ Tests C<WmlsInteger> PMC
 .sub 'check_defined'
     .const 'WmlsInteger' K = '42'
     $S0 = K
-    is($S0, '42')
+    is($S0, '42', "check defined")
     $P0 = defined K
     $S0 = $P0
     is($S0, 'true')
@@ -85,7 +85,7 @@ Tests C<WmlsInteger> PMC
 .sub 'check_box'
     $P0 = box 42
     $S0 = $P0
-    is($S0, '42')
+    is($S0, '42', "check box")
     $S0 = typeof $P0
     is($S0, 'WmlsInteger')
 .end
