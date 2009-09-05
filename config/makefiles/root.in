@@ -254,7 +254,6 @@ win32-inno-installer: installable
 	iscc parrot-wmlscript.iss
 
 TEST_CLEANERS := \
- "t/pmc/*.pir" \
  "t/*.pir" \
  "t/*.pbc" \
  "t/*.wmls" \
