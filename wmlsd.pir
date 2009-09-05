@@ -23,7 +23,7 @@ parrot-wmlsi
 
 .sub 'main' :main
     .param pmc argv
-    load_bytecode 'languages/wmlscript/library/WMLScript.pbc'
+    load_bytecode 'library/WMLScript.pbc'
     .local int argc
     .local string progname
     .local string filename
