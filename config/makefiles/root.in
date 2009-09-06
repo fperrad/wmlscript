@@ -224,6 +224,7 @@ install: installable
 	$(CHMOD) 0755 $(BIN_DIR)/parrot-wmlsd@exe@
 	-$(MKPATH) $(LIB_DIR)/languages/wmlscript
 	$(CP) *.pbc $(LIB_DIR)/languages/wmlscript
+	$(CP) wmlscript/*.pbc $(LIB_DIR)/languages/wmlscript
 	-$(MKPATH) $(LIB_DIR)/languages/wmlscript/library
 	$(CP) library/*.pbc $(LIB_DIR)/languages/wmlscript/library
 	-$(MKPATH) $(MANDIR)/man1
