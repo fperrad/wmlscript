@@ -49,7 +49,7 @@ wmlsd, wmls2pir, wmlsi
   L1:
     end
   USAGE:
-    printerr "Usage: parrot wmls2pir.pbc filename\n"
+    printerr "Usage: parrot wmls2pbc.pir filename\n"
     exit -1
   _handler:
     .local pmc e
