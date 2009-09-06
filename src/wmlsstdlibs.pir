@@ -21,10 +21,6 @@ See "WMLScript Standard Libraries Specification".
 
 =cut
 
-.HLL 'wmlscript'
-.loadlib 'wmls_group'
-.loadlib 'wmls_ops'
-
 .sub '__onload' :load :anon
 #    print "__onload (wmlsstdlibs.pir)\n"
     load_bytecode 'library/wmlslang.pbc'
