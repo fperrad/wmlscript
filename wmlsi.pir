@@ -23,7 +23,6 @@ parrot-wmlsd
 .sub 'main' :main
     .param pmc argv
     load_language 'wmlscript'
-    load_stdlibs()
     .local int argc
     .local string progname
     .local string filename
