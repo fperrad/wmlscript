@@ -274,6 +274,7 @@ BUILD_CLEANERS := \
 #IF(win32): parrot-wmlsd.exe \
 #IF(win32):  parrot-wmlscript.iss \
 #IF(win32):  "setup-parrot-*.exe" \
+ "wmlscript/*.pbc" \
  "library/*.pbc"
 
 clean:

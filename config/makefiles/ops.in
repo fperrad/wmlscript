@@ -41,7 +41,7 @@ CLEANUPS := \
   "*$(O)" \
   "*.c" \
   "*.h" \
-  "$(STAGING_DIR)/wmlscript2_ops*$(LOAD_EXT)"
+  "$(STAGING_DIR)/wmls_ops*$(LOAD_EXT)"
 
 
 all: staging

@@ -69,7 +69,7 @@ CLEANUPS := \
 #IF(win32):  "*.manifext" \
 #IF(win32):  "*.pdb" \
 #IF(win32):  "*.lib" \
-  $(STAGING_DIR)/$(WMLSCRIPT2_GROUP)$(LOAD_EXT)
+  $(STAGING_DIR)/$(WMLSCRIPT_GROUP)$(LOAD_EXT)
 
 
 all: staging
