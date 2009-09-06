@@ -102,7 +102,7 @@
 
   $P0 = get_hll_global '@stdlibs'
   unless null $P0 goto L1
-  load_bytecode 'library/WMLScript.pbc'
+  load_language 'wmlscript'
 L1:
 PIRCODE
 

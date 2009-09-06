@@ -73,7 +73,7 @@ GEN_PIR := \
 build: \
  $(WMLSCRIPT_OPS) \
  $(WMLSCRIPT_GROUP) \
- library/WMLScript.pbc \
+ wmlscript/wmlscript.pbc \
  $(PBCS)
 
 all: build wmlsi@exe@ wmlsd@exe@ installable
@@ -96,9 +96,9 @@ wmlsd.pbc: wmlsd.pir
 wmlsd@exe@: wmlsd.pbc
 	$(PBC_TO_EXE) wmlsd.pbc
 
-library/WMLScript.pbc: src/WMLScript.pir \
+wmlscript/wmlscript.pbc: src/WMLScript.pir \
  src/script.pir src/wmlsstdlibs.pir $(GEN_PIR)
-	$(PARROT) -o library/WMLScript.pbc src/WMLScript.pir
+	$(PARROT) -o wmlscript/wmlscript.pbc src/WMLScript.pir
 
 src/opcode.pir: src/translation.rules build/translator.pl \
  build/SRM/Stack.pm build/SRM/Register.pm
