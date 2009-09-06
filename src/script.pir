@@ -103,6 +103,7 @@
   $P0 = get_hll_global '@stdlibs'
   unless null $P0 goto L1
   load_language 'wmlscript'
+  load_stdlibs()
 L1:
 PIRCODE
 
