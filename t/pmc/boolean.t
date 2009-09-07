@@ -71,8 +71,7 @@ Tests C<WmlsBoolean> PMC
     set $P0, 1
     $P1 = clone $P0
     set $P0, 0
-    $S0 = typeof $P1
-    is($S0, 'WmlsBoolean', "check clone")
+    isa_ok($P1, 'WmlsBoolean', "check clone")
     $S0 = $P1
     is($S0, 'true')
     $S0 = $P0

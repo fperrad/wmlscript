@@ -58,8 +58,7 @@ Tests C<WmlsInteger> PMC
     set $P0, 10
     $P1 = clone $P0
     set $P0, -5
-    $S0 = typeof $P1
-    is($S0, 'WmlsInteger', "check clone")
+    isa_ok($P1, 'WmlsInteger', "check clone")
     $I0 = $P1
     is($I0, 10)
     $I0 = $P0

@@ -59,8 +59,7 @@ Tests C<WmlsString> PMC
     set $P0, 'str'
     $P1 = clone $P0
     set $P0, 'STR'
-    $S0 = typeof $P1
-    is($S0, 'WmlsString', "check clone")
+    isa_ok($P1, 'WmlsString', "check clone")
     $S0 = $P1
     is($S0, 'str')
     $S0 = $P0

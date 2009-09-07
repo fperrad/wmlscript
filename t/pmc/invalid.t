@@ -60,8 +60,7 @@ Tests C<WmlsInvalid> PMC
 .sub 'check_clone'
     $P0 = new 'WmlsInvalid'
     $P1 = clone $P0
-    $S0 = typeof $P1
-    is($S0, 'WmlsInvalid', "check clone")
+    isa_ok($P1, 'WmlsInvalid', "check clone")
     $S0 = $P1
     is($S0, 'invalid')
 .end

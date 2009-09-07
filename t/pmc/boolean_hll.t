@@ -35,8 +35,7 @@ Tests C<WmlsBoolean> PMC
     set $P0, 1
     $S0 = $P0
     is($S0, 'true', "check HLL")
-    $I0 = isa $P0, 'WmlsBoolean'
-    ok($I0)
+    isa_ok($P0, 'WmlsBoolean')
 .end
 
 .sub 'check_istrue'
@@ -46,8 +45,7 @@ Tests C<WmlsBoolean> PMC
     $P0 = istrue K
     $S0 = $P0
     is($S0, 'true')
-    $S0 = typeof $P0
-    is($S0, 'WmlsBoolean')
+    isa_ok($P0, 'WmlsBoolean')
 .end
 
 .sub 'check_typeof'
@@ -57,8 +55,7 @@ Tests C<WmlsBoolean> PMC
     $P0 = typeof K
     $I0 = $P0
     is($I0, 3)
-    $S0 = typeof $P0
-    is($S0, 'WmlsInteger')
+    isa_ok($P0, 'WmlsInteger')
 .end
 
 .sub 'check_defined'
@@ -68,8 +65,7 @@ Tests C<WmlsBoolean> PMC
     $P0 = defined K
     $S0 = $P0
     is($S0, 'true')
-    $S0 = typeof $P0
-    is($S0, 'WmlsBoolean')
+    isa_ok($P0, 'WmlsBoolean')
 .end
 
 # Local Variables:

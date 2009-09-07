@@ -58,8 +58,7 @@ Tests C<WmlsFloat> PMC
     set $P0, 3.14
     $P1 = clone $P0
     set $P0, 1.57
-    $S0 = typeof $P1
-    is($S0, 'WmlsFloat', "check clone")
+    isa_ok($P1, 'WmlsFloat', "check clone")
     $N0 = $P1
     is($N0, 3.14)
     $N0 = $P0

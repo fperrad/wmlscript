@@ -22,7 +22,7 @@ Tests C<WmlsInvalid> PMC
 .sub 'main' :main
     .include 'test_more.pir'
 
-    plan(11)
+    plan(10)
 
     check_HLL()
     check_istrue()
@@ -34,8 +34,7 @@ Tests C<WmlsInvalid> PMC
     $P0 = new 'WmlsInvalid'
     $S0 = $P0
     is($S0, 'invalid', "check HLL")
-    $I0 = isa $P0, 'WmlsInvalid'
-    ok($I0)
+    isa_ok($P0, 'WmlsInvalid')
 .end
 
 .sub 'check_istrue'
@@ -43,10 +42,7 @@ Tests C<WmlsInvalid> PMC
     $S0 = $P0
     is($S0, 'invalid', "check istrue")
     $P0 = istrue $P0
-    $S0 = $P0
-    is($S0, 'invalid')
-    $S0 = typeof $P0
-    is($S0, 'WmlsInvalid')
+    isa_ok($P0, 'WmlsInvalid')
 .end
 
 .sub 'check_typeof'
@@ -56,8 +52,7 @@ Tests C<WmlsInvalid> PMC
     $P1 = typeof $P0
     $I0 = $P1
     is($I0, 4)
-    $S0 = typeof $P1
-    is($S0, 'WmlsInteger')
+    isa_ok($P1, 'WmlsInteger')
 .end
 
 .sub 'check_defined'
@@ -67,8 +62,7 @@ Tests C<WmlsInvalid> PMC
     $P1 = defined $P0
     $S0 = $P1
     is($S0, 'false')
-    $S0 = typeof $P1
-    is($S0, 'WmlsBoolean')
+    isa_ok($P1, 'WmlsBoolean')
 .end
 
 # Local Variables:

@@ -38,24 +38,21 @@ Tests C<WmlsString> PMC
     set $P0, "simple string"
     $S0 = $P0
     is($S0, "simple string", "check HLL")
-    $I0 = isa $P0, 'WmlsString'
-    ok($I0)
+    isa_ok($P0, 'WmlsString')
 .end
 
 .sub 'check_HLL_const'
     .const 'WmlsString' K = "simple string"
     $S0 = K
     is($S0, "simple string", "check HLL & .const")
-    $I0 = isa K, 'WmlsString'
-    ok($I0)
+    isa_ok(K, 'WmlsString')
 .end
 
 .sub 'check_empty_string'
     .const 'WmlsString' K = ''
     $S0 = K
     is($S0, '', "check empty string")
-    $I0 = isa K, 'WmlsString'
-    ok($I0)
+    isa_ok(K, 'WmlsString')
 .end
 
 .sub 'check_istrue'
@@ -65,8 +62,7 @@ Tests C<WmlsString> PMC
     $P0 = istrue K
     $S0 = $P0
     is($S0, 'true')
-    $S0 = typeof $P0
-    is($S0, 'WmlsBoolean')
+    isa_ok($P0, 'WmlsBoolean')
 .end
 
 .sub 'check_typeof'
@@ -76,8 +72,7 @@ Tests C<WmlsString> PMC
     $P0 = typeof K
     $I0 = $P0
     is($I0, 2)
-    $S0 = typeof $P0
-    is($S0, 'WmlsInteger')
+    isa_ok($P0, 'WmlsInteger')
 .end
 
 .sub 'check_defined'
@@ -87,16 +82,14 @@ Tests C<WmlsString> PMC
     $P0 = defined K
     $S0 = $P0
     is($S0, 'true')
-    $S0 = typeof $P0
-    is($S0, 'WmlsBoolean')
+    isa_ok($P0, 'WmlsBoolean')
 .end
 
 .sub 'check_box'
     $P0 = box "simple string"
     $S0 = $P0
     is($S0, "simple string", "check box")
-    $S0 = typeof $P0
-    is($S0, 'WmlsString')
+    isa_ok($P0, 'WmlsString')
 .end
 
 # Local Variables:
