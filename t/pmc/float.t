@@ -32,19 +32,19 @@ Tests C<WmlsFloat> PMC
 .sub 'check_inheritance'
     $P0 = new 'WmlsFloat'
     $I0 = isa $P0, 'Float'
-    is($I0, 1, "check inheritance")
+    ok($I0, "check inheritance")
     $I0 = isa $P0, 'WmlsFloat'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_interface'
     $P0 = new 'WmlsFloat'
     $I0 = does $P0, 'scalar'
-    is($I0, 1, "check interface")
+    ok($I0, "check interface")
     $I0 = does $P0, 'float'
-    is($I0, 1)
+    ok($I0)
     $I0 = does $P0, 'no_interface'
-    is($I0, 0)
+    nok($I0)
 .end
 
 .sub 'check_name'
@@ -60,10 +60,10 @@ Tests C<WmlsFloat> PMC
     set $P0, 1.57
     $S0 = typeof $P1
     is($S0, 'WmlsFloat', "check clone")
-    $S0 = $P1
-    is($S0, 3.14)
-    $S0 = $P0
-    is($S0, 1.57)
+    $N0 = $P1
+    is($N0, 3.14)
+    $N0 = $P0
+    is($N0, 1.57)
 .end
 
 .sub 'check_get_bool'

@@ -33,19 +33,19 @@ Tests C<WmlsString> PMC
 .sub 'check_inheritance'
     $P0 = new 'WmlsString'
     $I0 = isa $P0, 'String'
-    is($I0, 1, "check inheritance")
+    ok($I0, "check inheritance")
     $I0 = isa $P0, 'WmlsString'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_interface'
     $P0 = new 'WmlsString'
     $I0 = does $P0, 'scalar'
-    is($I0, 1, "check interface")
+    ok($I0, "check interface")
     $I0 = does $P0, 'string'
-    is($I0, 1)
+    ok($I0)
     $I0 = does $P0, 'no_interface'
-    is($I0, 0)
+    nok($I0)
 .end
 
 .sub 'check_name'

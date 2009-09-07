@@ -39,7 +39,7 @@ Tests C<WmlsString> PMC
     $S0 = $P0
     is($S0, "simple string", "check HLL")
     $I0 = isa $P0, 'WmlsString'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_HLL_const'
@@ -47,7 +47,7 @@ Tests C<WmlsString> PMC
     $S0 = K
     is($S0, "simple string", "check HLL & .const")
     $I0 = isa K, 'WmlsString'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_empty_string'
@@ -55,7 +55,7 @@ Tests C<WmlsString> PMC
     $S0 = K
     is($S0, '', "check empty string")
     $I0 = isa K, 'WmlsString'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_istrue'
@@ -74,8 +74,8 @@ Tests C<WmlsString> PMC
     $S0 = K
     is($S0, "simple string", "check typeof")
     $P0 = typeof K
-    $S0 = $P0
-    is($S0, 2)
+    $I0 = $P0
+    is($I0, 2)
     $S0 = typeof $P0
     is($S0, 'WmlsInteger')
 .end

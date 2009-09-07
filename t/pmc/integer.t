@@ -32,19 +32,19 @@ Tests C<WmlsInteger> PMC
 .sub 'check_inheritance'
     $P0 = new 'WmlsInteger'
     $I0 = isa $P0, 'Integer'
-    is($I0, 1, "check inheritance")
+    ok($I0, "check inheritance")
     $I0 = isa $P0, 'WmlsInteger'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_interface'
     $P0 = new 'WmlsInteger'
     $I0 = does $P0, 'scalar'
-    is($I0, 1, "check interface")
+    ok($I0, "check interface")
     $I0 = does $P0, 'integer'
-    is($I0, 1)
+    ok($I0)
     $I0 = does $P0, 'no_interface'
-    is($I0, 0)
+    nok($I0)
 .end
 
 .sub 'check_name'
@@ -60,10 +60,10 @@ Tests C<WmlsInteger> PMC
     set $P0, -5
     $S0 = typeof $P1
     is($S0, 'WmlsInteger', "check clone")
-    $S0 = $P1
-    is($S0, 10)
-    $S0 = $P0
-    is($S0, -5)
+    $I0 = $P1
+    is($I0, 10)
+    $I0 = $P0
+    is($I0, -5)
 .end
 
 .sub 'check_get_bool'

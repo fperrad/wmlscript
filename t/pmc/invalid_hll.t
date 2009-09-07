@@ -35,7 +35,7 @@ Tests C<WmlsInvalid> PMC
     $S0 = $P0
     is($S0, 'invalid', "check HLL")
     $I0 = isa $P0, 'WmlsInvalid'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_istrue'
@@ -54,8 +54,8 @@ Tests C<WmlsInvalid> PMC
     $S0 = $P0
     is($S0, 'invalid', "check typeof")
     $P1 = typeof $P0
-    $S0 = $P1
-    is($S0, 4)
+    $I0 = $P1
+    is($I0, 4)
     $S0 = typeof $P1
     is($S0, 'WmlsInteger')
 .end

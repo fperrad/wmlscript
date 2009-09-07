@@ -33,21 +33,21 @@ Tests C<WmlsBoolean> PMC
 .sub 'check_inheritance'
     $P0 = new 'WmlsBoolean'
     $I0 = isa $P0, 'Boolean'
-    is($I0, 1, "check inheritance")
+    ok($I0, "check inheritance")
     $I0 = isa $P0, 'WmlsBoolean'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_interface'
     $P0 = new 'WmlsBoolean'
     $I0 = does $P0, 'scalar'
-    is($I0, 1, "check interface")
+    ok($I0, "check interface")
     $I0 = does $P0, 'boolean'
-    is($I0, 1)
+    ok($I0)
     $I0 = does $P0, 'integer'
-    is($I0, 1)
+    ok($I0)
     $I0 = does $P0, 'no_interface'
-    is($I0, 0)
+    nok($I0)
 .end
 
 .sub 'check_name'

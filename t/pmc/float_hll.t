@@ -35,24 +35,24 @@ Tests C<WmlsFloat> PMC
 .sub 'check_HLL'
     $P0 = new 'WmlsFloat'
     set $P0, 3.14
-    $S0 = $P0
-    is($S0, '3.14', "check HLL")
+    $N0 = $P0
+    is($N0, 3.14, "check HLL")
     $I0 = isa $P0, 'WmlsFloat'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_HLL_const'
     .const 'WmlsFloat' K = '3.14'
-    $S0 = K
-    is($S0, '3.14', "check HLL & .const")
+    $N0 = K
+    is($N0, 3.14, "check HLL & .const")
     $I0 = isa K, 'WmlsFloat'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_istrue'
     .const 'WmlsFloat' K = '3.14'
-    $S0 = K
-    is($S0, '3.14', "check istrue")
+    $N0 = K
+    is($N0, 3.14, "check istrue")
     $P0 = istrue K
     $S0 = $P0
     is($S0, 'true')
@@ -62,19 +62,19 @@ Tests C<WmlsFloat> PMC
 
 .sub 'check_typeof'
     .const 'WmlsFloat' K = '3.14'
-    $S0 = K
-    is($S0, '3.14', "check typeof")
+    $N0 = K
+    is($N0, 3.14, "check typeof")
     $P0 = typeof K
-    $S0 = $P0
-    is($S0, 1)
+    $I0 = $P0
+    is($I0, 1)
     $S0 = typeof $P0
     is($S0, 'WmlsInteger')
 .end
 
 .sub 'check_defined'
     .const 'WmlsFloat' K = '3.14'
-    $S0 = K
-    is($S0, '3.14', "check defined")
+    $N0 = K
+    is($N0, 3.14, "check defined")
     $P0 = defined K
     $S0 = $P0
     is($S0, 'true')
@@ -84,8 +84,8 @@ Tests C<WmlsFloat> PMC
 
 .sub 'check_box'
     $P0 = box 3.14
-    $S0 = $P0
-    is($S0, '3.14', "check box")
+    $N0 = $P0
+    is($N0, 3.14, "check box")
     $S0 = typeof $P0
     is($S0, 'WmlsFloat')
 .end

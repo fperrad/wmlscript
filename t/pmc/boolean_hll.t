@@ -36,7 +36,7 @@ Tests C<WmlsBoolean> PMC
     $S0 = $P0
     is($S0, 'true', "check HLL")
     $I0 = isa $P0, 'WmlsBoolean'
-    is($I0, 1)
+    ok($I0)
 .end
 
 .sub 'check_istrue'
@@ -55,8 +55,8 @@ Tests C<WmlsBoolean> PMC
     $S0 = K
     is($S0, 'true', "check typeof")
     $P0 = typeof K
-    $S0 = $P0
-    is($S0, 3)
+    $I0 = $P0
+    is($I0, 3)
     $S0 = typeof $P0
     is($S0, 'WmlsInteger')
 .end
