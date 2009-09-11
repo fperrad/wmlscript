@@ -22,10 +22,10 @@ See "WMLScript Standard Libraries Specification".
 =cut
 
 .sub 'load_stdlibs'
-    load_bytecode 'library/wmlslang.pbc'
-    load_bytecode 'library/wmlsfloat.pbc'
-    load_bytecode 'library/wmlsstring.pbc'
-    load_bytecode 'library/wmlsconsole.pbc'
+    load_bytecode 'wmlslang.pbc'
+    load_bytecode 'wmlsfloat.pbc'
+    load_bytecode 'wmlsstring.pbc'
+    load_bytecode 'wmlsconsole.pbc'
 
     new $P0, 'Hash'
     $P1 = getLang()

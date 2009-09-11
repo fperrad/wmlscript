@@ -61,10 +61,10 @@ DOCS := README
 PBCS := \
  wmlsi.pbc \
  wmlsd.pbc \
- library/wmlslang.pbc \
- library/wmlsfloat.pbc \
- library/wmlsstring.pbc \
- library/wmlsconsole.pbc
+ wmlscript/library/wmlslang.pbc \
+ wmlscript/library/wmlsfloat.pbc \
+ wmlscript/library/wmlsstring.pbc \
+ wmlscript/library/wmlsconsole.pbc
 
 GEN_PIR := \
  src/opcode.pir \
@@ -108,17 +108,17 @@ src/opcode.pir: src/translation.rules build/translator.pl \
 src/stdlibs.pir: src/wmlslibs.cfg build/stdlibs.pl
 	$(PERL) build/stdlibs.pl --output src/stdlibs.pir src/wmlslibs.cfg
 
-library/wmlslang.pbc: $(LIBPATH)/wmlslang.pir
-	$(PARROT) --output=library/wmlslang.pbc $(LIBPATH)/wmlslang.pir
+wmlscript/library/wmlslang.pbc: $(LIBPATH)/wmlslang.pir
+	$(PARROT) --output=wmlscript/library/wmlslang.pbc $(LIBPATH)/wmlslang.pir
 
-library/wmlsfloat.pbc: $(LIBPATH)/wmlsfloat.pir
-	$(PARROT) --output=library/wmlsfloat.pbc $(LIBPATH)/wmlsfloat.pir
+wmlscript/library/wmlsfloat.pbc: $(LIBPATH)/wmlsfloat.pir
+	$(PARROT) --output=wmlscript/library/wmlsfloat.pbc $(LIBPATH)/wmlsfloat.pir
 
-library/wmlsstring.pbc: $(LIBPATH)/wmlsstring.pir
-	$(PARROT) --output=library/wmlsstring.pbc $(LIBPATH)/wmlsstring.pir
+wmlscript/library/wmlsstring.pbc: $(LIBPATH)/wmlsstring.pir
+	$(PARROT) --output=wmlscript/library/wmlsstring.pbc $(LIBPATH)/wmlsstring.pir
 
-library/wmlsconsole.pbc: $(LIBPATH)/wmlsconsole.pir
-	$(PARROT) --output=library/wmlsconsole.pbc $(LIBPATH)/wmlsconsole.pir
+wmlscript/library/wmlsconsole.pbc: $(LIBPATH)/wmlsconsole.pir
+	$(PARROT) --output=wmlscript/library/wmlsconsole.pbc $(LIBPATH)/wmlsconsole.pir
 
 installable: installable_wmlsi@exe@ installable_wmlsd@exe@
 
@@ -226,7 +226,7 @@ install: installable
 	$(CP) *.pbc $(LIB_DIR)/languages/wmlscript
 	$(CP) wmlscript/*.pbc $(LIB_DIR)/languages/wmlscript
 	-$(MKPATH) $(LIB_DIR)/languages/wmlscript/library
-	$(CP) library/*.pbc $(LIB_DIR)/languages/wmlscript/library
+	$(CP) wmlscript/library/*.pbc $(LIB_DIR)/languages/wmlscript/library
 	-$(MKPATH) $(MANDIR)/man1
 	$(POD2MAN) wmlsi.pir > $(MANDIR)/man1/parrot-wmlsi.1
 	$(POD2MAN) wmlsd.pir > $(MANDIR)/man1/parrot-wmlsd.1
@@ -276,7 +276,7 @@ BUILD_CLEANERS := \
 #IF(win32):  parrot-wmlscript.iss \
 #IF(win32):  "setup-parrot-*.exe" \
  "wmlscript/*.pbc" \
- "library/*.pbc"
+ "wmlscript/library/*.pbc"
 
 clean:
 	$(MAKE) $(OPS_DIR) clean
