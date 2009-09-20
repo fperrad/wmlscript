@@ -76,7 +76,7 @@ build: \
  wmlscript/wmlscript.pbc \
  $(PBCS)
 
-all: build wmlsi@exe@ wmlsd@exe@ installable
+all: build installable
 
 $(WMLSCRIPT_GROUP): $(PMC_DEPS)
 	$(MAKE) $(PMC_DIR)
@@ -87,14 +87,8 @@ $(WMLSCRIPT_OPS): $(OPS_DEPS)
 wmlsi.pbc: wmlsi.pir
 	$(PARROT) $(PARROT_ARGS) -o wmlsi.pbc wmlsi.pir
 
-wmlsi@exe@: wmlsi.pbc
-	$(PBC_TO_EXE) wmlsi.pbc
-
 wmlsd.pbc: wmlsd.pir
 	$(PARROT) $(PARROT_ARGS) -o wmlsd.pbc wmlsd.pir
-
-wmlsd@exe@: wmlsd.pbc
-	$(PBC_TO_EXE) wmlsd.pbc
 
 wmlscript/wmlscript.pbc: src/WMLScript.pir \
  src/script.pir src/wmlsstdlibs.pir $(GEN_PIR)
@@ -138,7 +132,7 @@ help:
 	@echo ""
 	@echo "  build:             wmlsi.pbc, wmlsd.pbc"
 	@echo "                     This is the default."
-	@echo "  all:               wmlsi.pbc wmlsi@exe@ wmlsd.pbc wmlsd@exe@ installable"
+	@echo "  all:               wmlsi.pbc wmlsd.pbc installable"
 	@echo "  installable:       Create libs and self-hosting binaries to be installed."
 	@echo "  install:           Install the installable targets and docs."
 	@echo ""
@@ -223,7 +217,6 @@ install: installable
 	$(CP) installable_wmlsd@exe@ $(BIN_DIR)/parrot-wmlsd@exe@
 	$(CHMOD) 0755 $(BIN_DIR)/parrot-wmlsd@exe@
 	-$(MKPATH) $(LIB_DIR)/languages/wmlscript
-	$(CP) *.pbc $(LIB_DIR)/languages/wmlscript
 	$(CP) wmlscript/*.pbc $(LIB_DIR)/languages/wmlscript
 	-$(MKPATH) $(LIB_DIR)/languages/wmlscript/library
 	$(CP) wmlscript/library/*.pbc $(LIB_DIR)/languages/wmlscript/library
@@ -269,8 +262,8 @@ BUILD_CLEANERS := \
  "*.pbc" \
  "*.c" \
  "*$(O)" \
- wmlsi@exe@ installable_wmlsi@exe@ \
- wmlsd@exe@ installable_wmlsd@exe@ \
+ installable_wmlsi@exe@ \
+ installable_wmlsd@exe@ \
 #IF(win32): parrot-wmlsi.exe \
 #IF(win32): parrot-wmlsd.exe \
 #IF(win32):  parrot-wmlscript.iss \

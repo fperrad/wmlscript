@@ -6,8 +6,6 @@ Makefile
 *.exe
 *.iss
 
-wmlsi
-wmlsd
 installable_*
 
 man
