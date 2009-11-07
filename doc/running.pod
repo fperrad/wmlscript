@@ -30,7 +30,7 @@ Retrieve WMLScript
 Configure & build WMLScript
 
   cd languages/wmlscript
-  perl Configure.pl
+  parrot Configure.pir
   make
 
 =head2 Running the whole test suite

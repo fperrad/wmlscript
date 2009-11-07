@@ -35,13 +35,13 @@ There are 4 applications :
 
 =over 4
 
-=item * F<languages/WMLScript/wmlsd.pir> : a disassembler
+=item * F<wmlsd.pir> : a disassembler
 
-=item * F<languages/WMLScript/wmls2pir.pir> : a PIR translator
+=item * F<wmls2pir.pir> : a PIR translator
 
-=item * F<languages/WMLScript/wmls2pbc.pir> : a PIR translator & PBC compiler
+=item * F<wmls2pbc.pir> : a PIR translator & PBC compiler
 
-=item * F<languages/WMLScript/wmlsi.pir> : an interpreter
+=item * F<wmlsi.pir> : an interpreter
 
 =back
 
@@ -62,21 +62,21 @@ There are five types in WMLScript, each of them is implemented by a PMC.
 
 =over 4
 
-=item * Integer F<languages/WMLScript/pmc/wmlsinteger.pmc>
+=item * Integer F<dynext/pmc/wmlsinteger.pmc>
 
-=item * Floating-Point F<languages/WMLScript/pmc/wmlsfloat.pmc>
+=item * Floating-Point F<dynext/pmc/wmlsfloat.pmc>
 
-=item * String F<languages/WMLScript/pmc/wmlsstring.pmc>
+=item * String F<dynext/pmc/wmlsstring.pmc>
 
-=item * Boolean F<languages/WMLScript/pmc/wmlsboolean.pmc>
+=item * Boolean F<dynext/pmc/wmlsboolean.pmc>
 
-=item * Invalid F<languages/WMLScript/pmc/wmlsinvalid.pmc>
+=item * Invalid F<dynext/pmc/wmlsinvalid.pmc>
 
 =back
 
 =head2 WMLScript Ops
 
-F<languages/WMLScript/ops/wmls.ops> defines opcode with new signature.
+F<dynext/ops/wmls.ops> defines opcode with new signature.
 
 =head2 WMLScript Standard Libraries
 
@@ -84,17 +84,17 @@ Some of these libraries are implemented in :
 
 =over 4
 
-=item * Lang F<languages/WMLScript/runtime/wmlslang.pir>
+=item * Lang F<wmlscript/library/wmlslang.pir>
 
-=item * Float F<languages/WMLScript/runtime/wmlsfloat.pir>
+=item * Float F<wmlscript/library/wmlsfloat.pir>
 
-=item * String F<languages/WMLScript/runtime/wmlsstring.pir>
+=item * String F<wmlscript/library/wmlsstring.pir>
 
-=item * Console F<languages/WMLScript/runtime/wmlsconsole.pir>
+=item * Console F<wmlscript/library/wmlsconsole.pir>
 
 =back
 
-F<languages/WMLScript/src/wmlsstdlibs.pir> gives an unique entry point
+F<wmlscript/wmlsstdlibs.pir> gives an unique entry point
 and implements some helpers.
 
 =head3 TODO
