@@ -276,8 +276,8 @@ Returns a Parrot string representation of the number.
 
     MULTI PMC* subtract(WmlsString value, PMC* dest) {
         PMC *trans;
-        Parrot_pcc_invoke_method_from_c_args(interp, value, Parrot_str_new_constant(interp, "parseFloat"),
-            "->P", &trans);
+        Parrot_pcc_invoke_method_from_c_args(interp, value,
+                Parrot_str_new_constant(interp, "parseFloat"), "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
             const FLOATVAL result = SELF.get_number()
@@ -313,8 +313,8 @@ Returns a Parrot string representation of the number.
 
     MULTI void i_subtract(WmlsString value) {
         PMC *trans;
-        Parrot_pcc_invoke_method_from_c_args(interp, value, Parrot_str_new_constant(interp, "parseFloat"),
-            "->P", &trans);
+        Parrot_pcc_invoke_method_from_c_args(interp, value,
+                Parrot_str_new_constant(interp, "parseFloat"), "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
             const FLOATVAL result = SELF.get_number()
@@ -365,8 +365,8 @@ Returns a Parrot string representation of the number.
 
     MULTI PMC* multiply(WmlsString value, PMC* dest) {
         PMC *trans;
-        Parrot_pcc_invoke_method_from_c_args(interp, value, Parrot_str_new_constant(interp, "parseFloat"),
-            "->P", &trans);
+        Parrot_pcc_invoke_method_from_c_args(interp, value,
+                Parrot_str_new_constant(interp, "parseFloat"), "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
             const FLOATVAL result = SELF.get_number()
@@ -402,8 +402,8 @@ Returns a Parrot string representation of the number.
 
     MULTI void i_multiply(WmlsString value) {
         PMC *trans;
-        Parrot_pcc_invoke_method_from_c_args(interp, value, Parrot_str_new_constant(interp, "parseFloat"),
-            "->P", &trans);
+        Parrot_pcc_invoke_method_from_c_args(interp, value,
+                Parrot_str_new_constant(interp, "parseFloat"), "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
             const FLOATVAL result = SELF.get_number()
@@ -463,8 +463,8 @@ Returns a Parrot string representation of the number.
 
     MULTI PMC* divide(WmlsString value, PMC* dest) {
         PMC *trans;
-        Parrot_pcc_invoke_method_from_c_args(interp, value, Parrot_str_new_constant(interp, "parseFloat"),
-            "->P", &trans);
+        Parrot_pcc_invoke_method_from_c_args(interp, value,
+                Parrot_str_new_constant(interp, "parseFloat"), "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
             const FLOATVAL d = VTABLE_get_number(INTERP, trans);
@@ -517,8 +517,8 @@ Returns a Parrot string representation of the number.
 
     MULTI void i_divide(WmlsString value) {
         PMC *trans;
-        Parrot_pcc_invoke_method_from_c_args(interp, value, Parrot_str_new_constant(interp, "parseFloat"),
-            "->P", &trans);
+        Parrot_pcc_invoke_method_from_c_args(interp, value,
+                Parrot_str_new_constant(interp, "parseFloat"), "->P", &trans);
 
         if (trans->vtable->base_type == dynpmc_WmlsFloat) {
             const FLOATVAL d = VTABLE_get_number(INTERP, trans);
