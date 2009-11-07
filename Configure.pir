@@ -20,8 +20,8 @@
     # Here, do the job
     push_eh _handler
     genfile('Makefile.in', 'Makefile', config)
-    genfile('src/ops/Makefile.in', 'src/ops/Makefile', config)
-    genfile('src/pmc/Makefile.in', 'src/pmc/Makefile', config)
+    genfile('dynext/ops/Makefile.in', 'dynext/ops/Makefile', config)
+    genfile('dynext/pmc/Makefile.in', 'dynext/pmc/Makefile', config)
     pop_eh
 
     # Give the user a hint of next action

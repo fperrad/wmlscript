@@ -12,33 +12,31 @@ man
 *.tmp
 *.sto
 
-src/*.pbc
-src/opcode.pir
-src/stdlibs.pir
+wmlscript/*.pbc
+wmlscript/opcode.pir
+wmlscript/stdlibs.pir
+wmlscript/library/*.pbc
 
-src/ops/*.bundle
-src/ops/*.c
-src/ops/*.dll
-src/ops/*.h
-src/ops/*.o
-src/ops/*.obj
-src/ops/*.so
+dynext/ops/*.bundle
+dynext/ops/*.c
+dynext/ops/*.dll
+dynext/ops/*.h
+dynext/ops/*.o
+dynext/ops/*.obj
+dynext/ops/*.so
 
-src/pmc/*.bundle
-src/pmc/*.c
-src/pmc/*.dll
-src/pmc/*.dump
-src/pmc/*.h
-src/pmc/*.o
-src/pmc/*.obj
-src/pmc/*.pdb
-src/pmc/*.so
-
-src/runtime/*.pbc
+dynext/pmc/*.bundle
+dynext/pmc/*.c
+dynext/pmc/*.dll
+dynext/pmc/*.dump
+dynext/pmc/*.h
+dynext/pmc/*.o
+dynext/pmc/*.obj
+dynext/pmc/*.pdb
+dynext/pmc/*.so
 
 t/*.out
 t/*.pbc
 t/*.pir
 t/*.wmls
 t/*.wmlsc
-t/pmc/*.pir

@@ -58,7 +58,7 @@ OBJS := \
   wmlsbytecode$(O)
 
 CLEANUPS := \
-  "*$(LOAD_EXT)" \
+  "../*$(LOAD_EXT)" \
   "*$(O)" \
   "*.c" \
   "*.h" \
@@ -68,10 +68,9 @@ CLEANUPS := \
 #IF(win32):  "*.manifext" \
 #IF(win32):  "*.pdb" \
 #IF(win32):  "*.lib" \
-  $(STAGING_DIR)/$(WMLSCRIPT_GROUP)$(LOAD_EXT)
 
 
-all: staging
+all: linklibs
 
 generate: $(PMC_SOURCES)
 	$(PMC2CD) wmlsinteger.pmc
@@ -98,16 +97,12 @@ compile: generate
 	$(CC) $(CC_OUT) lib-$(WMLSCRIPT_GROUP)$(O) $(INCLUDES) $(CFLAGS) $(WMLSCRIPT_GROUP).c
 
 linklibs: compile
-	$(LD) $(LD_OUT) $(WMLSCRIPT_GROUP)$(LOAD_EXT) $(OBJS) $(LINKARGS)
-
-staging: linklibs
-#IF(cygwin or hpux):	CHMOD 0775 "*$(LOAD_EXT)"
-	$(CP) "*$(LOAD_EXT)" $(STAGING_DIR)
+	$(LD) $(LD_OUT) ../$(WMLSCRIPT_GROUP)$(LOAD_EXT) $(OBJS) $(LINKARGS)
 
 install:
 	$(MKPATH) $(INSTALL_DIR)
 #IF(cygwin or hpux):	CHMOD 0775 "*$(LOAD_EXT)"
-	$(CP) "*$(LOAD_EXT)" $(INSTALL_DIR)
+	$(CP) "../*$(LOAD_EXT)" $(INSTALL_DIR)
 
 uninstall:
 	$(RM_F) $(INSTALL_DIR)/$(WMLSCRIPT_GROUP)$(LOAD_EXT)

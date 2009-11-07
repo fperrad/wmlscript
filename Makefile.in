@@ -16,9 +16,9 @@ LOAD_EXT      := @load_ext@
 O             := @o@
 
 # Various paths
-PMC_DIR       := src/pmc
-OPS_DIR       := src/ops
-LIBPATH       := src/runtime
+PMC_DIR       := dynext/pmc
+OPS_DIR       := dynext/ops
+LIBPATH       := wmlscript/library
 
 ## Setup some commands
 MAKE          := @make_c@
@@ -39,8 +39,8 @@ PBC_TO_EXE    := ../../pbc_to_exe@exe@
 
 SRM := Stack
 
-WMLSCRIPT_GROUP := $(PMC_DIR)/wmls_group$(LOAD_EXT)
-WMLSCRIPT_OPS := $(OPS_DIR)/wmls_ops$(LOAD_EXT)
+WMLSCRIPT_GROUP := dynext/wmls_group$(LOAD_EXT)
+WMLSCRIPT_OPS := dynext/wmls_ops$(LOAD_EXT)
 
 PMC_DEPS := \
  $(PMC_DIR)/Makefile.in \
@@ -60,14 +60,14 @@ DOCS := README
 PBCS := \
  wmlsi.pbc \
  wmlsd.pbc \
- wmlscript/library/wmlslang.pbc \
- wmlscript/library/wmlsfloat.pbc \
- wmlscript/library/wmlsstring.pbc \
- wmlscript/library/wmlsconsole.pbc
+ $(LIBPATH)/wmlslang.pbc \
+ $(LIBPATH)/wmlsfloat.pbc \
+ $(LIBPATH)/wmlsstring.pbc \
+ $(LIBPATH)/wmlsconsole.pbc
 
 GEN_PIR := \
- src/opcode.pir \
- src/stdlibs.pir
+ wmlscript/opcode.pir \
+ wmlscript/stdlibs.pir
 
 build: \
  $(WMLSCRIPT_OPS) \
@@ -89,29 +89,29 @@ wmlsi.pbc: wmlsi.pir
 wmlsd.pbc: wmlsd.pir
 	$(PARROT) $(PARROT_ARGS) -o wmlsd.pbc wmlsd.pir
 
-wmlscript/wmlscript.pbc: src/WMLScript.pir \
- src/script.pir src/wmlsstdlibs.pir $(GEN_PIR)
-	$(PARROT) -o wmlscript/wmlscript.pbc src/WMLScript.pir
+wmlscript/wmlscript.pbc: wmlscript/WMLScript.pir \
+ wmlscript/script.pir wmlscript/wmlsstdlibs.pir $(GEN_PIR)
+	$(PARROT) -o wmlscript/wmlscript.pbc wmlscript/WMLScript.pir
 
-src/opcode.pir: src/translation.rules build/translator.pl \
+wmlscript/opcode.pir: wmlscript/translation.rules build/translator.pl \
  build/SRM/Stack.pm build/SRM/Register.pm
-	$(PERL) build/translator.pl --output src/opcode.pir --srm $(SRM) \
-	  src/translation.rules
+	$(PERL) build/translator.pl --output wmlscript/opcode.pir --srm $(SRM) \
+	  wmlscript/translation.rules
 
-src/stdlibs.pir: src/wmlslibs.cfg build/stdlibs.pl
-	$(PERL) build/stdlibs.pl --output src/stdlibs.pir src/wmlslibs.cfg
+wmlscript/stdlibs.pir: wmlscript/wmlslibs.cfg build/stdlibs.pl
+	$(PERL) build/stdlibs.pl --output wmlscript/stdlibs.pir wmlscript/wmlslibs.cfg
 
-wmlscript/library/wmlslang.pbc: $(LIBPATH)/wmlslang.pir
-	$(PARROT) --output=wmlscript/library/wmlslang.pbc $(LIBPATH)/wmlslang.pir
+$(LIBPATH)/wmlslang.pbc: $(LIBPATH)/wmlslang.pir
+	$(PARROT) --output=$(LIBPATH)/wmlslang.pbc $(LIBPATH)/wmlslang.pir
 
-wmlscript/library/wmlsfloat.pbc: $(LIBPATH)/wmlsfloat.pir
-	$(PARROT) --output=wmlscript/library/wmlsfloat.pbc $(LIBPATH)/wmlsfloat.pir
+$(LIBPATH)/wmlsfloat.pbc: $(LIBPATH)/wmlsfloat.pir
+	$(PARROT) --output=$(LIBPATH)/wmlsfloat.pbc $(LIBPATH)/wmlsfloat.pir
 
-wmlscript/library/wmlsstring.pbc: $(LIBPATH)/wmlsstring.pir
-	$(PARROT) --output=wmlscript/library/wmlsstring.pbc $(LIBPATH)/wmlsstring.pir
+$(LIBPATH)/wmlsstring.pbc: $(LIBPATH)/wmlsstring.pir
+	$(PARROT) --output=$(LIBPATH)/wmlsstring.pbc $(LIBPATH)/wmlsstring.pir
 
-wmlscript/library/wmlsconsole.pbc: $(LIBPATH)/wmlsconsole.pir
-	$(PARROT) --output=wmlscript/library/wmlsconsole.pbc $(LIBPATH)/wmlsconsole.pir
+$(LIBPATH)/wmlsconsole.pbc: $(LIBPATH)/wmlsconsole.pir
+	$(PARROT) --output=$(LIBPATH)/wmlsconsole.pbc $(LIBPATH)/wmlsconsole.pir
 
 installable: installable_wmlsi@exe@ installable_wmlsd@exe@
 
@@ -153,11 +153,11 @@ test: all
 
 codetest: codetest-c codetest-make codetest-perl codetest-pir codetest-pod
 
-T_C     := src//pmc//*.pmc src//ops//*.ops
-T_MAKE  := Makefile.in src//ops//Makefile.in src//pmc//Makefile.in
+T_C     := dynext//pmc//*.pmc dynext//ops//*.ops
+T_MAKE  := Makefile.in dynext//ops//Makefile.in dynext//pmc//Makefile.in
 T_PERL  := t//harness t//*.t t//Parrot//Test//*.pm \
           build//*.pl build//SRM//*.pm
-T_PIR   := *.pir src//*.pir src//runtime//*.pir t//pmc//*.t
+T_PIR   := *.pir wmlscript//*.pir wmlscript//library//*.pir t//pmc//*.t
 T_POD   := doc//*.pod
 
 codetest-c:
