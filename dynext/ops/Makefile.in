@@ -56,14 +56,14 @@ compile: generate
 #IF(cg_flag):	$(CC) $(CC_OUT) wmls_ops_cgp$(O) $(INCLUDES) $(CFLAGS) wmls_ops_cgp.c
 
 linklibs: compile
-	$(LD) $(LD_OUT) ../wmls_ops$(LOAD_EXT) wmls_ops$(O) $(LINKARGS)
-	$(LD) $(LD_OUT) ../wmls_ops_switch$(LOAD_EXT) wmls_ops_switch$(O) $(LINKARGS)
-#IF(cg_flag):	$(LD) $(LD_OUT) ../wmls_ops_cg$(LOAD_EXT) wmls_ops_cg$(O) $(LINKARGS)
-#IF(cg_flag):	$(LD) $(LD_OUT) ../wmls_ops_cgp$(LOAD_EXT) wmls_ops_cgp$(O) $(LINKARGS)
+	$(LD) $(LD_OUT)../wmls_ops$(LOAD_EXT) wmls_ops$(O) $(LINKARGS)
+	$(LD) $(LD_OUT)../wmls_ops_switch$(LOAD_EXT) wmls_ops_switch$(O) $(LINKARGS)
+#IF(cg_flag):	$(LD) $(LD_OUT)../wmls_ops_cg$(LOAD_EXT) wmls_ops_cg$(O) $(LINKARGS)
+#IF(cg_flag):	$(LD) $(LD_OUT)../wmls_ops_cgp$(LOAD_EXT) wmls_ops_cgp$(O) $(LINKARGS)
 
 install:
 	$(MKPATH) $(INSTALL_DIR)
-#IF(cygwin or hpux):	CHMOD 0775 "*$(LOAD_EXT)"
+#IF(cygwin or hpux):	CHMOD 0775 "../*$(LOAD_EXT)"
 	$(CP) "../*$(LOAD_EXT)" $(INSTALL_DIR)
 
 uninstall:

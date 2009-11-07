@@ -97,11 +97,11 @@ compile: generate
 	$(CC) $(CC_OUT) lib-$(WMLSCRIPT_GROUP)$(O) $(INCLUDES) $(CFLAGS) $(WMLSCRIPT_GROUP).c
 
 linklibs: compile
-	$(LD) $(LD_OUT) ../$(WMLSCRIPT_GROUP)$(LOAD_EXT) $(OBJS) $(LINKARGS)
+	$(LD) $(LD_OUT)../$(WMLSCRIPT_GROUP)$(LOAD_EXT) $(OBJS) $(LINKARGS)
 
 install:
 	$(MKPATH) $(INSTALL_DIR)
-#IF(cygwin or hpux):	CHMOD 0775 "*$(LOAD_EXT)"
+#IF(cygwin or hpux):	CHMOD 0775 "../*$(LOAD_EXT)"
 	$(CP) "../*$(LOAD_EXT)" $(INSTALL_DIR)
 
 uninstall:
