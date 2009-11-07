@@ -30,8 +30,8 @@ MKPATH        := @mkpath@
 RM_F          := @rm_f@
 RM_RF         := @rm_rf@
 POD2MAN       := pod2man
-PARROT        := ../../parrot@exe@
-PBC_TO_EXE    := ../../pbc_to_exe@exe@
+PARROT        := $(BIN_DIR)/parrot@exe@
+PBC_TO_EXE    := $(BIN_DIR)/pbc_to_exe@exe@
 #IF(darwin):
 #IF(darwin):# MACOSX_DEPLOYMENT_TARGET must be defined for OS X compilation/linking
 #IF(darwin):export MACOSX_DEPLOYMENT_TARGET := @osx_version@
@@ -150,7 +150,7 @@ help:
 test: all
 	$(PERL) t/harness
 
-pmctest: all
+pmctest: build
 	prove --exec=$(PARROT) t/pmc//*.t
 
 codetest: codetest-c codetest-make codetest-perl codetest-pir codetest-pod
