@@ -17,23 +17,22 @@ wmlscript/opcode.pir
 wmlscript/stdlibs.pir
 wmlscript/library/*.pbc
 
+dynext/*.dll
+dynext/*.so
+
 dynext/ops/*.bundle
 dynext/ops/*.c
-dynext/ops/*.dll
 dynext/ops/*.h
 dynext/ops/*.o
 dynext/ops/*.obj
-dynext/ops/*.so
 
 dynext/pmc/*.bundle
 dynext/pmc/*.c
-dynext/pmc/*.dll
 dynext/pmc/*.dump
 dynext/pmc/*.h
 dynext/pmc/*.o
 dynext/pmc/*.obj
 dynext/pmc/*.pdb
-dynext/pmc/*.so
 
 t/*.out
 t/*.pbc

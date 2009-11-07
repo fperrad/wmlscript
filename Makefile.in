@@ -151,6 +151,9 @@ help:
 test: all
 	$(PERL) t/harness
 
+pmctest: all
+	prove --exec=$(PARROT) t/pmc//*.t
+
 codetest: codetest-c codetest-make codetest-perl codetest-pir codetest-pod
 
 T_C     := dynext//pmc//*.pmc dynext//ops//*.ops

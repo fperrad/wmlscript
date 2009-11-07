@@ -22,11 +22,9 @@ Tests C<WmlsString> PMC
 .sub 'main' :main
     .include 'test_more.pir'
 
-    plan(17)
+    plan(13)
 
     check_HLL()
-    check_HLL_const()
-    check_empty_string()
     check_istrue()
     check_typeof()
     check_defined()
@@ -41,45 +39,34 @@ Tests C<WmlsString> PMC
     isa_ok($P0, 'WmlsString')
 .end
 
-.sub 'check_HLL_const'
-    .const 'WmlsString' K = "simple string"
-    $S0 = K
-    is($S0, "simple string", "check HLL & .const")
-    isa_ok(K, 'WmlsString')
-.end
-
-.sub 'check_empty_string'
-    .const 'WmlsString' K = ''
-    $S0 = K
-    is($S0, '', "check empty string")
-    isa_ok(K, 'WmlsString')
-.end
-
 .sub 'check_istrue'
-    .const 'WmlsString' K = "simple string"
-    $S0 = K
+    $P1 = new 'WmlsString'
+    set $P1, "simple string"
+    $S0 = $P1
     is($S0, "simple string", "check istrue")
-    $P0 = istrue K
+    $P0 = istrue $P1
     $S0 = $P0
     is($S0, 'true')
     isa_ok($P0, 'WmlsBoolean')
 .end
 
 .sub 'check_typeof'
-    .const 'WmlsString' K = "simple string"
-    $S0 = K
+    $P1 = new 'WmlsString'
+    set $P1, "simple string"
+    $S0 = $P1
     is($S0, "simple string", "check typeof")
-    $P0 = typeof K
+    $P0 = typeof $P1
     $I0 = $P0
     is($I0, 2)
     isa_ok($P0, 'WmlsInteger')
 .end
 
 .sub 'check_defined'
-    .const 'WmlsString' K = "simple string"
-    $S0 = K
+    $P1 = new 'WmlsString'
+    set $P1, "simple string"
+    $S0 = $P1
     is($S0, "simple string", "check defined")
-    $P0 = defined K
+    $P0 = defined $P1
     $S0 = $P0
     is($S0, 'true')
     isa_ok($P0, 'WmlsBoolean')

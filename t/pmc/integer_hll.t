@@ -22,10 +22,9 @@ Tests C<WmlsInteger> PMC
 .sub 'main' :main
     .include 'test_more.pir'
 
-    plan(15)
+    plan(13)
 
     check_HLL()
-    check_HLL_const()
     check_istrue()
     check_typeof()
     check_defined()
@@ -40,38 +39,34 @@ Tests C<WmlsInteger> PMC
     isa_ok($P0, 'WmlsInteger')
 .end
 
-.sub 'check_HLL_const'
-    .const 'WmlsInteger' K = '42'
-    $I0 = K
-    is($I0, 42, "check HLL & .const")
-    isa_ok(K, 'WmlsInteger')
-.end
-
 .sub 'check_istrue'
-    .const 'WmlsInteger' K = '42'
-    $I0 = K
+    $P1 = new 'WmlsInteger'
+    set $P1, 42
+    $I0 = $P1
     is($I0, 42, "check istrue")
-    $P0 = istrue K
+    $P0 = istrue $P1
     $S0 = $P0
     is($S0, 'true')
     isa_ok($P0, 'WmlsBoolean')
 .end
 
 .sub 'check_typeof'
-    .const 'WmlsInteger' K = '42'
-    $I0 = K
+    $P1 = new 'WmlsInteger'
+    set $P1, 42
+    $I0 = $P1
     is($I0, 42, "check typeof")
-    $P0 = typeof K
+    $P0 = typeof $P1
     $I0 = $P0
     is($I0, 0)
     isa_ok($P0, 'WmlsInteger')
 .end
 
 .sub 'check_defined'
-    .const 'WmlsInteger' K = '42'
-    $I0 = K
+    $P1 = new 'WmlsInteger'
+    set $P1, 42
+    $I0 = $P1
     is($I0, 42, "check defined")
-    $P0 = defined K
+    $P0 = defined $P1
     $S0 = $P0
     is($S0, 'true')
     isa_ok($P0, 'WmlsBoolean')
