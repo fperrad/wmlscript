@@ -43,7 +43,7 @@ WMLSCRIPT_GROUP := $(PMC_DIR)/wmls_group$(LOAD_EXT)
 WMLSCRIPT_OPS := $(OPS_DIR)/wmls_ops$(LOAD_EXT)
 
 PMC_DEPS := \
- config/makefiles/pmc.in \
+ $(PMC_DIR)/Makefile.in \
  $(PMC_DIR)/wmlsinteger.pmc \
  $(PMC_DIR)/wmlsfloat.pmc \
  $(PMC_DIR)/wmlsstring.pmc \
@@ -52,7 +52,7 @@ PMC_DEPS := \
  $(PMC_DIR)/wmlsbytecode.pmc
 
 OPS_DEPS := \
- config/makefiles/ops.in \
+ $(OPS_DIR)/Makefile.in \
  $(OPS_DIR)/wmls.ops
 
 DOCS := README
@@ -122,8 +122,8 @@ installable_wmlsd@exe@: wmlsd.pbc
 	$(PBC_TO_EXE) wmlsd.pbc --install
 
 # regenerate the Makefile
-Makefile: config/makefiles/root.in
-	$(PERL) Configure.pl
+Makefile: Makefile.in
+	$(PARROT) Configure.pir
 
 help:
 	@echo ""
@@ -154,8 +154,8 @@ test: all
 codetest: codetest-c codetest-make codetest-perl codetest-pir codetest-pod
 
 T_C     := src//pmc//*.pmc src//ops//*.ops
-T_MAKE  := config//makefiles//root.in config//makefiles//ops.in config//makefiles//pmc.in
-T_PERL  := Configure.pl t//harness t//*.t t//Parrot//Test//*.pm \
+T_MAKE  := Makefile.in src//ops//Makefile.in src//pmc//Makefile.in
+T_PERL  := t//harness t//*.t t//Parrot//Test//*.pm \
           build//*.pl build//SRM//*.pm
 T_PIR   := *.pir src//*.pir src//runtime//*.pir t//pmc//*.t
 T_POD   := doc//*.pod

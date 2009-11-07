@@ -112,8 +112,8 @@ install:
 uninstall:
 	$(RM_F) $(INSTALL_DIR)/$(WMLSCRIPT_GROUP)$(LOAD_EXT)
 
-Makefile: ../../config/makefiles/pmc.in
-	cd ../.. && $(PERL) Configure.pl
+Makefile: Makefile.in
+	cd ../.. && $(PARROT) Configure.pir
 
 clean:
 	$(RM_F) $(CLEANUPS)

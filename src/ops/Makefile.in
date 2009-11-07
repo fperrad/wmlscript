@@ -75,8 +75,8 @@ install:
 uninstall:
 	$(RM_F) "$(INSTALL_DIR)/wmls_ops*$(LOAD_EXT)"
 
-Makefile: ../../config/makefiles/ops.in
-	cd ../.. && $(PERL) Configure.pl
+Makefile: Makefile.in
+	cd ../.. && $(PARROT) Configure.pir
 
 clean:
 	$(RM_F) $(CLEANUPS)
