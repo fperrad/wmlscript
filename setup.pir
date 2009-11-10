@@ -28,6 +28,9 @@ No Configure step, no Makefile generated.
     .const 'Sub' clean = 'clean'
     register_step_before('clean', clean)
 
+    .const 'Sub' pmctest = 'pmctest'
+    register_step('pmctest', pmctest)
+
     # build
     $P0 = new 'Hash'
     $P1 = new 'Hash'
@@ -70,11 +73,6 @@ SOURCES
     $P6['parrot-wmlsd'] = 'wmlsd.pbc'
     $P0['exe_pbc'] = $P6
 
-    # test
-    $S0 = get_parrot()
-    $P0['prove_exec'] = $S0
-    $P0['prove_files'] = 't/pmc/*.t'
-
     # install
     $P7 = split "\n", <<'LIBS'
 wmlscript/wmlscript.pbc
@@ -109,6 +107,7 @@ SOURCES
     cmd .= ' wmlscript/translation.rules'
     system(cmd)
   L1:
+
     $P0 = split ' ', 'wmlscript/wmlslibs.cfg build/stdlibs.pl'
     $I0 = newer('wmlscript/stdlibs.pir', $P0)
     if $I0 goto L2
@@ -125,6 +124,16 @@ SOURCES
     unlink('wmlscript/stdlibs.pir')
 .end
 
+.sub 'pmctest' :anon
+    .param pmc kv :slurpy :named
+    run_step('build', kv :flat :named)
+    .local string cmd
+    cmd = "prove --exec="
+    $S0 = get_parrot()
+    cmd .= $S0
+    cmd .= " t/pmc/*.t"
+    system(cmd)
+.end
 
 # Local Variables:
 #   mode: pir
