@@ -31,8 +31,8 @@ No Configure step, no Makefile generated.
     .const 'Sub' pmctest = 'pmctest'
     register_step('pmctest', pmctest)
 
-    # build
     $P0 = new 'Hash'
+    # build
     $P1 = new 'Hash'
     $P1['wmls_ops'] = 'dynext/ops/wmls.ops'
     $P0['dynops'] = $P1
@@ -71,7 +71,10 @@ SOURCES
     $P6 = new 'Hash'
     $P6['parrot-wmlsi'] = 'wmlsi.pbc'
     $P6['parrot-wmlsd'] = 'wmlsd.pbc'
-    $P0['exe_pbc'] = $P6
+    $P0['installable_pbc'] = $P6
+
+    # test
+    $P0['harness_files'] = ''
 
     # install
     $P7 = split "\n", <<'LIBS'
