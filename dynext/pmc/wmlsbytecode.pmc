@@ -18,13 +18,13 @@ This singleton PMC holds a factory.
 
 static PMC * WmlsBytecode_PMC;
 static PMC * script;
-static const char * bytecode;
+static char * bytecode;
 static UINTVAL maxi;
 static const char *fp;
 
 static void _init(Interp *interp, STRING *str)
 {
-    bytecode = Parrot_string_cstring(interp, str);
+    bytecode = Parrot_str_to_cstring(interp, str);
     maxi     = Parrot_str_byte_length(interp, str);
     fp       = (const char *)bytecode;
 }
@@ -425,9 +425,9 @@ Loads WMLScript bytecode.
 =cut
 
 */
-    METHOD PMC* load(STRING* bytecode) {
-        script = new_wmls(interp, "Script");
-        _init(INTERP, bytecode);
+    METHOD PMC* load(STRING* str) {
+        script = new_wmls(INTERP, "Script");
+        _init(INTERP, str);
         if (_load_header(INTERP))
             goto err;
         if (_load_constant_pool(INTERP))
@@ -436,8 +436,10 @@ Loads WMLScript bytecode.
             goto err;
         if (_load_function_pool(INTERP))
             goto err;
+        Parrot_free_cstring(bytecode);
         RETURN(PMC *script);
 err:
+        Parrot_free_cstring(bytecode);
         RETURN(PMC *NULL);
     }
 
