@@ -1,29 +1,54 @@
-#! perl
+#! /usr/local/bin/parrot
 # Copyright (C) 2006-2009, Parrot Foundation.
-# $Id$
 
 =head1 WMLScript String library
 
 =head2 Synopsis
 
-    % perl t/libstring.t
+    % parrot t/libstring.t
 
 =head2 Description
 
 Tests WMLScript String Library
-(implemented in F<languages/WMLScript/runtime/wmlsstring.pir>).
+(implemented in F<wmlscript/library/wmlsstring.pir>).
 
 =cut
 
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../../lib", "$FindBin::Bin";
+.sub 'main' :main
+    load_bytecode 't/helpers.pir'
 
-use Parrot::Test tests => 24;
-use Test::More;
+    .include 'test_more.pir'
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.length' );
+    plan(24)
+
+    test_length_1()
+    test_length_2()
+    test_isEmpty_1()
+    test_isEmpty_2()
+    test_charAt_1()
+    test_charAt_2()
+    test_charAt_3()
+    test_subString_1()
+    test_subString_2()
+    test_find()
+    test_replace_1()
+    test_replace_2()
+    test_elements_1()
+    test_elements_2()
+    test_elementAt()
+    test_removeAt()
+    test_replaceAt()
+    test_insertAt()
+    test_squeeze()
+    test_trim()
+    test_compare()
+    test_toString_1()
+    test_toString_2()
+    test_format()
+.end
+
+.sub 'test_length_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "ABC";
@@ -40,6 +65,7 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.length")
 3
 0
 0
@@ -47,8 +73,10 @@ CODE
 3
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.length' );
+.sub 'test_length_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var b = String.length(3.14);
@@ -63,14 +91,17 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.length")
 4
 0
 5
 0
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.isEmpty' );
+.sub 'test_isEmpty_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "Hello";
@@ -88,6 +119,7 @@ extern function main()
     Console.println(typeof e);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.isEmpty")
 false
 3
 true
@@ -95,8 +127,10 @@ true
 false
 3
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.isEmpty' );
+.sub 'test_isEmpty_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var b = String.isEmpty(0);
@@ -111,14 +145,17 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.isEmpty")
 false
 3
 false
 3
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.charAt' );
+.sub 'test_charAt_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "My name is Joe";
@@ -138,6 +175,7 @@ extern function main()
     Console.println(typeof e);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.charAt")
 M
 2
 
@@ -146,8 +184,10 @@ M
 2
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.charAt' );
+.sub 'test_charAt_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "string";
@@ -166,6 +206,7 @@ extern function main()
     Console.println(typeof e);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.charAt")
 
 2
 i
@@ -173,8 +214,10 @@ i
 4
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.charAt' );
+.sub 'test_charAt_3'
+     $S0 = <<'CODE'
 extern function main()
 {
     var b = String.charAt(true, 0);
@@ -189,14 +232,17 @@ extern function main()
     Console.println(typeof f);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.charAt")
 t
 2
 .
 2
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.subString' );
+.sub 'test_subString_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "ABCD";
@@ -213,6 +259,7 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.subString")
 BC
 2
 CD
@@ -220,8 +267,10 @@ CD
 12
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.subString' );
+.sub 'test_subString_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "ABCD";
@@ -242,6 +291,7 @@ extern function main()
     Console.println(typeof e);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.subString")
 AB
 2
 
@@ -251,8 +301,10 @@ AB
 
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.find' );
+.sub 'test_find'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "abcde";
@@ -276,6 +328,7 @@ extern function main()
     Console.println(typeof f);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.find")
 2
 0
 -1
@@ -286,8 +339,10 @@ CODE
 0
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.replace' );
+.sub 'test_replace_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "Hello Joe. What is up Joe?";
@@ -302,13 +357,16 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.replace")
 Hello Don. What is up Don?
 2
 Hello Joe. What is up Joe?
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.replace' );
+.sub 'test_replace_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "Hello Joe. What is up Joe?";
@@ -317,10 +375,13 @@ extern function main()
     Console.println(typeof c);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.replace")
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.elements' );
+.sub 'test_elements_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "My name is Joe; Age 50;";
@@ -349,6 +410,7 @@ extern function main()
     Console.println(typeof g);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.elements")
 6
 0
 3
@@ -362,8 +424,10 @@ CODE
 4
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.elements' );
+.sub 'test_elements_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "My name is Joe; Age 50;";
@@ -371,10 +435,13 @@ extern function main()
     Console.println(typeof b);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.elements")
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.elementAt' );
+.sub 'test_elementAt'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "My name is Joe; Age 50;";
@@ -391,6 +458,7 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.elementAt")
 My
 2
 
@@ -398,8 +466,10 @@ My
  Age 50
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.removeAt' );
+.sub 'test_removeAt'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "A A; B C D";
@@ -417,6 +487,7 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.removeAt")
 A B C D
 2
  B C D
@@ -424,8 +495,10 @@ A B C D
 A A
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.replaceAt' );
+.sub 'test_replaceAt'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "B C; E";
@@ -439,13 +512,16 @@ extern function main()
     Console.println(typeof c);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.replaceAt")
 A C; E
 2
 B C;F
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.insertAt' );
+.sub 'test_insertAt'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "B C; E";
@@ -467,6 +543,7 @@ extern function main()
     Console.println(typeof e);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.insertAt")
 A B C; E
 2
 B C; E X
@@ -476,8 +553,10 @@ B C;D; E
 B C; E;F
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.squeeze' );
+.sub 'test_squeeze'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "Hello";
@@ -492,13 +571,16 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.squeeze")
 Hello
 2
  Bye Jon . See you!
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.trim' );
+.sub 'test_trim'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "Hello";
@@ -513,13 +595,16 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.trim")
 Hello
 2
 Bye   Jon .  See you!
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.compare' );
+.sub 'test_compare'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "Hello";
@@ -537,6 +622,7 @@ extern function main()
     Console.println(typeof e);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.compare")
 0
 0
 -1
@@ -544,8 +630,10 @@ CODE
 1
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.toString' );
+.sub 'test_toString_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = String.toString(12);
@@ -557,13 +645,16 @@ extern function main()
     Console.println(typeof b);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.toString")
 12
 2
 true
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.toString' );
+.sub 'test_toString_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = String.toString("str");
@@ -583,6 +674,7 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.toString")
 str
 2
 
@@ -592,8 +684,10 @@ str
 invalid
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'String.format', cflags => '-On' );
+.sub 'test_format'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 45;
@@ -645,6 +739,7 @@ extern function main()
     Console.println(typeof o);
 }
 CODE
+    wmls_is($S0, <<'OUT', "String.format", 'flags'=>"-On")
 e:     45
 2
    -45
@@ -656,11 +751,10 @@ Do it now
 true
 2
 OUT
+.end
 
 # Local Variables:
-#   mode: cperl
-#   cperl-indent-level: 4
+#   mode: pir
 #   fill-column: 100
 # End:
-# vim: expandtab shiftwidth=4:
-
+# vim: expandtab shiftwidth=4 ft=pir:

@@ -1,12 +1,11 @@
 #! perl
 # Copyright (C) 2006-2009, Parrot Foundation.
-# $Id$
 
 =head1 WMLScript literals
 
 =head2 Synopsis
 
-    % perl t/literals.t
+    % parrot t/literals.t
 
 =head2 Description
 
@@ -14,15 +13,26 @@ See "WMLScript Specification", section 6.1.5 "Literals".
 
 =cut
 
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../../lib", "$FindBin::Bin";
+.sub 'main' :main
+    load_bytecode 't/helpers.pir'
 
-use Parrot::Test tests => 9;
-use Test::More;
+    .include 'test_more.pir'
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'decimal integer', cflags => '-On' );
+    plan(9)
+
+    test_decimal_integer()
+    test_hexadecimal_integer()
+    test_octal_integer()
+    test_floating_point()
+    test_string()
+    test_string_with_escape_sequence()
+    test_unicode_string()
+    test_boolean()
+    test_invalid()
+.end
+
+.sub 'test_decimal_integer'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 0;
@@ -33,13 +43,16 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "decimal integer", 'flags'=>"-On")
 0
 0
 -123
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'hexadecimal integer', cflags => '-On' );
+.sub 'test_hexadecimal_integer'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 0xFE;
@@ -47,11 +60,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "hexadecimal integer", 'flags'=>"-On")
 254
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'octal integer', cflags => '-On' );
+.sub 'test_octal_integer'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 033;
@@ -59,11 +75,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "octal integer", 'flags'=>"-On")
 27
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'floating-point', cflags => '-On' );
+.sub 'test_floating_point'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 0.0;
@@ -77,6 +96,7 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "floating-point", 'flags'=>"-On")
 0
 1
 2
@@ -84,8 +104,10 @@ CODE
 -1.23
 1
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'string', cflags => '-On' );
+.sub 'test_string'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "Example";
@@ -93,12 +115,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "string", 'flags'=>"-On")
 Example
 2
 OUT
+.end
 
-language_output_is( 'WMLScript',
-    <<'CODE', <<'OUT', 'string with escape sequence', cflags => '-On' );
+.sub 'test_string_with_escape_sequence'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "Quote: \"";
@@ -112,6 +136,7 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "string with escape sequence", 'flags'=>"-On")
 Quote: "
 2
 Apos: '
@@ -119,8 +144,10 @@ Apos: '
 	Tab
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'unicode string', cflags => '-On' );
+.sub 'test_unicode_string'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "Fran\u00e7ois";
@@ -131,13 +158,16 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "unicode string", 'flags'=>"-On")
 François
 2
 20 €
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'boolean', cflags => '-On' );
+.sub 'test_boolean'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = true;
@@ -148,13 +178,16 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "boolean", 'flags'=>"-On")
 true
 3
 false
 3
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'invalid', cflags => '-On' );
+.sub 'test_invalid'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = invalid;
@@ -162,14 +195,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "invalid", 'flags'=>"-On")
 invalid
 4
 OUT
+.end
 
 # Local Variables:
-#   mode: cperl
-#   cperl-indent-level: 4
+#   mode: pir
 #   fill-column: 100
 # End:
-# vim: expandtab shiftwidth=4:
-
+# vim: expandtab shiftwidth=4 ft=pir:

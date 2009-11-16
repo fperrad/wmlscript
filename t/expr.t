@@ -1,27 +1,30 @@
-#! perl
+#! /usr/local/bin/parrot
 # Copyright (C) 2006-2009, Parrot Foundation.
-# $Id$
 
 =head1 WMLScript expressions
 
 =head2 Synopsis
 
-    % perl t/expr.t
+    % parrot t/expr.t
 
 =head2 Description
 
 
 =cut
 
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../../lib", "$FindBin::Bin";
+.sub 'main' :main
+    load_bytecode 't/helpers.pir'
 
-use Parrot::Test tests => 2;
-use Test::More;
+    .include 'test_more.pir'
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'assign', cflags => '-On' );
+    plan(2)
+
+    test_assign()
+    test_incr()
+.end
+
+.sub 'test_assign'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = "abc";
@@ -31,11 +34,14 @@ extern function main()
     Console.println(b);
 }
 CODE
+    wmls_is($S0, <<'OUT', "assign", 'flags'=>"-On")
 abc
 def
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'incr', cflags => '-On' );
+.sub 'test_incr'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 10;
@@ -45,14 +51,14 @@ extern function main()
     Console.println(b);
 }
 CODE
+    wmls_is($S0, <<'OUT', "incr", 'flags'=>"-On")
 10
 11
 OUT
+.end
 
 # Local Variables:
-#   mode: cperl
-#   cperl-indent-level: 4
+#   mode: pir
 #   fill-column: 100
 # End:
-# vim: expandtab shiftwidth=4:
-
+# vim: expandtab shiftwidth=4 ft=pir:

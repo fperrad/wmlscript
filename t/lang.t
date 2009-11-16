@@ -1,29 +1,55 @@
-#! perl
+#! /usr/local/bin/parrot
 # Copyright (C) 2006-2009, Parrot Foundation.
-# $Id$
 
 =head1 WMLScript Lang library
 
 =head2 Synopsis
 
-    % perl t/lang.t
+    % parrot t/lang.t
 
 =head2 Description
 
 Tests WMLScript Lang Library
-(implemented in F<languages/WMLScript/runtime/wmlslang.pir>).
+(implemented in F<wmlscript/library/wmlslang.pir>).
 
 =cut
 
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../../lib", "$FindBin::Bin";
+.sub 'main' :main
+    load_bytecode 't/helpers.pir'
 
-use Parrot::Test tests => 25;
-use Test::More;
+    .include 'test_more.pir'
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.abs' );
+    plan(25)
+
+    test_abs_1()
+    test_abs_2()
+    test_min_1()
+    test_min_2()
+    test_max_1()
+    test_max_2()
+    test_parseInt_1()
+    test_parseInt_2()
+    test_parseFloat_1()
+    test_parseFloat_2()
+    test_isInt_1()
+    test_isInt_2()
+    test_isFloat_1()
+    test_isFloat_2()
+    test_maxInt()
+    test_minInt()
+    test_float()
+    test_exit_1()
+    test_exit_2()
+    test_exit_3()
+    test_abort()
+    test_random_1()
+    test_random_2()
+    test_seed()
+    test_characterSet()
+.end
+
+.sub 'test_abs_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = -3;
@@ -33,11 +59,14 @@ extern function main()
     Console.println(typeof b);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.abs")
 3
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.abs' );
+.sub 'test_abs_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.abs(-3.14);
@@ -54,14 +83,17 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.abs")
 3.14
 1
 4
 4
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.min' );
+.sub 'test_min_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = -3;
@@ -80,6 +112,7 @@ extern function main()
     Console.println(typeof e);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.min")
 -3
 0
 45
@@ -87,8 +120,10 @@ CODE
 45
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.min' );
+.sub 'test_min_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.min(3, invalid);
@@ -103,14 +138,17 @@ extern function main()
     Console.println(typeof c);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.min")
 4
 true
 3
 1
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.max' );
+.sub 'test_max_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = -3;
@@ -129,6 +167,7 @@ extern function main()
     Console.println(typeof e);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.max")
 3
 0
 76
@@ -136,8 +175,10 @@ CODE
 45
 1
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.max' );
+.sub 'test_max_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.max(3, invalid);
@@ -152,14 +193,17 @@ extern function main()
     Console.println(typeof c);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.max")
 4
 12
 0
 12
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.parseInt' );
+.sub 'test_parseInt_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var i = Lang.parseInt("1234");
@@ -171,13 +215,16 @@ extern function main()
     Console.println(typeof j);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.parseInt")
 1234
 0
 100
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.parseInt' );
+.sub 'test_parseInt_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.parseInt(12);
@@ -194,14 +241,17 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.parseInt")
 12
 0
 4
 4
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.parseFloat' );
+.sub 'test_parseFloat_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.parseFloat("123.7");
@@ -234,6 +284,7 @@ extern function main()
     Console.println(typeof h);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.parseFloat")
 123.7
 1
 734
@@ -248,8 +299,10 @@ CODE
 4
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.parseFloat' );
+.sub 'test_parseFloat_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.parseFloat(12);
@@ -267,6 +320,7 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.parseFloat")
 12
 1
 3.14
@@ -274,8 +328,10 @@ CODE
 4
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.isInt' );
+.sub 'test_isInt_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.isInt(" -123");
@@ -294,14 +350,17 @@ extern function main()
     Console.println(typeof e);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.isInt")
 true
 false
 false
 false
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.isInt' );
+.sub 'test_isInt_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.isInt(12);
@@ -317,13 +376,16 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.isInt")
 true
 false
 false
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.isFloat' );
+.sub 'test_isFloat_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.isFloat(" -123");
@@ -342,14 +404,17 @@ extern function main()
     Console.println(typeof e);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.isFloat")
 true
 true
 false
 false
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.isFloat' );
+.sub 'test_isFloat_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.isFloat(12);
@@ -365,13 +430,16 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.isFloat")
 true
 true
 false
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.maxInt' );
+.sub 'test_maxInt'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.maxInt();
@@ -379,11 +447,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.maxInt")
 2147483647
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.minInt' );
+.sub 'test_minInt'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.minInt();
@@ -391,11 +462,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.minInt")
 -2147483648
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.float' );
+.sub 'test_float'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.float();
@@ -403,11 +477,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.float")
 true
 3
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.exit(0)' );
+.sub 'test_exit_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     Console.println("exit");
@@ -415,11 +492,14 @@ extern function main()
     Console.println("ko");
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.exit(0)")
 exit
 
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.exit("1")' );
+.sub 'test_exit_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     Console.println("exit");
@@ -427,11 +507,14 @@ extern function main()
     Console.println("ko");
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.exit('1')")
 exit
 
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.exit(invalid)' );
+.sub 'test_exit_3'
+     $S0 = <<'CODE'
 extern function main()
 {
     Console.println("exit");
@@ -439,41 +522,51 @@ extern function main()
     Console.println("ko");
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.exit(invalid)")
 exit
 
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.abort' );
+.sub 'test_abort'
+     $S0 = <<'CODE'
 extern function main()
 {
     Lang.abort("abort");
     Console.println("ko");
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.abort")
 abort
 OUT
+.end
 
-language_output_like( 'WMLScript', <<'CODE', <<'OUT', 'Lang.random' );
+.sub 'test_random_1'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.random(10);
     Console.println(a);
 }
 CODE
-/^\d$/
-OUT
+    wmls_like($S0, "^\\d\\n$", "Lang.random")
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.random' );
+.sub 'test_random_2'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.random("invalid");
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.random")
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.seed' );
+.sub 'test_seed'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.seed(3.14);
@@ -481,11 +574,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.seed")
 
 2
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Lang.characterSet' );
+.sub 'test_characterSet'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Lang.characterSet();
@@ -493,14 +589,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Lang.characterSet")
 4
 0
 OUT
+.end
 
 # Local Variables:
-#   mode: cperl
-#   cperl-indent-level: 4
+#   mode: pir
 #   fill-column: 100
 # End:
-# vim: expandtab shiftwidth=4:
-
+# vim: expandtab shiftwidth=4 ft=pir:

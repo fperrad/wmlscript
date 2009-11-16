@@ -1,29 +1,38 @@
-#! perl
+#! /usr/local/bin/parrot
 # Copyright (C) 2006-2009, Parrot Foundation.
-# $Id$
 
 =head1 WMLScript Float library
 
 =head2 Synopsis
 
-    % perl t/libfloat.t
+    % parrot t/libfloat.t
 
 =head2 Description
 
 Tests WMLScript Float Library
-(implemented in F<languages/WMLScript/runtime/wmlsfloat.pir>).
+(implemented in F<wmlscript/library/wmlsfloat.pir>).
 
 =cut
 
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../../lib", "$FindBin::Bin";
+.sub 'main' :main
+    load_bytecode 't/helpers.pir'
 
-use Parrot::Test tests => 8;
-use Test::More;
+    .include 'test_more.pir'
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Float.int' );
+    plan(8)
+
+    test_int()
+    test_floor()
+    test_ceil()
+    test_pow()
+    test_round()
+    test_sqrt()
+    test_maxFloat()
+    test_minFloat()
+.end
+
+.sub 'test_int'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 3.14;
@@ -36,13 +45,16 @@ extern function main()
     Console.println(typeof c);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Float.int")
 3
 0
 -2
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Float.floor' );
+.sub 'test_floor'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 3.14;
@@ -55,13 +67,16 @@ extern function main()
     Console.println(typeof c);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Float.floor")
 3
 0
 -3
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Float.ceil' );
+.sub 'test_ceil'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 3.14;
@@ -74,13 +89,16 @@ extern function main()
     Console.println(typeof c);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Float.ceil")
 4
 0
 -2
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Float.pow' );
+.sub 'test_pow'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 3;
@@ -89,11 +107,14 @@ extern function main()
     Console.println(typeof b);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Float.pow")
 9
 1
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Float.round' );
+.sub 'test_round'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Float.round(3.5);
@@ -113,6 +134,7 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Float.round")
 4
 0
 -3
@@ -122,8 +144,10 @@ CODE
 0
 0
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Float.sqrt' );
+.sub 'test_sqrt'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = 4;
@@ -139,14 +163,17 @@ extern function main()
     Console.println(typeof d);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Float.sqrt")
 2
 1
 2.23607
 1
 4
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Float.maxFloat' );
+.sub 'test_maxFloat'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Float.maxFloat();
@@ -154,11 +181,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Float.maxFloat")
 3.40282e+38
 1
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'Float.minFloat' );
+.sub 'test_minFloat'
+     $S0 = <<'CODE'
 extern function main()
 {
     var a = Float.minFloat();
@@ -166,14 +196,14 @@ extern function main()
     Console.println(typeof a);
 }
 CODE
+    wmls_is($S0, <<'OUT', "Float.minFloat")
 1.17549e-38
 1
 OUT
+.end
 
 # Local Variables:
-#   mode: cperl
-#   cperl-indent-level: 4
+#   mode: pir
 #   fill-column: 100
 # End:
-# vim: expandtab shiftwidth=4:
-
+# vim: expandtab shiftwidth=4 ft=pir:

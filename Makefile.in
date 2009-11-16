@@ -148,7 +148,7 @@ help:
 	@echo ""
 
 test: all
-	$(PERL) t/harness
+	prove --exec=$(PARROT) t/pmc//*.t t//*.t
 
 pmctest: build
 	prove --exec=$(PARROT) t/pmc//*.t
@@ -157,9 +157,8 @@ codetest: codetest-c codetest-make codetest-perl codetest-pir codetest-pod
 
 T_C     := dynext//pmc//*.pmc dynext//ops//*.ops
 T_MAKE  := Makefile.in dynext//ops//Makefile.in dynext//pmc//Makefile.in
-T_PERL  := t//harness t//*.t t//Parrot//Test//*.pm \
-          build//*.pl build//SRM//*.pm
-T_PIR   := *.pir wmlscript//*.pir wmlscript//library//*.pir t//pmc//*.t
+T_PERL  := build//*.pl build//SRM//*.pm
+T_PIR   := *.pir wmlscript//*.pir wmlscript//library//*.pir t//*.pir t//*.t t//pmc//*.t
 T_POD   := doc//*.pod
 
 codetest-c:
@@ -249,11 +248,8 @@ win32-inno-installer: installable
 	iscc parrot-wmlscript.iss
 
 TEST_CLEANERS := \
- "t/*.pir" \
- "t/*.pbc" \
- "t/*.wmls" \
- "t/*.wmlsc" \
- "t/*.out"
+ "test_*.wmls" \
+ "test_*.wmlsc"
 
 testclean:
 	$(RM_F) $(TEST_CLEANERS)

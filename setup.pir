@@ -28,6 +28,10 @@ No Configure step, no Makefile generated.
     .const 'Sub' clean = 'clean'
     register_step_before('clean', clean)
 
+    .const 'Sub' testclean = 'testclean'
+    register_step_after('test', testclean)
+    register_step_after('clean', testclean)
+
     .const 'Sub' pmctest = 'pmctest'
     register_step('pmctest', pmctest)
 
@@ -74,7 +78,9 @@ SOURCES
     $P0['installable_pbc'] = $P6
 
     # test
-    $P0['harness_files'] = ''
+    $S0 = get_parrot()
+    $P0['prove_exec'] = $S0
+    $P0['prove_files'] = 't/pmc/*.t t/*.t'
 
     # install
     $P7 = split "\n", <<'LIBS'
@@ -125,6 +131,11 @@ SOURCES
     .param pmc kv :slurpy :named
     unlink('wmlscript/opcode.pir')
     unlink('wmlscript/stdlibs.pir')
+.end
+
+.sub 'testclean' :anon
+    .param pmc kv :slurpy :named
+    system("perl -MExtUtils::Command -e rm_f test_*.wmls test_*.wmlsc")
 .end
 
 .sub 'pmctest' :anon

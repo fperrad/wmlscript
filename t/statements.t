@@ -1,26 +1,30 @@
-#! perl
+#! /usr/local/bin/parrot
 # Copyright (C) 2006-2009, Parrot Foundation.
-# $Id$
 
 =head1 WMLScript Statements
 
 =head2 Synopsis
 
-    % perl t/statements.t
+    % parrot t/statements.t
 
 =head2 Description
 
 =cut
 
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../../lib", "$FindBin::Bin";
+.sub 'main' :main
+    load_bytecode 't/helpers.pir'
 
-use Parrot::Test tests => 3;
-use Test::More;
+    .include 'test_more.pir'
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'for' );
+    plan(3)
+
+    test_for()
+    test_for_break()
+    test_while()
+.end
+
+.sub 'test_for'
+     $S0 = <<'CODE'
 extern function main()
 {
     var sum = 0;
@@ -31,14 +35,17 @@ extern function main()
     Console.println("Sum: " + sum);
 }
 CODE
+    wmls_is($S0, <<'OUT', "for")
 1
 2
 3
 4
 Sum: 10
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'for break' );
+.sub 'test_for_break'
+     $S0 = <<'CODE'
 extern function main()
 {
     var sum = 0;
@@ -50,14 +57,17 @@ extern function main()
     Console.println("Sum: " + sum);
 }
 CODE
+    wmls_is($S0, <<'OUT', "for break")
 1
 2
 3
 4
 Sum: 10
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'while', cflags => '-On' );
+.sub 'test_while'
+     $S0 = <<'CODE'
 extern function main()
 {
     var sum = 0;
@@ -69,17 +79,17 @@ extern function main()
     Console.println("Sum: " + sum);
 }
 CODE
+    wmls_is($S0, <<'OUT', "while", 'flags'=>"-On")
 4
 3
 2
 1
 Sum: 10
 OUT
+.end
 
 # Local Variables:
-#   mode: cperl
-#   cperl-indent-level: 4
+#   mode: pir
 #   fill-column: 100
 # End:
-# vim: expandtab shiftwidth=4:
-
+# vim: expandtab shiftwidth=4 ft=pir:

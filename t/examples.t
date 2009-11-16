@@ -1,12 +1,11 @@
-#! perl
-# Copyright (C) 2006-2009, Parrot Foundation.
-# $Id$
+#! /usr/local/bin/parrot
+# Copyright (C) 2009, Parrot Foundation.
 
 =head1 some WMLScript code examples
 
 =head2 Synopsis
 
-    % perl t/examples.t
+    % parrot t/examples.t
 
 =head2 Description
 
@@ -14,53 +13,72 @@ First tests in order to check infrastructure.
 
 =cut
 
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../../../lib", "$FindBin::Bin";
+.sub 'main' :main
+    load_bytecode 't/helpers.pir'
 
-use Parrot::Test tests => 5;
-use Test::More;
+    .include 'test_more.pir'
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'hello world' );
+    plan(5)
+
+    test_hello()
+    test_another_main()
+    test_with_params()
+    test_no_optim()
+    test_sieve()
+.end
+
+.sub 'test_hello'
+     $S0 = <<'CODE'
 extern function main()
 {
     Console.println("Hello World!");
 }
 CODE
+    wmls_is($S0, <<'OUT', "hello world")
 Hello World!
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'another main', function => 'hello' );
+.sub 'test_another_main'
+    $S0 = <<'CODE'
 extern function hello()
 {
     Console.println("Hello World!");
 }
 CODE
+    wmls_is($S0, <<'OUT', "another main", 'entry'=>'hello')
 Hello World!
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'with params', params => "abc def" );
+.sub 'test_with_params'
+    $S0 = <<'CODE'
 extern function main(arg1, arg2)
 {
     Console.println(arg1);
     Console.println(arg2);
 }
 CODE
+    wmls_is($S0, <<'OUT', "with params", 'params'=>"abc def")
 abc
 def
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'no optim', cflags => '-On' );
+.sub 'test_no_optim'
+    $S0 = <<'CODE'
 extern function main()
 {
     Console.println(1 + 2);
 }
 CODE
+    wmls_is($S0, <<'OUT', "no optim", 'flags'=>"-On")
 3
 OUT
+.end
 
-language_output_is( 'WMLScript', <<'CODE', <<'OUT', 'sieve', function => 'sieve' );
+.sub 'test_sieve'
+    $S0 = <<'CODE'
 /*
  *  Eratosthenes Sieve prime number calculation
  */
@@ -89,6 +107,7 @@ extern function sieve ()
     Console.println(count + " primes.");
 }
 CODE
+    wmls_is($S0, <<'OUT', "sieve", 'entry'=>'sieve')
  prime 1 = 3
  prime 2 = 5
  prime 3 = 7
@@ -102,11 +121,11 @@ CODE
 
 10 primes.
 OUT
+.end
+
 
 # Local Variables:
-#   mode: cperl
-#   cperl-indent-level: 4
+#   mode: pir
 #   fill-column: 100
 # End:
-# vim: expandtab shiftwidth=4:
-
+# vim: expandtab shiftwidth=4 ft=pir:

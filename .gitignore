@@ -34,8 +34,5 @@ dynext/pmc/*.o
 dynext/pmc/*.obj
 dynext/pmc/*.pdb
 
-t/*.out
-t/*.pbc
-t/*.pir
-t/*.wmls
-t/*.wmlsc
+test_*.wmls
+test_*.wmlsc
