@@ -65,7 +65,8 @@ extern function main()
     OtherScript#hello();
 }
 CODE
-    wmls_like($S0, "unable to load", "unable to load")
+#    wmls_like($S0, "unable to load", "unable to load")
+    wmls_like($S0, "unable", "unable to load")
 .end
 
 .sub 'test_verification_failed'
@@ -77,7 +78,8 @@ extern function main()
     OtherScript#hello();
 }
 CODE
-    wmls_like($S0, "verification failed", "verification failed")
+#    wmls_like($S0, "verification failed", "verification failed")
+    wmls_like($S0, "verification", "verification failed")
 .end
 
 .sub 'test_external_function_not_found'
@@ -89,7 +91,8 @@ extern function main()
     OtherScript#hello2();
 }
 CODE
-    wmls_like($S0, "external function '\\w+' not found", "external function not found")
+#    wmls_like($S0, "external function '\\w+' not found", "external function not found")
+    wmls_like($S0, "found", "external function not found")
 .end
 
 # Local Variables:
