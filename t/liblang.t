@@ -5,7 +5,7 @@
 
 =head2 Synopsis
 
-    % parrot t/lang.t
+    % parrot t/liblang.t
 
 =head2 Description
 
