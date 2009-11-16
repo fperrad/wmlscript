@@ -574,7 +574,7 @@ CODE
     wmls_is($S0, <<'OUT', "String.squeeze")
 Hello
 2
- Bye Jon . See you!
+ Bye Jon . See you! 
 2
 OUT
 .end
