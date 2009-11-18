@@ -346,7 +346,7 @@ static int _load_function_pool(Interp *interp)
         Parrot_str_new_constant(interp, "FunctionNameTable"), FunctionNameTable);
 
     for (idx = 0; idx < NumberOfFunctionNames; idx++) {
-        PMC * Couple = pmc_new(interp, enum_class_Array);
+        PMC * Couple = pmc_new(interp, enum_class_FixedPMCArray);
         const UINTVAL FunctionIndex = _get_uint8();
         UINTVAL FunctionNameSize = _get_uint8();
         STRING * const FunctionName = string_make(interp, _get_pos(),

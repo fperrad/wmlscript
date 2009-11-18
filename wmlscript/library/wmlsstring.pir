@@ -575,7 +575,7 @@ Returns C<invalid> if the separator is an empty string.
     $I2 = $I4 - 1
   L5:
     dec $I4
-    new $P1, 'Array'
+    new $P1, 'FixedPMCArray'
     set $P1, $I4
     $I0 = 0
     $I1 = 0
@@ -751,7 +751,7 @@ Returns C<invalid> if the separator is an empty string.
     $I3 = $I5
   L5:
     $I6 = $I5 + 1
-    new $P1, 'Array'
+    new $P1, 'FixedPMCArray'
     set $P1, $I6
     $I0 = 0
     $I1 = 0
@@ -1079,7 +1079,7 @@ Illegal format specifier results in an C<invalid> return value.
     $I0 = isa format, 'WmlsInvalid'
     if $I0 goto L1
     $S0 = format
-    new $P0, 'Array'
+    new $P0, 'FixedPMCArray'
     set $P0, 1
     $P0[0] = value
   L2:

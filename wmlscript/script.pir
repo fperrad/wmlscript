@@ -6,19 +6,19 @@
 .sub '__onload' :anon :load
 #    print "__onload (script.pir)\n"
     $P0 = subclass 'Hash', ['Wmls'; 'Script']
-    $P0 = subclass 'Array', ['Wmls'; 'Constants']
+    $P0 = subclass 'ResizablePMCArray', ['Wmls'; 'Constants']
     $P0 = subclass 'Integer', ['Wmls'; 'ConstantInteger']
     $P0 = subclass 'Float', ['Wmls'; 'ConstantFloat']
     $P0 = subclass 'String', ['Wmls'; 'ConstantUTF8String']
     $P0 = subclass 'String', ['Wmls'; 'ConstantEmptyString']
     $P0 = subclass 'String', ['Wmls'; 'ConstantString']
-    $P0 = subclass 'Array', ['Wmls'; 'Pragmas']
+    $P0 = subclass 'ResizablePMCArray', ['Wmls'; 'Pragmas']
     $P0 = subclass 'Hash', ['Wmls'; 'AccessDomain']
     $P0 = subclass 'Hash', ['Wmls'; 'AccessPath']
     $P0 = subclass 'Hash', ['Wmls'; 'UserAgentProperty']
     $P0 = subclass 'Hash', ['Wmls'; 'UserAgentProperty&Scheme']
-    $P0 = subclass 'Array', ['Wmls'; 'Functions']
-    $P0 = subclass 'Array', ['Wmls'; 'FunctionNameTable']
+    $P0 = subclass 'ResizablePMCArray', ['Wmls'; 'Functions']
+    $P0 = subclass 'ResizablePMCArray', ['Wmls'; 'FunctionNameTable']
     $P0 = subclass 'Hash', ['Wmls'; 'Function']
 .end
 
