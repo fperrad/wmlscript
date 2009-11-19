@@ -1,4 +1,3 @@
-Makefile
 *.pbc
 *.c
 *.o
@@ -7,6 +6,8 @@ Makefile
 *.iss
 
 installable_*
+
+*.patch
 
 man
 *.tmp
