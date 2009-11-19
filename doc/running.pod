@@ -27,15 +27,14 @@ Retrieve WMLScript
 
   perl tools/dev/fetch_languages.pl --lang=wmlscript
 
-Configure & build WMLScript
+Build WMLScript
 
   cd languages/wmlscript
-  parrot Configure.pir
-  make
+  parrot setup.pir build
 
 =head2 Running the whole test suite
 
-  make test
+  parrot setup.pir test
 
 =head2 Compiling your own code
 
@@ -49,23 +48,23 @@ Configure & build WMLScript
 
 =head2 Disassembling
 
-  ../../parrot wmlsd.pir example.wmlsc
+  parrot wmlsd.pbc example.wmlsc
 
 =head2 Translating
 
-  ../../parrot wmls2pir.pir example.wmlsc
+  parrot wmls2pir.pir example.wmlsc
 
-  ../../parrot wmls2pbc.pir example.wmlsc
+  parrot wmls2pbc.pir example.wmlsc
 
 =head2 Interpreting
 
-  ../../parrot wmlsi.pir example.wmlsc main
+  parrot wmlsi.pbc example.wmlsc main
 
 =head2 Bugs & Limitations
 
 =head2 See Also
 
-F<languages/WMLScript/doc/status.pod>
+F<doc/status.pod>
 
 =head2 Author
 
