@@ -4,8 +4,8 @@
         "uri"      : "https://trac.parrot.org/parrot/wiki/ModuleEcosystem"
     },
     "general"      : {
-        "name"     : "markdown",
-        "abstract" : "Markdown on Parrot",
+        "name"     : "wmlscript",
+        "abstract" : "WMLScript Bytecode Translator",
         "authority": "http://github.com/fperrad",
         "version"  : "HEAD",
         "license"  : {
@@ -50,3 +50,5 @@
         }
     }
 }
+
+

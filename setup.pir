@@ -36,6 +36,20 @@ No Configure step, no Makefile generated.
     register_step('pmctest', pmctest)
 
     $P0 = new 'Hash'
+    $P0['name'] = 'WMLScript'
+    $P0['abstract'] = 'WMLScript Bytecode Translator'
+    $P0['authority'] = 'http://github.com/fperrad'
+    $P0['description'] = 'WMLScript Bytecode Translator'
+    $P5 = split ',', 'wmlscript,wap'
+    $P0['keywords'] = $P5
+    $P0['license_type'] = 'Artistic License 2.0'
+    $P0['license_uri'] = 'http://www.perlfoundation.org/artistic_license_2_0'
+    $P0['copyright_holder'] = 'Parrot Foundation'
+    $P0['generated_by'] = 'Francois Perrad <francois.perrad@gadz.org>'
+    $P0['checkout_uri'] = 'git://github.com/fperrad/wmlscript.git'
+    $P0['browser_uri'] = 'http://github.com/fperrad/wmlscript'
+    $P0['project_uri'] = 'http://github.com/fperrad/wmlscript'
+
     # build
     $P1 = new 'Hash'
     $P1['wmls_ops'] = 'dynext/ops/wmls.ops'
