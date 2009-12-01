@@ -107,8 +107,10 @@ LIBS
     $P0['inst_lang'] = $P7
 
     # dist
-    $P0['manifest_includes'] = 'wmls2p*.pir t/helpers.pir build/*.pl build/SRM/*.pm wmlscript/translation.rules wmlscript/wmlslibs.cfg'
-    $P0['manifest_excludes'] = 'wmlscript/opcode.pir wmlscript/stdlibs.pir'
+    $P8 = glob('wmls2p*.pir t/helpers.pir build/*.pl build/SRM/*.pm wmlscript/translation.rules wmlscript/wmlslibs.cfg')
+    $P0['manifest_includes'] = $P8
+    $P9 = split ' ', 'wmlscript/opcode.pir wmlscript/stdlibs.pir'
+    $P0['manifest_excludes'] = $P9
 
     .tailcall setup(args :flat, $P0 :flat :named)
 .end
