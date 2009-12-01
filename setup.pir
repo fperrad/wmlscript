@@ -1,4 +1,4 @@
-#! /usr/local/bin/parrot
+#!/usr/bin/env parrot
 # Copyright (C) 2009, Parrot Foundation.
 
 =head1 NAME
@@ -45,7 +45,6 @@ No Configure step, no Makefile generated.
     $P0['license_type'] = 'Artistic License 2.0'
     $P0['license_uri'] = 'http://www.perlfoundation.org/artistic_license_2_0'
     $P0['copyright_holder'] = 'Parrot Foundation'
-    $P0['generated_by'] = 'Francois Perrad <francois.perrad@gadz.org>'
     $P0['checkout_uri'] = 'git://github.com/fperrad/wmlscript.git'
     $P0['browser_uri'] = 'http://github.com/fperrad/wmlscript'
     $P0['project_uri'] = 'http://github.com/fperrad/wmlscript'
@@ -106,6 +105,12 @@ wmlscript/library/wmlsconsole.pbc
 LIBS
     $S0 = pop $P7
     $P0['inst_lang'] = $P7
+
+    # dist
+    $P8 = split ' ', 'wmls2pbc.pir wmls2pir.pir t/helpers.pir build/stdlibs.pl build/translator.pl build/SRM/Register.pm build/SRM/Stack.pm wmlscript/translation.rules wmlscript/wmlslibs.cfg'
+    $P0['manifest_includes'] = $P8
+    $P9 = split ' ', 'wmlscript/opcode.pir wmlscript/stdlibs.pir'
+    $P0['manifest_excludes'] = $P9
 
     .tailcall setup(args :flat, $P0 :flat :named)
 .end
