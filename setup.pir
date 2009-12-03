@@ -133,7 +133,7 @@ SOURCES
     cmd .= ' --srm '
     cmd .= srm
     cmd .= ' wmlscript/translation.rules'
-    system(cmd)
+    system(cmd, 1 :named('verbose'))
   L1:
 
     $P0 = split ' ', 'wmlscript/wmlslibs.cfg build/stdlibs.pl'
@@ -142,14 +142,14 @@ SOURCES
     cmd = 'perl build/stdlibs.pl'
     cmd .= ' --output wmlscript/stdlibs.pir'
     cmd .= ' wmlscript/wmlslibs.cfg'
-    system(cmd)
+    system(cmd, 1 :named('verbose'))
   L2:
 .end
 
 .sub 'clean' :anon
     .param pmc kv :slurpy :named
-    unlink('wmlscript/opcode.pir')
-    unlink('wmlscript/stdlibs.pir')
+    unlink('wmlscript/opcode.pir', 1 :named('verbose'))
+    unlink('wmlscript/stdlibs.pir', 1 :named('verbose'))
 .end
 
 .sub 'testclean' :anon
@@ -165,7 +165,7 @@ SOURCES
     $S0 = get_parrot()
     cmd .= $S0
     cmd .= " t/pmc/*.t"
-    system(cmd)
+    system(cmd, 1 :named('verbose'))
 .end
 
 # Local Variables:
