@@ -111,6 +111,8 @@ LIBS
     $P0['manifest_includes'] = $P8
     $P9 = split ' ', 'wmlscript/opcode.pir wmlscript/stdlibs.pir'
     $P0['manifest_excludes'] = $P9
+    $P10 = split ' ', 'CREDITS MAINTAINER README'
+    $P0['doc_files'] = $P10
 
     .tailcall setup(args :flat, $P0 :flat :named)
 .end
