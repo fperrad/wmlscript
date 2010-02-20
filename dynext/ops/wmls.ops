@@ -24,11 +24,11 @@ implements C<ISVALID> WMLScript opcode.
 =cut
 
 inline op defined(out PMC, invar PMC) :base_core {
-    const INTVAL dynpmc_WmlsBoolean = pmc_type(interp,
+    const INTVAL dynpmc_WmlsBoolean = Parrot_pmc_get_type_str(interp,
         Parrot_str_new_constant(interp, "WmlsBoolean"));
 
     const INTVAL result = PMC_IS_NULL($2) ? 0 : VTABLE_defined(interp, $2);
-    $1 = pmc_new(interp, dynpmc_WmlsBoolean);
+    $1 = Parrot_pmc_new(interp, dynpmc_WmlsBoolean);
     VTABLE_set_integer_native(interp, $1, result);
     goto NEXT();
 }
@@ -41,18 +41,18 @@ implements C<TOBOOL> WMLScript opcode.
 =cut
 
 inline op istrue(out PMC, invar PMC) :base_core {
-    const INTVAL dynpmc_WmlsInvalid = pmc_type(interp,
+    const INTVAL dynpmc_WmlsInvalid = Parrot_pmc_get_type_str(interp,
         Parrot_str_new_constant(interp, "WmlsInvalid"));
     const INTVAL type = VTABLE_type(interp, $2);
 
     if (type == dynpmc_WmlsInvalid) {
-        $1 = pmc_new(interp, dynpmc_WmlsInvalid);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsInvalid);
     }
     else {
-        const INTVAL dynpmc_WmlsBoolean = pmc_type(interp,
+        const INTVAL dynpmc_WmlsBoolean = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsBoolean"));
         const INTVAL result = VTABLE_get_bool(interp, $2);
-        $1 = pmc_new(interp, dynpmc_WmlsBoolean);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsBoolean);
         VTABLE_set_integer_native(interp, $1, result);
     }
     goto NEXT();
@@ -71,14 +71,14 @@ inline op isgt(out PMC, invar PMC, invar PMC) {
             "cmp", "PP->I", $2, $3, &result);
 
     if (4 == result) {
-        const INTVAL dynpmc_WmlsInvalid = pmc_type(interp,
+        const INTVAL dynpmc_WmlsInvalid = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsInvalid"));
-        $1 = pmc_new(interp, dynpmc_WmlsInvalid);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsInvalid);
     }
     else {
-        const INTVAL dynpmc_WmlsBoolean = pmc_type(interp,
+        const INTVAL dynpmc_WmlsBoolean = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsBoolean"));
-        $1 = pmc_new(interp, dynpmc_WmlsBoolean);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsBoolean);
         VTABLE_set_integer_native(interp, $1, result > 0);
     }
     goto NEXT();
@@ -97,14 +97,14 @@ inline op isge(out PMC, invar PMC, invar PMC) {
             "cmp", "PP->I", $2, $3, &result);
 
     if (4 == result) {
-        const INTVAL dynpmc_WmlsInvalid = pmc_type(interp,
+        const INTVAL dynpmc_WmlsInvalid = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsInvalid"));
-        $1 = pmc_new(interp, dynpmc_WmlsInvalid);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsInvalid);
     }
     else {
-        const INTVAL dynpmc_WmlsBoolean = pmc_type(interp,
+        const INTVAL dynpmc_WmlsBoolean = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsBoolean"));
-        $1 = pmc_new(interp, dynpmc_WmlsBoolean);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsBoolean);
         VTABLE_set_integer_native(interp, $1, result >= 0);
     }
     goto NEXT();
@@ -123,14 +123,14 @@ inline op isle(out PMC, invar PMC, invar PMC) {
             "cmp", "PP->I", $2, $3, &result);
 
     if (4 == result) {
-        const INTVAL dynpmc_WmlsInvalid = pmc_type(interp,
+        const INTVAL dynpmc_WmlsInvalid = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsInvalid"));
-        $1 = pmc_new(interp, dynpmc_WmlsInvalid);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsInvalid);
     }
     else {
-        const INTVAL dynpmc_WmlsBoolean = pmc_type(interp,
+        const INTVAL dynpmc_WmlsBoolean = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsBoolean"));
-        $1 = pmc_new(interp, dynpmc_WmlsBoolean);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsBoolean);
         VTABLE_set_integer_native(interp, $1, result <= 0);
     }
     goto NEXT();
@@ -149,14 +149,14 @@ inline op islt(out PMC, invar PMC, invar PMC) {
             "cmp", "PP->I", $2, $3, &result);
 
     if (4 == result) {
-        const INTVAL dynpmc_WmlsInvalid = pmc_type(interp,
+        const INTVAL dynpmc_WmlsInvalid = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsInvalid"));
-        $1 = pmc_new(interp, dynpmc_WmlsInvalid);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsInvalid);
     }
     else {
-        const INTVAL dynpmc_WmlsBoolean = pmc_type(interp,
+        const INTVAL dynpmc_WmlsBoolean = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsBoolean"));
-        $1 = pmc_new(interp, dynpmc_WmlsBoolean);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsBoolean);
         VTABLE_set_integer_native(interp, $1, result < 0);
     }
     goto NEXT();
@@ -174,14 +174,14 @@ inline op iseq(out PMC, invar PMC, invar PMC) {
             "is_equal", "PP->I", $2, $3, &result);
 
     if (4 == result) {
-        const INTVAL dynpmc_WmlsInvalid = pmc_type(interp,
+        const INTVAL dynpmc_WmlsInvalid = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsInvalid"));
-        $1 = pmc_new(interp, dynpmc_WmlsInvalid);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsInvalid);
     }
     else {
-        const INTVAL dynpmc_WmlsBoolean = pmc_type(interp,
+        const INTVAL dynpmc_WmlsBoolean = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsBoolean"));
-        $1 = pmc_new(interp, dynpmc_WmlsBoolean);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsBoolean);
         VTABLE_set_integer_native(interp, $1, result);
     }
     goto NEXT();
@@ -200,14 +200,14 @@ inline op isne(out PMC, invar PMC, invar PMC) {
             "is_equal", "PP->I", $2, $3, &result);
 
     if (4 == result) {
-        const INTVAL dynpmc_WmlsInvalid = pmc_type(interp,
+        const INTVAL dynpmc_WmlsInvalid = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsInvalid"));
-        $1 = pmc_new(interp, dynpmc_WmlsInvalid);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsInvalid);
     }
     else {
-        const INTVAL dynpmc_WmlsBoolean = pmc_type(interp,
+        const INTVAL dynpmc_WmlsBoolean = Parrot_pmc_get_type_str(interp,
             Parrot_str_new_constant(interp, "WmlsBoolean"));
-        $1 = pmc_new(interp, dynpmc_WmlsBoolean);
+        $1 = Parrot_pmc_new(interp, dynpmc_WmlsBoolean);
         VTABLE_set_integer_native(interp, $1, !result);
     }
     goto NEXT();

@@ -31,11 +31,11 @@ pmclass WmlsInvalid
 /* Class initialization. Caches constant strings that will be used later.
 */
     void class_init() {
-        dynpmc_WmlsBoolean = pmc_type(INTERP,
+        dynpmc_WmlsBoolean = Parrot_pmc_get_type_str(INTERP,
             Parrot_str_new_constant(INTERP, "WmlsBoolean"));
-        dynpmc_WmlsInteger = pmc_type(INTERP,
+        dynpmc_WmlsInteger = Parrot_pmc_get_type_str(INTERP,
             Parrot_str_new_constant(INTERP, "WmlsInteger"));
-        dynpmc_WmlsInvalid = pmc_type(INTERP,
+        dynpmc_WmlsInvalid = Parrot_pmc_get_type_str(INTERP,
             Parrot_str_new_constant(INTERP, "WmlsInvalid"));
     }
 
@@ -47,7 +47,7 @@ pmclass WmlsInvalid
 
 */
     VTABLE PMC* clone() {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
 /*
@@ -60,7 +60,7 @@ Return the integer 4.
 
 */
     VTABLE PMC* get_class() {
-        PMC* retval = pmc_new(interp, dynpmc_WmlsInteger);
+        PMC* retval = Parrot_pmc_new(interp, dynpmc_WmlsInteger);
         VTABLE_set_integer_native(INTERP, retval, 4);
         return retval;
     }
@@ -110,7 +110,7 @@ Return the string "invalid".
 
 */
     VTABLE PMC* absolute(PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     VTABLE void i_absolute() {
@@ -127,7 +127,7 @@ Return the string "invalid".
 
 */
     VTABLE PMC* neg(PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     VTABLE void i_neg() {
@@ -144,7 +144,7 @@ Return the string "invalid".
 
 */
     VTABLE PMC* bitwise_not(PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     VTABLE void i_bitwise_not() {
@@ -161,7 +161,7 @@ Return the string "invalid".
 
 */
     VTABLE PMC* logical_not(PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     VTABLE void i_logical_not() {
@@ -184,7 +184,7 @@ Return the string "invalid".
 
 */
     PMC* add(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     void i_add(PMC* value) {
@@ -201,7 +201,7 @@ Return the string "invalid".
 
 */
     PMC* subtract(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     void i_subtract(PMC* value) {
@@ -218,7 +218,7 @@ Return the string "invalid".
 
 */
     PMC* multiply(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     void i_multiply(PMC* value) {
@@ -235,7 +235,7 @@ Return the string "invalid".
 
 */
     PMC* divide(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     void i_divide(PMC* value) {
@@ -252,7 +252,7 @@ Return the string "invalid".
 
 */
     PMC* floor_divide(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     void i_floor_divide(PMC* value) {
@@ -269,7 +269,7 @@ Return the string "invalid".
 
 */
     PMC* modulus(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     void i_modulus(PMC* value) {
@@ -286,7 +286,7 @@ Return the string "invalid".
 
 */
     VTABLE PMC* bitwise_or(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     VTABLE void i_bitwise_or(PMC* value) {
@@ -303,7 +303,7 @@ Return the string "invalid".
 
 */
     VTABLE PMC* bitwise_and(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     VTABLE void i_bitwise_and(PMC* value) {
@@ -320,7 +320,7 @@ Return the string "invalid".
 
 */
     VTABLE PMC* bitwise_xor(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     VTABLE void i_bitwise_xor(PMC* value) {
@@ -337,7 +337,7 @@ Return the string "invalid".
 
 */
     VTABLE PMC* bitwise_shr(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     VTABLE void i_bitwise_shr(PMC* value) {
@@ -354,7 +354,7 @@ Return the string "invalid".
 
 */
     VTABLE PMC* bitwise_lsr(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     VTABLE void i_bitwise_lsr(PMC* value) {
@@ -371,7 +371,7 @@ Return the string "invalid".
 
 */
     VTABLE PMC* bitwise_shl(PMC* value, PMC* dest) {
-        return pmc_new(INTERP, dynpmc_WmlsInvalid);
+        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
     }
 
     VTABLE void i_bitwise_shl(PMC* value) {
