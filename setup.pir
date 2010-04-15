@@ -163,7 +163,7 @@ SOURCES
     .param pmc kv :slurpy :named
     run_step('build', kv :flat :named)
     .local string cmd
-    cmd = "prove --exec="
+    cmd = "tapir --exec="
     $S0 = get_parrot()
     cmd .= $S0
     cmd .= " t/pmc/*.t"
