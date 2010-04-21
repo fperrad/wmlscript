@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2006-2009, Parrot Foundation.
+Copyright (C) 2006-2010, Parrot Foundation.
 $Id$
 
 =head1 WMLScript String
@@ -258,7 +258,7 @@ Return the integer 2.
 */
     MULTI PMC* add(WmlsString value, PMC* dest) {
         STRING* const result = Parrot_str_concat(INTERP,
-            SELF.get_string(), VTABLE_get_string(INTERP, value), 0);
+            SELF.get_string(), VTABLE_get_string(INTERP, value));
         dest = Parrot_pmc_new(INTERP, dynpmc_WmlsString);
         VTABLE_set_string_native(INTERP, dest, result);
         return dest;
@@ -266,7 +266,7 @@ Return the integer 2.
 
     MULTI PMC* add(WmlsInteger value, PMC* dest) {
         STRING* const result = Parrot_str_concat(INTERP,
-            SELF.get_string(), VTABLE_get_string(INTERP, value), 0);
+            SELF.get_string(), VTABLE_get_string(INTERP, value));
         dest = Parrot_pmc_new(INTERP, dynpmc_WmlsString);
         VTABLE_set_string_native(INTERP, dest, result);
         return dest;
@@ -274,7 +274,7 @@ Return the integer 2.
 
     MULTI PMC* add(WmlsBoolean value, PMC* dest) {
         STRING* const result = Parrot_str_concat(INTERP,
-            SELF.get_string(), VTABLE_get_string(INTERP, value), 0);
+            SELF.get_string(), VTABLE_get_string(INTERP, value));
         dest = Parrot_pmc_new(INTERP, dynpmc_WmlsString);
         VTABLE_set_string_native(INTERP, dest, result);
         return dest;
@@ -282,7 +282,7 @@ Return the integer 2.
 
     MULTI PMC* add(WmlsFloat value, PMC* dest) {
         STRING* const result = Parrot_str_concat(INTERP,
-            SELF.get_string(), VTABLE_get_string(INTERP, value), 0);
+            SELF.get_string(), VTABLE_get_string(INTERP, value));
         dest = Parrot_pmc_new(INTERP, dynpmc_WmlsString);
         VTABLE_set_string_native(INTERP, dest, result);
         return dest;
@@ -293,25 +293,25 @@ Return the integer 2.
     }
 
     MULTI void i_add(WmlsString value) {
-        STRING* const result = Parrot_str_append(INTERP,
+        STRING* const result = Parrot_str_concat(INTERP,
             SELF.get_string(), VTABLE_get_string(INTERP, value));
         SELF.set_string_native(result);
     }
 
     MULTI void i_add(WmlsInteger value) {
-        STRING* const result = Parrot_str_append(INTERP,
+        STRING* const result = Parrot_str_concat(INTERP,
             SELF.get_string(), VTABLE_get_string(INTERP, value));
         SELF.set_string_native(result);
     }
 
     MULTI void i_add(WmlsBoolean value) {
-        STRING* const result = Parrot_str_append(INTERP,
+        STRING* const result = Parrot_str_concat(INTERP,
             SELF.get_string(), VTABLE_get_string(INTERP, value));
         SELF.set_string_native(result);
     }
 
     MULTI void i_add(WmlsFloat value) {
-        STRING* const result = Parrot_str_append(INTERP,
+        STRING* const result = Parrot_str_concat(INTERP,
             SELF.get_string(), VTABLE_get_string(INTERP, value));
         SELF.set_string_native(result);
     }

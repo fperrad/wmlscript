@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2006-2009, Parrot Foundation.
+Copyright (C) 2006-2010, Parrot Foundation.
 $Id$
 
 =head1 WMLScript Boolean
@@ -257,7 +257,7 @@ Return the string "true" or "false".
     MULTI PMC* add(WmlsString value, PMC* dest) {
         STRING* const result = Parrot_str_concat(INTERP,
               SELF.get_string(),
-              VTABLE_get_string(INTERP, value), 0);
+              VTABLE_get_string(INTERP, value));
         dest = Parrot_pmc_new(INTERP, dynpmc_WmlsString);
         VTABLE_set_string_native(INTERP, dest, result);
         return dest;
@@ -291,7 +291,7 @@ Return the string "true" or "false".
     MULTI void i_add(WmlsString value) {
         STRING* const result = Parrot_str_concat(INTERP,
               SELF.get_string(),
-              VTABLE_get_string(INTERP, value), 0);
+              VTABLE_get_string(INTERP, value));
         Parrot_pmc_reuse(INTERP, SELF, dynpmc_WmlsString, 0);
         SELF.set_string_native(result);
     }
