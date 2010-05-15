@@ -394,6 +394,7 @@ static int _load_function_pool(Interp *interp)
 pmclass WmlsBytecode
     singleton
     dynpmc
+    auto_attrs
     group wmls_group {
 
 /*

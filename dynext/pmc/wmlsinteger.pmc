@@ -55,6 +55,7 @@ pmclass WmlsInteger
     provides scalar
     provides integer
     dynpmc
+    auto_attrs
     group wmls_group
     hll wmlscript maps Integer {
 

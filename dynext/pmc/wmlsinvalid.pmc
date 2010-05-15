@@ -25,6 +25,7 @@ pmclass WmlsInvalid
     extends Undef
     provides scalar
     dynpmc
+    auto_attrs
     group wmls_group
     hll wmlscript maps Undef {
 

@@ -42,6 +42,7 @@ pmclass WmlsFloat
     provides scalar
     provides float
     dynpmc
+    auto_attrs
     group wmls_group
     hll wmlscript maps Float {
 

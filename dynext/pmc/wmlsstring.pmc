@@ -28,6 +28,7 @@ pmclass WmlsString
     provides scalar
     provides string
     dynpmc
+    auto_attrs
     group wmls_group
     hll wmlscript maps String {
 
