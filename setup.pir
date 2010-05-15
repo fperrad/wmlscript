@@ -162,12 +162,21 @@ SOURCES
 .sub 'pmctest' :anon
     .param pmc kv :slurpy :named
     run_step('build', kv :flat :named)
-    .local string cmd
-    cmd = "tapir --exec="
+
+    load_bytecode 'TAP/Harness.pbc'
+    .local pmc opts, files, harness, aggregate
+    opts = new 'Hash'
     $S0 = get_parrot()
-    cmd .= $S0
-    cmd .= " t/pmc/*.t"
-    system(cmd, 1 :named('verbose'))
+    opts['exec'] = $S0
+    files = glob('t/pmc/*.t')
+    files = sort_strings(files)
+    harness = new ['TAP';'Harness']
+    harness.'process_args'(opts)
+    aggregate = harness.'runtests'(files)
+    $I0 = aggregate.'has_errors'()
+    unless $I0 goto L1
+    die "test fails"
+  L1:
 .end
 
 # Local Variables:
