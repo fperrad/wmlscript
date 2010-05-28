@@ -18,6 +18,7 @@ wmlsd, wmls2pbc, wmlsi
 =cut
 
 .HLL 'wmlscript'
+.loadlib 'io_ops'
 
 .sub 'main' :main
     .param pmc argv

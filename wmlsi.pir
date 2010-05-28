@@ -19,6 +19,7 @@ parrot-wmlsd
 =cut
 
 .HLL 'wmlscript'
+.loadlib 'io_ops'
 
 .sub 'main' :main
     .param pmc argv
