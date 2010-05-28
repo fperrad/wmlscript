@@ -14,7 +14,6 @@ $Id$
 =cut
 
 #include "parrot/dynext.h"
-VERSION = PARROT_VERSION;
 
 
 =item B<defined>(out PMC, invar PMC)
