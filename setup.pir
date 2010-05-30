@@ -163,20 +163,10 @@ SOURCES
     .param pmc kv :slurpy :named
     run_step('build', kv :flat :named)
 
-    load_bytecode 'TAP/Harness.pbc'
-    .local pmc opts, files, harness, aggregate
-    opts = new 'Hash'
+    $P0 = glob('t/pmc/*.t')
+    $P0 = sort_strings($P0)
     $S0 = get_parrot()
-    opts['exec'] = $S0
-    files = glob('t/pmc/*.t')
-    files = sort_strings(files)
-    harness = new ['TAP';'Harness']
-    harness.'process_args'(opts)
-    aggregate = harness.'runtests'(files)
-    $I0 = aggregate.'has_errors'()
-    unless $I0 goto L1
-    die "test fails"
-  L1:
+    runtests($P0 :flat, $S0 :named('exec'))
 .end
 
 # Local Variables:
