@@ -138,7 +138,9 @@ helper for CALL_URL* opcodes.
     $S1 = err
     $S0 .= $S1
     $S0 .= ")\n"
-    printerr $S0
+    .local pmc stderr
+    stderr = getstderr
+    print stderr, $S0
     .return ('')
 .end
 

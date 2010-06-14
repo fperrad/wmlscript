@@ -15,7 +15,6 @@ See "WMLScript Standard Libraries Specification", section 8 "Float".
 =cut
 
 .HLL 'wmlscript'
-.loadlib 'io_ops'
 .loadlib 'wmls_group'
 .loadlib 'wmls_ops'
 .loadlib 'trans_ops'

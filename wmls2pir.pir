@@ -18,7 +18,6 @@ wmlsd, wmls2pbc, wmlsi
 =cut
 
 .HLL 'wmlscript'
-.loadlib 'io_ops'
 
 .sub 'main' :main
     .param pmc argv
@@ -46,7 +45,9 @@ wmlsd, wmls2pbc, wmlsi
   L1:
     end
   USAGE:
-    printerr "Usage: parrot wmls2pir.pir filename\n"
+    .local pmc stderr
+    stderr = getstderr
+    print stderr, "Usage: parrot wmls2pir.pir filename\n"
     exit -1
   _handler:
     .local pmc e

@@ -18,7 +18,6 @@ parrot-wmlsi
 =cut
 
 .HLL 'wmlscript'
-.loadlib 'io_ops'
 
 .sub 'main' :main
     .param pmc argv
@@ -44,7 +43,9 @@ parrot-wmlsi
   L1:
     end
   USAGE:
-    printerr "Usage: parrot wmlsd.pbc filename\n"
+    .local pmc stderr
+    stderr = getstderr
+    print stderr, "Usage: parrot wmlsd.pbc filename\n"
     exit -1
   _handler:
     .local pmc e

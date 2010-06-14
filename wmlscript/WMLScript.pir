@@ -2,7 +2,6 @@
 # $Id$
 
 .HLL 'wmlscript'
-.loadlib 'io_ops'
 .loadlib 'wmls_group'
 .loadlib 'wmls_ops'
 
