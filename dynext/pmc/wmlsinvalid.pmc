@@ -154,23 +154,6 @@ Return the string "invalid".
 
 /*
 
-=item C<PMC* logical_not(PMC *dest)>
-
-=item C<void i_logical_not()>
-
-=cut
-
-*/
-    VTABLE PMC* logical_not(PMC* dest) {
-        return Parrot_pmc_new(INTERP, dynpmc_WmlsInvalid);
-    }
-
-    VTABLE void i_logical_not() {
-        return;
-    }
-
-/*
-
 =back
 
 =head3 non-Vtable Methods

@@ -140,28 +140,6 @@ Returns a Parrot string representation of the number.
 
 /*
 
-=item C<PMC* logical_not(PMC *dest)>
-
-=item C<void i_logical_not()>
-
-=cut
-
-*/
-    VTABLE PMC* logical_not(PMC* dest) {
-        const INTVAL result = ! SELF.get_bool();
-        dest = Parrot_pmc_new(INTERP, dynpmc_WmlsBoolean);
-        VTABLE_set_bool(INTERP, dest, result);
-        return dest;
-    }
-
-    VTABLE void i_logical_not() {
-        const INTVAL result = ! SELF.get_bool();
-        Parrot_pmc_reuse(INTERP, SELF, dynpmc_WmlsBoolean, 0);
-        SELF.set_bool(result);
-    }
-
-/*
-
 =back
 
 =head3 non-Vtable Methods
