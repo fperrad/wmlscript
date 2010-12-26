@@ -807,11 +807,11 @@ String or invalid.
     $I0 = is_cclass .CCLASS_WHITESPACE, s, idx
     if $I0 goto L3
     $S0 = substr s, idx, 1
-    res = concat $S0
+    res = concat res, $S0
     inc idx
     goto L1
   L3:
-    res = concat ' '
+    res = concat res, ' '
   L4:
     inc idx
     $I0 = is_cclass .CCLASS_WHITESPACE, s, idx

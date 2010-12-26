@@ -315,7 +315,7 @@ sub generate_initial_code {
 .sub 'translate_code'
     .param string code
     .param pmc script
-    .local string gen_pir
+    .local pmc gen_pir
     .local int pc, next_pc, bc_length, cur_ic
     .local int inline
     .local int arg_1
@@ -333,7 +333,8 @@ sub generate_initial_code {
     .local pmc constants
     constants = script['Constants']
 
-    gen_pir = <<"PIR"
+    gen_pir = new 'StringBuilder'
+    push gen_pir, <<"PIR"
   ${AUTO_MAGICALS}
 PIR
 
@@ -350,7 +351,7 @@ PIRCODE
 
     $pir .= <<'PIRCODE';
 
-    gen_pir = concat "\n# BEGIN OF TRANSLATED BYTECODE\n\n"
+    push gen_pir, "\n# BEGIN OF TRANSLATED BYTECODE\n\n"
 
   LOOP:
     pc = next_pc
@@ -370,9 +371,9 @@ PIRCODE
     # Emit label generation code.
     $pir .= <<'PIRCODE';
     $S0 = pc
-    gen_pir = concat "PC"
-    gen_pir = concat $S0
-    gen_pir = concat ": \n"
+    push gen_pir, "PC"
+    push gen_pir, $S0
+    push gen_pir, ": \n"
 
 PIRCODE
 
@@ -437,8 +438,8 @@ PIRCODE
     .local string msg
     msg = "unknown instruction (code "
     $S0 = cur_ic
-    msg = concat $S0
-    msg = concat ")"
+    msg = concat msg, $S0
+    msg = concat msg, ")"
     die msg
 
 PIRCODE
@@ -506,7 +507,7 @@ sub generate_rule_code {
     my $pir = <<"PIRCODE";
   BDISPATCH_$rule->{name}:
     # Translation code for $rule->{name} ($rule->{code})
-    gen_pir = concat "  # $rule->{name}\\n"
+    push gen_pir, "  # $rule->{name}\\n"
 PIRCODE
 
     # Emit trace code.
@@ -848,11 +849,11 @@ sub generate_final_code {
   COMPLETE:
 
     $S0 = pc
-    gen_pir = concat "PC"
-    gen_pir = concat $S0
-    gen_pir = concat ": \n"
+    push gen_pir, "PC"
+    push gen_pir, $S0
+    push gen_pir, ": \n"
 
-    gen_pir = concat "\n# END OF TRANSLATED BYTECODE\n\n"
+    push gen_pir, "\n# END OF TRANSLATED BYTECODE\n\n"
 
     # Insert constants.
     $P0 = iter h_const
@@ -861,11 +862,12 @@ sub generate_final_code {
     unless $P0 goto L2_CST
     $S1 = shift $P0
     $S1 = $P0[$S1]
-    $S0 = concat $S1
+    $S0 = concat $S0, $S1
     goto L1_CST
   L2_CST:
-    $S0 = concat "\n"
-    gen_pir = concat $S0, gen_pir
+    $S0 = concat $S0,"\n"
+    $S1 = gen_pir
+    $S0 = concat $S0, $S1
 PIRCODE
 
     # SRM post translation code
@@ -876,7 +878,7 @@ PIRCODE
 
     # Emit the end of the translator PIR.
     $pir .= <<'PIRCODE';
-    .return (gen_pir)
+    .return ($S0)
 .end
 
 # Local Variables:

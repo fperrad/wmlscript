@@ -10,9 +10,9 @@ inline = 1F
 pir = <<PIR
     $I0 = ${NEXTPC} + ${INLINE}
     $S0 = $I0
-    ${INS} = concat "  goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [JUMP_FW]
@@ -22,9 +22,9 @@ arguments = uint8
 pir = <<PIR
     $I0 = ${NEXTPC} + ${ARG1}
     $S0 = $I0
-    ${INS} = concat "  goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [JUMP_FW_W]
@@ -34,9 +34,9 @@ arguments = uint16
 pir = <<PIR
     $I0 = ${NEXTPC} + ${ARG1}
     $S0 = $I0
-    ${INS} = concat "  goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [JUMP_BW_S]
@@ -46,9 +46,9 @@ inline = 1F
 pir = <<PIR
     $I0 = ${PC} - ${INLINE}
     $S0 = $I0
-    ${INS} = concat "  goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [JUMP_BW]
@@ -58,9 +58,9 @@ arguments = uint8
 pir = <<PIR
     $I0 = ${PC} - ${ARG1}
     $S0 = $I0
-    ${INS} = concat "  goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [JUMP_BW_W]
@@ -70,9 +70,9 @@ arguments = uint16
 pir = <<PIR
     $I0 = ${PC} - ${ARG1}
     $S0 = $I0
-    ${INS} = concat "  goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [TJUMP_FW_S]
@@ -83,12 +83,12 @@ pop = 1
 pir = <<PIR
     $I0 = ${NEXTPC} + ${INLINE}
     $S0 = $I0
-    ${INS} = concat "  ${ITEMP0} = isfalse "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
-    ${INS} = concat "  if ${ITEMP0} goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  ${ITEMP0} = isfalse "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
+    push ${INS}, "  if ${ITEMP0} goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [TJUMP_FW]
@@ -99,12 +99,12 @@ pop = 1
 pir = <<PIR
     $I0 = ${NEXTPC} + ${ARG1}
     $S0 = $I0
-    ${INS} = concat "  ${ITEMP0} = isfalse "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
-    ${INS} = concat "  if ${ITEMP0} goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  ${ITEMP0} = isfalse "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
+    push ${INS}, "  if ${ITEMP0} goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [TJUMP_FW_W]
@@ -115,12 +115,12 @@ pop = 1
 pir = <<PIR
     $I0 = ${NEXTPC} + ${ARG1}
     $S0 = $I0
-    ${INS} = concat "  ${ITEMP0} = isfalse "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
-    ${INS} = concat "  if ${ITEMP0} goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  ${ITEMP0} = isfalse "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
+    push ${INS}, "  if ${ITEMP0} goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [TJUMP_BW]
@@ -131,12 +131,12 @@ pop = 1
 pir = <<PIR
     $I0 = ${PC} - ${ARG1}
     $S0 = $I0
-    ${INS} = concat "  ${ITEMP0} = isfalse "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
-    ${INS} = concat "  if ${ITEMP0} goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  ${ITEMP0} = isfalse "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
+    push ${INS}, "  if ${ITEMP0} goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [TJUMP_BW_W]
@@ -147,12 +147,12 @@ pop = 1
 pir = <<PIR
     $I0 = ${PC} - ${ARG1}
     $S0 = $I0
-    ${INS} = concat "  ${ITEMP0} = isfalse "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
-    ${INS} = concat "  if ${ITEMP0} goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  ${ITEMP0} = isfalse "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
+    push ${INS}, "  if ${ITEMP0} goto PC"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 ## Function Call Instructions
@@ -163,14 +163,14 @@ class = calling
 inline = 07
 nb_arg = script.'get_nb_arg'(${INLINE})
 pir = <<PIR
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = function"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = function"
     $S0 = ${INLINE}
-    ${INS} = concat $S0
-    ${INS} = concat "("
-    ${INS} = concat ${PARAMS}
-    ${INS} = concat ")\n"
+    push ${INS}, $S0
+    push ${INS}, "("
+    push ${INS}, ${PARAMS}
+    push ${INS}, ")\n"
 PIR
 
 [CALL]
@@ -179,14 +179,14 @@ class = calling
 arguments = uint8
 nb_arg = script.'get_nb_arg'(${ARG1})
 pir = <<PIR
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = function"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = function"
     $S0 = ${ARG1}
-    ${INS} = concat $S0
-    ${INS} = concat "("
-    ${INS} = concat ${PARAMS}
-    ${INS} = concat ")\n"
+    push ${INS}, $S0
+    push ${INS}, "("
+    push ${INS}, ${PARAMS}
+    push ${INS}, ")\n"
 PIR
 
 [CALL_LIB_S]
@@ -196,18 +196,18 @@ inline = 07
 arguments = uint8
 nb_arg = get_nb_arg_lib(${ARG1}, ${INLINE})
 pir = <<PIR
-    ${INS} = concat "  ${PTEMP0} = find_lib("
+    push ${INS}, "  ${PTEMP0} = find_lib("
     $S0 = ${ARG1}   # lindex
-    ${INS} = concat $S0
-    ${INS} = concat ", "
+    push ${INS}, $S0
+    push ${INS}, ", "
     $S0 = ${INLINE}
-    ${INS} = concat $S0
-    ${INS} = concat ")\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = ${PTEMP0}("
-    ${INS} = concat ${PARAMS}
-    ${INS} = concat ")\n"
+    push ${INS}, $S0
+    push ${INS}, ")\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = ${PTEMP0}("
+    push ${INS}, ${PARAMS}
+    push ${INS}, ")\n"
 PIR
 
 [CALL_LIB]
@@ -216,18 +216,18 @@ class = calling
 arguments = uint8, uint8
 nb_arg = get_nb_arg_lib(${ARG2}, ${ARG1})
 pir = <<PIR
-    ${INS} = concat "  ${PTEMP0} = find_lib("
+    push ${INS}, "  ${PTEMP0} = find_lib("
     $S0 = ${ARG2}   # lindex
-    ${INS} = concat $S0
-    ${INS} = concat ", "
+    push ${INS}, $S0
+    push ${INS}, ", "
     $S0 = ${ARG1}   # findex
-    ${INS} = concat $S0
-    ${INS} = concat ")\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = ${PTEMP0}("
-    ${INS} = concat ${PARAMS}
-    ${INS} = concat ")\n"
+    push ${INS}, $S0
+    push ${INS}, ")\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = ${PTEMP0}("
+    push ${INS}, ${PARAMS}
+    push ${INS}, ")\n"
 PIR
 
 [CALL_LIB_W]
@@ -236,18 +236,18 @@ class = calling
 arguments = uint8, uint16
 nb_arg = get_nb_arg_lib(${ARG2}, ${ARG1})
 pir = <<PIR
-    ${INS} = concat "  ${PTEMP0} = find_lib("
+    push ${INS}, "  ${PTEMP0} = find_lib("
     $S0 = ${ARG2}   # lindex
-    ${INS} = concat $S0
-    ${INS} = concat ", "
+    push ${INS}, $S0
+    push ${INS}, ", "
     $S0 = ${ARG1}   # findex
-    ${INS} = concat $S0
-    ${INS} = concat ")\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = ${PTEMP0}("
-    ${INS} = concat ${PARAMS}
-    ${INS} = concat ")\n"
+    push ${INS}, $S0
+    push ${INS}, ")\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = ${PTEMP0}("
+    push ${INS}, ${PARAMS}
+    push ${INS}, ")\n"
 PIR
 
 [CALL_URL]
@@ -258,10 +258,10 @@ nb_arg = ${ARG3}
 pir = <<PIR
     $S0 = ${ARG1}   # urlindex
     $S1 = "const"
-    $S1 = concat $S0
-    ${INS} = concat "  ${STEMP1} = "
-    ${INS} = concat $S1
-    ${INS} = concat "\n"
+    $S1 = concat $S1, $S0
+    push ${INS}, "  ${STEMP1} = "
+    push ${INS}, $S1
+    push ${INS}, "\n"
     $I0 = exists ${CONST}[$S1]
     if $I0 goto L6_${CURIC}
     $S0 = constants.'translate'(${ARG1})
@@ -269,21 +269,21 @@ pir = <<PIR
   L6_${CURIC}:
     $S0 = ${ARG2}   # findex
     $S1 = "const"
-    $S1 = concat $S0
-    ${INS} = concat "  ${STEMP2} = "
-    ${INS} = concat $S1
-    ${INS} = concat "\n"
+    $S1 = concat $S1, $S0
+    push ${INS}, "  ${STEMP2} = "
+    push ${INS}, $S1
+    push ${INS}, "\n"
     $I0 = exists ${CONST}[$S1]
     if $I0 goto L7_${CURIC}
     $S0 = constants.'translate'(${ARG2})
     ${CONST}[$S1] = $S0
   L7_${CURIC}:
-    ${INS} = concat "  ${PTEMP0} = find_lib_url(${STEMP1}, ${STEMP2})\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = ${PTEMP0}("
-    ${INS} = concat ${PARAMS}
-    ${INS} = concat ")\n"
+    push ${INS}, "  ${PTEMP0} = find_lib_url(${STEMP1}, ${STEMP2})\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = ${PTEMP0}("
+    push ${INS}, ${PARAMS}
+    push ${INS}, ")\n"
 PIR
 
 [CALL_URL_W]
@@ -294,10 +294,10 @@ nb_arg = ${ARG3}
 pir = <<PIR
     $S0 = ${ARG1}   # urlindex
     $S1 = "const"
-    $S1 = concat $S0
-    ${INS} = concat "  ${STEMP1} = "
-    ${INS} = concat $S1
-    ${INS} = concat "\n"
+    $S1 = concat $S1, $S0
+    push ${INS}, "  ${STEMP1} = "
+    push ${INS}, $S1
+    push ${INS}, "\n"
     $I0 = exists ${CONST}[$S1]
     if $I0 goto L6_${CURIC}
     $S0 = constants.'translate'(${ARG1})
@@ -305,21 +305,21 @@ pir = <<PIR
   L6_${CURIC}:
     $S0 = ${ARG2}   # findex
     $S1 = "const"
-    $S1 = concat $S0
-    ${INS} = concat "  ${STEMP2} = "
-    ${INS} = concat $S1
-    ${INS} = concat "\n"
+    $S1 = concat $S1, $S0
+    push ${INS}, "  ${STEMP2} = "
+    push ${INS}, $S1
+    push ${INS}, "\n"
     $I0 = exists ${CONST}[$S1]
     if $I0 goto L7_${CURIC}
     $S0 = constants.'translate'(${ARG2})
     ${CONST}[$S1] = $S0
   L7_${CURIC}:
-    ${INS} = concat "  ${PTEMP0} = find_lib_url(${STEMP1}, ${STEMP2})\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = ${PTEMP0}("
-    ${INS} = concat ${PARAMS}
-    ${INS} = concat ")\n"
+    push ${INS}, "  ${PTEMP0} = find_lib_url(${STEMP1}, ${STEMP2})\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = ${PTEMP0}("
+    push ${INS}, ${PARAMS}
+    push ${INS}, ")\n"
 PIR
 
 ## Variable Access and Manipulation
@@ -331,11 +331,11 @@ inline = 1F
 push = 1
 pir = <<PIR
     $S0 = ${INLINE}
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone local"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone local"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [LOAD_VAR]
@@ -345,11 +345,11 @@ arguments = uint8
 push = 1
 pir = <<PIR
     $S0 = ${ARG1}
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone local"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone local"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [STORE_VAR_S]
@@ -360,7 +360,7 @@ pop = 1
 pir = <<PIR
     $S0 = ${INLINE}
     ${STOREREG} = "local"
-    ${STOREREG} = concat $S0
+    ${STOREREG} = concat ${STOREREG}, $S0
 PIR
 
 [STORE_VAR]
@@ -371,7 +371,7 @@ pop = 1
 pir = <<PIR
     $S0 = ${ARG1}
     ${STOREREG} = "local"
-    ${STOREREG} = concat $S0
+    ${STOREREG} = concat ${STOREREG}, $S0
 PIR
 
 [INCR_VAR_S]
@@ -380,9 +380,9 @@ class = op
 inline = 07
 pir = <<PIR
     $S0 = ${INLINE}
-    ${INS} = concat "  inc local"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  inc local"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [INCR_VAR]
@@ -391,9 +391,9 @@ class = op
 arguments = uint8
 pir = <<PIR
     $S0 = ${ARG1}
-    ${INS} = concat "  inc local"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  inc local"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 [DECR_VAR]
@@ -402,9 +402,9 @@ class = op
 arguments = uint8
 pir = <<PIR
     $S0 = ${ARG1}
-    ${INS} = concat "  dec local"
-    ${INS} = concat $S0
-    ${INS} = concat "\n"
+    push ${INS}, "  dec local"
+    push ${INS}, $S0
+    push ${INS}, "\n"
 PIR
 
 ## Access To Constants
@@ -417,12 +417,12 @@ push = 1
 pir = <<PIR
     $S0 = ${INLINE}
     $S1 = "const"
-    $S1 = concat $S0
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone "
-    ${INS} = concat $S1
-    ${INS} = concat "\n"
+    $S1 = concat $S1, $S0
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone "
+    push ${INS}, $S1
+    push ${INS}, "\n"
     $I0 = exists ${CONST}[$S1]
     if $I0 goto L1_${CURIC}
     $S0 = constants.'translate'(${INLINE})
@@ -438,12 +438,12 @@ push = 1
 pir = <<PIR
     $S0 = ${ARG1}
     $S1 = "const"
-    $S1 = concat $S0
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone "
-    ${INS} = concat $S1
-    ${INS} = concat "\n"
+    $S1 = concat $S1, $S0
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone "
+    push ${INS}, $S1
+    push ${INS}, "\n"
     $I0 = exists ${CONST}[$S1]
     if $I0 goto L1_${CURIC}
     $S0 = constants.'translate'(${ARG1})
@@ -459,12 +459,12 @@ push = 1
 pir = <<PIR
     $S0 = ${ARG1}
     $S1 = "const"
-    $S1 = concat $S0
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone "
-    ${INS} = concat $S1
-    ${INS} = concat "\n"
+    $S1 = concat $S1, $S0
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone "
+    push ${INS}, $S1
+    push ${INS}, "\n"
     $I0 = exists ${CONST}[$S1]
     if $I0 goto L1_${CURIC}
     $S0 = constants.'translate'(${ARG1})
@@ -477,9 +477,9 @@ code = 14
 class = load
 push = 1
 pir = <<PIR
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone const_0\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone const_0\n"
     $I0 = exists ${CONST}['const_0']
     if $I0 goto L1_${CURIC}
     $S0 = "  .local pmc const_0\n  new const_0, 'WmlsInteger'\n  set const_0, 0\n"
@@ -492,9 +492,9 @@ code = 15
 class = load
 push = 1
 pir = <<PIR
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone const_1\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone const_1\n"
     $I0 = exists ${CONST}['const_1']
     if $I0 goto L1_${CURIC}
     $S0 = "  .local pmc const_1\n  new const_1, 'WmlsInteger'\n  set const_1, 1\n"
@@ -507,9 +507,9 @@ code = 16
 class = load
 push = 1
 pir = <<PIR
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone const_m1\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone const_m1\n"
     $I0 = exists ${CONST}['const_m1']
     if $I0 goto L1_${CURIC}
     $S0 = "  .local pmc const_m1\n  new const_m1, 'WmlsInteger'\n  set const_m1, -1\n"
@@ -522,9 +522,9 @@ code = 17
 class = load
 push = 1
 pir = <<PIR
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone const_es\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone const_es\n"
     $I0 = exists ${CONST}['const_es']
     if $I0 goto L1_${CURIC}
     $S0 = "  .local pmc const_es\n  new const_es, 'WmlsString'\n"
@@ -537,9 +537,9 @@ code = 18
 class = load
 push = 1
 pir = <<PIR
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone const_invalid\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone const_invalid\n"
     $I0 = exists ${CONST}['const_invalid']
     if $I0 goto L1_${CURIC}
     $S0 = "  .local pmc const_invalid\n  new const_invalid, 'WmlsInvalid'\n"
@@ -552,9 +552,9 @@ code = 19
 class = load
 push = 1
 pir = <<PIR
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone const_true\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone const_true\n"
     $I0 = exists ${CONST}['const_true']
     if $I0 goto L1_${CURIC}
     $S0 = "  .local pmc const_true\n  new const_true, 'WmlsBoolean'\n  set const_true, 1\n"
@@ -567,9 +567,9 @@ code = 1A
 class = load
 push = 1
 pir = <<PIR
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone const_false\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone const_false\n"
     $I0 = exists ${CONST}['const_false']
     if $I0 goto L1_${CURIC}
     $S0 = "  .local pmc const_false\n  new const_false, 'WmlsBoolean'\n  set const_false, 0\n"
@@ -585,13 +585,13 @@ class = op
 pop = 1
 push = 1
 pir = <<PIR
-    ${INS} = concat "  ${PTEMP0} = "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
-    ${INS} = concat "  inc ${PTEMP0}\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = ${PTEMP0}\n"
+    push ${INS}, "  ${PTEMP0} = "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
+    push ${INS}, "  inc ${PTEMP0}\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = ${PTEMP0}\n"
 PIR
 
 [DECR]
@@ -600,13 +600,13 @@ class = op
 pop = 1
 push = 1
 pir = <<PIR
-    ${INS} = concat "  ${PTEMP0} = "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
-    ${INS} = concat "  dec ${PTEMP0}\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = ${PTEMP0}\n"
+    push ${INS}, "  ${PTEMP0} = "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
+    push ${INS}, "  dec ${PTEMP0}\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = ${PTEMP0}\n"
 PIR
 
 [ADD_ASG]
@@ -616,13 +616,13 @@ arguments = uint8
 pop = 1
 pir = <<PIR
     $S0 = ${ARG1}
-    ${INS} = concat "  local"
-    ${INS} = concat $S0
-    ${INS} = concat " = add local"
-    ${INS} = concat $S0
-    ${INS} = concat ", "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
+    push ${INS}, "  local"
+    push ${INS}, $S0
+    push ${INS}, " = add local"
+    push ${INS}, $S0
+    push ${INS}, ", "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
 PIR
 
 [SUB_ASG]
@@ -632,13 +632,13 @@ arguments = uint8
 pop = 1
 pir = <<PIR
     $S0 = ${ARG1}
-    ${INS} = concat "  local"
-    ${INS} = concat $S0
-    ${INS} = concat " = sub local"
-    ${INS} = concat $S0
-    ${INS} = concat ", "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
+    push ${INS}, "  local"
+    push ${INS}, $S0
+    push ${INS}, " = sub local"
+    push ${INS}, $S0
+    push ${INS}, ", "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
 PIR
 
 [UMINUS]
@@ -802,40 +802,40 @@ push = 2
 pir = <<PIR
     $I0 = ${NEXTPC} - 1
     $S0 = $I0
-    ${INS} = concat "  ${PTEMP0} = istrue "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
-    ${INS} = concat "  ${ITEMP0} = isa ${PTEMP0}, 'WmlsBoolean'\n"
-    ${INS} = concat "  unless ${ITEMP0} goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_A\n"
-    ${INS} = concat "  ${ITEMP0} = istrue ${PTEMP0}\n"
-    ${INS} = concat "  if ${ITEMP0} goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_B\n"
-    ${INS} = concat "PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_A:\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone ${PTEMP0}\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST1}
-    ${INS} = concat " = clone const_false\n"
+    push ${INS}, "  ${PTEMP0} = istrue "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
+    push ${INS}, "  ${ITEMP0} = isa ${PTEMP0}, 'WmlsBoolean'\n"
+    push ${INS}, "  unless ${ITEMP0} goto PC"
+    push ${INS}, $S0
+    push ${INS}, "_A\n"
+    push ${INS}, "  ${ITEMP0} = istrue ${PTEMP0}\n"
+    push ${INS}, "  if ${ITEMP0} goto PC"
+    push ${INS}, $S0
+    push ${INS}, "_B\n"
+    push ${INS}, "PC"
+    push ${INS}, $S0
+    push ${INS}, "_A:\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone ${PTEMP0}\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST1}
+    push ${INS}, " = clone const_false\n"
 ${__PUSH_2__}
-    ${INS} = concat "goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_C\n"
-    ${INS} = concat "PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_B:\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone const_true\n"
+    push ${INS}, "goto PC"
+    push ${INS}, $S0
+    push ${INS}, "_C\n"
+    push ${INS}, "PC"
+    push ${INS}, $S0
+    push ${INS}, "_B:\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone const_true\n"
 ${__PUSH_1__}
-    ${INS} = concat "PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_C:\n"
+    push ${INS}, "PC"
+    push ${INS}, $S0
+    push ${INS}, "_C:\n"
     $I0 = exists ${CONST}['const_true']
     if $I0 goto L1_${CURIC}
     $S0 = "  .local pmc const_true\n  new const_true, 'WmlsBoolean'\n  set const_true, 1\n"
@@ -856,40 +856,40 @@ push = 2
 pir = <<PIR
     $I0 = ${NEXTPC} - 1
     $S0 = $I0
-    ${INS} = concat "  ${PTEMP0} = istrue "
-    ${INS} = concat ${STACK0}
-    ${INS} = concat "\n"
-    ${INS} = concat "  ${ITEMP0} = isa ${PTEMP0}, 'WmlsBoolean'\n"
-    ${INS} = concat "  unless ${ITEMP0} goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_A\n"
-    ${INS} = concat "  ${ITEMP0} = isfalse ${PTEMP0}\n"
-    ${INS} = concat "  if ${ITEMP0} goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_B\n"
-    ${INS} = concat "PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_A:\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone ${PTEMP0}\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST1}
-    ${INS} = concat " = clone const_false\n"
+    push ${INS}, "  ${PTEMP0} = istrue "
+    push ${INS}, ${STACK0}
+    push ${INS}, "\n"
+    push ${INS}, "  ${ITEMP0} = isa ${PTEMP0}, 'WmlsBoolean'\n"
+    push ${INS}, "  unless ${ITEMP0} goto PC"
+    push ${INS}, $S0
+    push ${INS}, "_A\n"
+    push ${INS}, "  ${ITEMP0} = isfalse ${PTEMP0}\n"
+    push ${INS}, "  if ${ITEMP0} goto PC"
+    push ${INS}, $S0
+    push ${INS}, "_B\n"
+    push ${INS}, "PC"
+    push ${INS}, $S0
+    push ${INS}, "_A:\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone ${PTEMP0}\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST1}
+    push ${INS}, " = clone const_false\n"
 ${__PUSH_2__}
-    ${INS} = concat "goto PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_C\n"
-    ${INS} = concat "PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_B:\n"
-    ${INS} = concat "  "
-    ${INS} = concat ${DEST0}
-    ${INS} = concat " = clone const_true\n"
+    push ${INS}, "goto PC"
+    push ${INS}, $S0
+    push ${INS}, "_C\n"
+    push ${INS}, "PC"
+    push ${INS}, $S0
+    push ${INS}, "_B:\n"
+    push ${INS}, "  "
+    push ${INS}, ${DEST0}
+    push ${INS}, " = clone const_true\n"
 ${__PUSH_1__}
-    ${INS} = concat "PC"
-    ${INS} = concat $S0
-    ${INS} = concat "_C:\n"
+    push ${INS}, "PC"
+    push ${INS}, $S0
+    push ${INS}, "_C:\n"
     $I0 = exists ${CONST}['const_true']
     if $I0 goto L1_${CURIC}
     $S0 = "  .local pmc const_true\n  new const_true, 'WmlsBoolean'\n  set const_true, 1\n"
@@ -940,17 +940,17 @@ code = 3A
 class = op
 pop = 1
 pir = <<PIR
-    ${INS} = concat "  .return ("
-    ${INS} = concat ${STACK0}
-    ${INS} = concat ")\n"
+    push ${INS}, "  .return ("
+    push ${INS}, ${STACK0}
+    push ${INS}, ")\n"
 PIR
 
 [RETURN_ES]
 code = 3B
 class = op
 pir = <<PIR
-    ${INS} = concat "  new ${PTEMP0}, 'WmlsString'\n"
-    ${INS} = concat "  .return (${PTEMP0})\n"
+    push ${INS}, "  new ${PTEMP0}, 'WmlsString'\n"
+    push ${INS}, "  .return (${PTEMP0})\n"
 PIR
 
 ## Miscellaneous Instructions
