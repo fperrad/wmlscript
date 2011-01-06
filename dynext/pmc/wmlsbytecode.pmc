@@ -140,6 +140,24 @@ static float _get_float32(void)
     return value;
 }
 
+static STRING *
+string_make(PARROT_INTERP, ARGIN_NULLOK(const char *buffer),
+        UINTVAL len, ARGIN_NULLOK(const char *encoding_name), UINTVAL flags)
+{
+    const STR_VTABLE *encoding;
+
+    if (encoding_name) {
+        encoding = Parrot_find_encoding(interp, encoding_name);
+        if (!encoding)
+            Parrot_ex_throw_from_c_args(interp, NULL, EXCEPTION_UNIMPLEMENTED,
+                "Can't make '%s' encoding strings", encoding_name);
+    }
+    else
+        encoding = Parrot_default_encoding_ptr;
+
+    return Parrot_str_new_init(interp, buffer, len, encoding, flags);
+}
+
 static int _load_header(Interp *interp)
 {
     const UINTVAL VersionNumber = _get_uint8();
