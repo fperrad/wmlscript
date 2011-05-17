@@ -17,14 +17,7 @@ See "WMLScript Standard Libraries Specification", section 7 "Lang".
 .HLL 'wmlscript'
 .loadlib 'wmls_group'
 .loadlib 'wmls_ops'
-
-.sub '__onload' :load :init
-    load_bytecode 'Math/Rand.pbc'
-    $P0 = get_root_namespace ['parrot'; 'Math'; 'Rand']
-    $P1 = get_namespace
-    $P2 = split ' ', 'rand srand RAND_MAX'
-    $P0.'export_to'($P1, $P2)
-.end
+.loadlib 'math_ops'
 
 
 .sub 'getLang'
@@ -577,11 +570,7 @@ If value is less than zero (0), the function returns C<invalid>.
     if $I0 goto L2
     $I1 = $P1
     if $I1 < 0 goto L2
-    $I0 = rand()
-    $I0 = mul $I1
-    $I2 = RAND_MAX()
-    inc $I2
-    $I0 = div $I2
+    $I0 = rand $I1
     box res, $I0
     goto L3
   L2:
@@ -630,7 +619,7 @@ String or invalid.
     if $I0 >= 0 goto L3
     $I1 = time
   L3:
-    srand($I1)
+    srand $I1
     new res, 'WmlsString'
     set res, ''
     goto L4
