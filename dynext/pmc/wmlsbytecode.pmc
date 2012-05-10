@@ -455,10 +455,10 @@ Loads WMLScript bytecode.
             goto err;
         if (_load_function_pool(INTERP))
             goto err;
-        Parrot_free_cstring(bytecode);
+        Parrot_str_free_cstring(bytecode);
         RETURN(PMC *script);
 err:
-        Parrot_free_cstring(bytecode);
+        Parrot_str_free_cstring(bytecode);
         RETURN(PMC *NULL);
     }
 
